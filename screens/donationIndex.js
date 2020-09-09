@@ -117,7 +117,7 @@ function donationIndex({navigation}) {
         <Text onPress={()=>navigation.navigate('DonationPayment')}style={[styles.font]}>Click to Continue</Text>
       </View>
       <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter, {backgroundColor:"#1C4C75"}]}>
-        <Text style={{fontSize:18, color:"white"}}>See more details</Text>
+        <Text onPress={()=>navigation.navigate('DonationCharityBrief')} style={{fontSize:18, color:"white"}}>See more details</Text>
       </View>
 
       </View>
