@@ -7,6 +7,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import InvestmentStack from "./investmentStack";
 import InvestmentEducation from "../screens/investmentEducation";
 import SavingStack from "./savingStack"
+import DonationStack from "./donationStack"
 
 
 function Feed() {
@@ -19,6 +20,10 @@ function Investment() {
 
 function Profile() {
   return <InvestmentEducation />;
+}
+
+function Donation(){
+  return <DonationStack />;
 }
 
 function Notifications() {
@@ -64,7 +69,7 @@ function MyTabs() {
       />
       <Tab.Screen
         name="Donation"
-        component={Notifications}
+        component={Donation}
         options={{
           tabBarLabel: "Donation",
           tabBarIcon: ({ color, size }) => (
