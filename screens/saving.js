@@ -89,7 +89,7 @@ function SavingOne ({navigation}) {
                 </View>
             </ImageBackground>
             <View style={styles.creditCard}>
-                <TouchableOpacity style={styles.creditCardSection} onPress={() => navigation.navigate("SavingTwo")}>
+                <TouchableOpacity style={styles.creditCardSection} onPress={() => navigation.navigate("Saving2")}>
                     <ImageBackground style={styles.imageBackground} imageStyle={{ borderRadius: 12}}
                     source={require('../assets/Welcome/Royal.jpg')}>
                         <View style={styles.bankLogoSection}>

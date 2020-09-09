@@ -1,13 +1,17 @@
 import React, { useState } from 'react';
-import { View, Text, ImageBackground, StyleSheet, Image, Modal, TouchableHighlight } from 'react-native';
-import {MaterialCommunityIcons, MaterialIcons} from '@expo/vector-icons';
+import { View, Text, ImageBackground, StyleSheet, Image, Modal, TouchableHighlight, TextInput, Button, Alert } from 'react-native';
+import {MaterialCommunityIcons, MaterialIcons, AntDesign} from '@expo/vector-icons';
 
 import AppText from '../components/AppText/AppText';
 import AppButton from '../components/AppButton';
+import AppTextInput from '../components/AppTextInput';
+import colors from '../config/colors';
 
 function WelcomeScreen({navigation}) {
 
     const [modalVisible, setModalVisible] = useState(false);
+    const [email, setEmail] = useState();
+    const [password, setPassword] = useState();
 
     return (
         <ImageBackground
@@ -20,37 +24,34 @@ function WelcomeScreen({navigation}) {
             </View>
             <View style={styles.loginButton}>
                 
-                {/* <Modal visible={false}>
-                    <View style={StyleSheet.modalContent}>
-                        <MaterialIcons 
-                            name='close'
-                            size={24}
-                            onPress={() => setModalOpen(false)}
-                        />
-                        <Text>Hello :D</Text>
-                    </View>
-                </Modal> */}
-
         <Modal
             animationType="slide"
             transparent={true}
-            visible={modalVisible}
-            onRequestClose={() => {
-            Alert.alert("Modal has been closed.");
-            }}
-            >
+            visible={modalVisible}>
             <View style={styles.centeredView}>
             <View style={styles.modalView}>
-                <Text style={styles.modalText}>Please enter your username and password</Text>
+                <AntDesign name="close" size={24} color="black" style={styles.closeTag} onPress={() => {
+                    setModalVisible(!modalVisible);}}/>
+                <AppTextInput 
+                    keyboardType="email-address"
+                    onChangeText={text => setEmail(text)}
+                    autoCorrect={false}
+                    autoCapitalize= 'none'
+                    icon = 'email'
+                    placeholder="Email"
+                    textContentType="emailAddress"
+                    />
+                <AppTextInput
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    icon='lock'
+                    onChangeText={text => setPassword(text)}
+                    placeholder="Password"
+                    secureTextEntry
+                    textContentType="password"
+                    />
+                <Button title="Login" onPress={()=>navigation.navigate("MainScreen") && setModalVisible(!modalVisible)} />
 
-                <TouchableHighlight
-                style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
-                onPress={() => {
-                    setModalVisible(!modalVisible);
-                }}
-                >
-                <Text style={styles.textStyle}>close</Text>
-                </TouchableHighlight>
             </View>
             </View>
         </Modal>
@@ -58,7 +59,7 @@ function WelcomeScreen({navigation}) {
                 <Text onPress={() => setModalVisible(true)} style={styles.buttonText}>Login</Text>
             </View>
             <View style={styles.registerButton}>
-                <Text onPress={() => navigation.navigate("MainScreen")} style={styles.buttonText}>Register</Text>
+                <Text onPress={() => navigation.navigate("RegisterScreen")} style={styles.buttonText}>Register</Text>
             </View>
         </ImageBackground>  
     );
@@ -127,7 +128,13 @@ const styles = StyleSheet.create({
         },
         shadowOpacity: 0.25,
         shadowRadius: 3.84,
-        elevation: 5
+        elevation: 5,
+        marginTop: 150,
+    },
+    closeTag: {
+        position: 'absolute',
+        top: 20,
+        right: 20,
     },
 })
 

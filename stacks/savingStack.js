@@ -1,8 +1,11 @@
-import { createAppContainer } from "react-navigation";
+// Import detailed saving screens here
+import Saving from "../screens/saving";
+import Saving2 from "../screens/Saving2";
+import Saving3 from "../screens/Saving3";
 
-import Saving from "../screens/saving"
 
 import { createStackNavigator } from "react-navigation-stack";
+import { createAppContainer } from "react-navigation";
 
 const SavingStack = createStackNavigator({
 
@@ -12,7 +15,20 @@ const SavingStack = createStackNavigator({
       headerShown: false,
     },
   },
-  
+  Saving2: {
+    screen: Saving2,
+    navigationOptions: {
+      
+    },
+  },
+  Saving3: {
+    screen: Saving3,
+    navigationOptions: {
+      
+    },
+  },
+
+
 
 });
 
