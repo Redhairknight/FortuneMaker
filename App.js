@@ -24,6 +24,7 @@ const MainStack = createStackNavigator({
     },
   },
 
+  // Register Screen
   RegisterScreen: {
     screen: RegisterScreen,
     navigationOptions: {
