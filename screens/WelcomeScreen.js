@@ -2,6 +2,9 @@ import React, { useState } from 'react';
 import { View, Text, ImageBackground, StyleSheet, Image, Modal, TouchableHighlight, TextInput, Button, Alert } from 'react-native';
 import {MaterialCommunityIcons, MaterialIcons, AntDesign} from '@expo/vector-icons';
 
+// Import firebase here
+import * as firebase from 'firebase'
+
 import AppText from '../components/AppText/AppText';
 import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
@@ -55,11 +58,11 @@ function WelcomeScreen({navigation}) {
             </View>
             </View>
         </Modal>
-
-                <Text onPress={() => setModalVisible(true)} style={styles.buttonText}>Login</Text>
+            <Text onPress={() => navigation.navigate("LoginScreen")} style={styles.buttonText}>Login</Text>
+                {/* <Text onPress={() => setModalVisible(true)} style={styles.buttonText}>Login</Text> */}
             </View>
             <View style={styles.registerButton}>
-                <Text onPress={() => navigation.navigate("RegisterScreen")} style={styles.buttonText}>Register</Text>
+                <Text onPress={() => navigation.navigate("LoadingScreen")} style={styles.buttonText}>Register</Text>
             </View>
         </ImageBackground>  
     );
