@@ -13,6 +13,7 @@ import {
 } from "react-native";
 import { render } from "react-dom";
 import { createAppContainer } from "react-navigation";
+import * as firebase from 'firebase';
 
 class Investment extends React.Component {
   render() {

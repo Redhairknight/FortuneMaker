@@ -12,13 +12,19 @@ import RegisterScreen from './screens/Register';
 
 import { createStackNavigator,} from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
+import {loadingComplete } from "./config/database_init";
 
+var w = Main;
+
+if (loadingComplete) {
+  w = WelcomeScreen;
+}
 
 const MainStack = createStackNavigator({
-
   // Login screen
   Welcom: {
-    screen: WelcomeScreen,
+
+    screen: w,
     navigationOptions: {
       headerShown: false,
     },
