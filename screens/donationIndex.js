@@ -14,7 +14,7 @@ import {
   Dimensions,
   PixelRatio,
   TextInput,
-  ScrollView,
+  ScrollView, Modal
 } from "react-native";
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
@@ -23,6 +23,34 @@ import { TouchableHighlight } from "react-native-gesture-handler";
 
 
 function donationIndex({navigation}) {
+
+  const [onceFontColor, setOnceFontColor] = React.useState("lightblue");
+  const [regularFontColor, setRegularFontColor] = React.useState("white");
+  const [OnceOrRegularTextCharity, setORTText] = React.useState("Give once to Child");
+  const [OnceOrRegularMoneyOne, setMoney1] = React.useState("$ 50 once");
+  const [OnceOrRegularMoneyTwo, setMoney2] = React.useState("$ 100 once");
+  const [OnceOrRegularMoneyThree, setMoney3] = React.useState("Set your amounts");
+
+
+  function setOnceColor(){
+    setOnceFontColor("lightblue");
+    setRegularFontColor("white");
+    setORTText("Give once to Child")
+    setMoney1("$ 50 once");
+    setMoney2("$ 100 once");
+  }
+
+  function setRegularColor(){
+    setRegularFontColor("lightblue");
+    setOnceFontColor("white");
+    setORTText("Give Regular to Needed People");
+    setMoney1("$ 50 per month");
+    setMoney2("$ 100 per month");
+  }
+  
+function OnceView(){
+
+  
   var confirmSquareBGC = "white";
 
   function handlePress() {
@@ -40,13 +68,39 @@ function donationIndex({navigation}) {
       underlayColor: "white",
       activeOpacity: 0,
     }
-
     return (
       <TouchableHighlight {...touchProps}>
 
       </TouchableHighlight>
     )
   }
+
+  return(
+    <View style={{width:"100%"}}>
+      
+      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter]}>
+        <Text style={[styles.font]}>{OnceOrRegularTextCharity}</Text>
+      </View>
+      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter]}>
+        <Text style={[styles.font]}>{OnceOrRegularMoneyOne}</Text>
+      </View>
+      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter]}>
+        <Text style={[styles.font]}>{OnceOrRegularMoneyTwo}</Text>
+      </View>
+      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter]}>
+        <Text style={[styles.font]}>{OnceOrRegularMoneyThree}</Text>
+      </View>
+      <View style={{height:35,flexDirection:"row",marginTop:"5%"}}>
+        <View style={{flex:1,marginLeft:"15%"}}>
+        <ConfirmBtn/>
+        </View>
+
+        <View style={{marginLeft:"2%", flex:10}}><Text style={{fontSize:16}}>This donation is on behalf of Charity</Text></View>
+      </View>
+
+    </View>
+  )
+}
 
   return (
     <ScrollView contentContainerStyle={{flexGrow:1,}}>
@@ -55,7 +109,9 @@ function donationIndex({navigation}) {
         style={{
           backgroundColor: "#1F4E79",
           width: "100%",
-          height:"15%"
+          height:"15%",
+          position:"absolute",
+          top:0
         }}
       >
         <Text
@@ -82,44 +138,33 @@ function donationIndex({navigation}) {
       <View style={styles.regularAndOnceBar}>
           <View style={[styles.regularAndOnceCenter,styles.regularAndOnceItem, styles.borderOnRight]}>
 
-            <Text style={styles.font}>Give Once</Text>
+            <Text style={{
+              color:onceFontColor,
+              fontSize:16,
+              fontWeight:"bold",
+            }}
+            onPress={()=>setOnceColor()} >Give Once</Text>
 
           </View>
 
         <View style={[styles.regularAndOnceCenter,styles.regularAndOnceItem]}>
-          <Text style={styles.font}>Give Regular</Text>
+          <Text style={{    
+              color:regularFontColor,
+              fontSize:16,
+              fontWeight:"bold"}} onPress={()=>setRegularColor()}>Give Regular</Text>
         </View>
       </View>
       {/** End of give once & give regularly */}
 
-      <Text style={{fontSize:12, alignItems:"center",justifyContent:"center", marginLeft:"35%",marginTop:"3%", color:"#1F4E79"}}>I would like to give to</Text>
+      <Text style={{fontSize:12, alignItems:"center",justifyContent:"center", marginLeft:"35%",marginTop:"3%", color:"#1F4E79"}}>I would like to give to</Text>   
 
-      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter]}>
-        <Text style={[styles.font]}>Child Charity</Text>
       </View>
-      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter]}>
-        <Text style={[styles.font]}>$ 50</Text>
-      </View>
-      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter]}>
-        <Text style={[styles.font]}>$ 100</Text>
-      </View>
-      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter]}>
-        <Text style={[styles.font]}>Other</Text>
-      </View>
-      <View style={{height:35,flexDirection:"row",marginTop:"5%"}}>
-        <View style={{flex:1,marginLeft:"15%"}}>
-        <ConfirmBtn/>
-        </View>
-
-        <View style={{marginLeft:"2%", flex:10}}><Text style={{fontSize:16}}>This donation is on behalf of Charity</Text></View>
-      </View>
-      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter, {backgroundColor:"#1C4C75"}]}>
+      <OnceView/>
+      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter, {backgroundColor:"#1C4C75", width:"70%"}]}>
         <Text onPress={()=>navigation.navigate('DonationPayment')}style={[styles.font]}>Click to Continue</Text>
       </View>
-      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter, {backgroundColor:"#1C4C75"}]}>
+      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter, {backgroundColor:"#1C4C75", width:"70%"}]}>
         <Text onPress={()=>navigation.navigate('DonationCharityBrief')} style={{fontSize:18, color:"white"}}>See more details</Text>
-      </View>
-
       </View>
 
       {/** Main bar finishes */}
@@ -216,5 +261,60 @@ const paymentStyle = StyleSheet.create(
     }
   }
 )
+
+
+
+function RegularView({navigation}){
+
+  
+  var confirmSquareBGC = "white";
+
+  function handlePress() {
+    alert("you tapped sth");
+    
+  }
+
+  function ConfirmBtn(){
+    var [isConfirm, setIsConfirm] = React.useState(false);
+
+
+    var touchProps={
+      style : isConfirm ? styles.squarePress : styles.squareNotPress,
+      onPress: ()=> setIsConfirm(!isConfirm),
+      underlayColor: "white",
+      activeOpacity: 0,
+    }
+    return (
+      <TouchableHighlight {...touchProps}>
+
+      </TouchableHighlight>
+    )
+  }
+  return(
+    <View style={{width:"100%"}}>
+      
+      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter]}>
+        <Text style={[styles.font]}>Regular to CanTeen</Text>
+      </View>
+      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter]}>
+        <Text style={[styles.font]}>$ 50/month</Text>
+      </View>
+      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter]}>
+        <Text style={[styles.font]}>$ 100/month</Text>
+      </View>
+      <View style={[styles.donationMainSelectionBar,styles.regularAndOnceCenter]}>
+        <Text style={[styles.font]}>Other</Text>
+      </View>
+      <View style={{height:35,flexDirection:"row",marginTop:"5%"}}>
+        <View style={{flex:1,marginLeft:"15%"}}>
+        <ConfirmBtn/>
+        </View>
+
+        <View style={{marginLeft:"2%", flex:10}}><Text style={{fontSize:16}}>Thank you for your regular donation</Text></View>
+      </View>
+
+    </View>
+  )
+}
 
 export default donationIndex;
