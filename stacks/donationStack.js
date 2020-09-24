@@ -2,6 +2,8 @@
 import donationIndex from "../screens/donationIndex";
 import donationPayment from "../screens/donationPayment";
 import donationPaymentSuccess from "../screens/donationPaymentSuccess";
+import donationCharityBrief from "../screens/donationCharityBrief";
+import donationCharityCanTeen from "../screens/donationCharityCanTeen"
 
 
 import { createStackNavigator } from "react-navigation-stack";
@@ -23,10 +25,20 @@ const DonationStack = createStackNavigator({
   },
   DonationPaymentSuccess: {
     screen: donationPaymentSuccess,
-    navigationOptions: {
+    navigationOptions: {},
       
     },
-  },
+  DonationCharityBrief: {
+    screen: donationCharityBrief,
+    navigationOptions: {},
+      
+    },
+    DonationCharityCanTeen: {
+      screen: donationCharityCanTeen,
+      navigationOptions: {},
+        
+      },
+  
 
 
 
