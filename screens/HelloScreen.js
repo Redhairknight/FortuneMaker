@@ -10,7 +10,7 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 import colors from '../config/colors';
 
-function WelcomeScreen({navigation}) {
+function HelloScreen({navigation}) {
 
     const [modalVisible, setModalVisible] = useState(false);
     const [email, setEmail] = useState();
@@ -58,11 +58,11 @@ function WelcomeScreen({navigation}) {
             </View>
             </View>
         </Modal>
-            <Text onPress={() => navigation.navigate("LoginScreen")} style={styles.buttonText}>Login</Text>
+            <Text onPress={() => navigation.navigate("Login")} style={styles.buttonText}>Login</Text>
                 {/* <Text onPress={() => setModalVisible(true)} style={styles.buttonText}>Login</Text> */}
             </View>
             <View style={styles.registerButton}>
-                <Text onPress={() => navigation.navigate("LoadingScreen")} style={styles.buttonText}>Register</Text>
+                <Text onPress={() => navigation.navigate("Register")} style={styles.buttonText}>Register</Text>
             </View>
         </ImageBackground>  
     );
@@ -141,4 +141,4 @@ const styles = StyleSheet.create({
     },
 })
 
-export default WelcomeScreen;
+export default HelloScreen;

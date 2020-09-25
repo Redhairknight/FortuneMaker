@@ -20,11 +20,11 @@ export default class LoginScreen extends React.Component {
     checkLogin = () => {
         firebase.auth().onAuthStateChanged(user =>{
             if (user) {
-                this.props.navigation.navigate("MainScreen")
+                this.props.navigation.navigate("App")
                 
             } else {
                 // No user is signed in.
-                this.props.navigation.navigate("LoginScreen")
+                this.props.navigation.navigate("Login")
             }
             });
     }
