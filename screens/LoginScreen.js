@@ -9,11 +9,25 @@ import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 
 export default class LoginScreen extends React.Component {
+
     state = {
         email: "",
         password: "",
-        errorMessage: null
+        errorMessage: null,
     };
+
+    // check if user is successfully logged in
+    checkLogin = () => {
+        firebase.auth().onAuthStateChanged(user =>{
+            if (user) {
+                this.props.navigation.navigate("MainScreen")
+                
+            } else {
+                // No user is signed in.
+                this.props.navigation.navigate("LoginScreen")
+            }
+            });
+    }
 
     handleLogin = () => {
         const {email, password} = this.state
@@ -21,6 +35,7 @@ export default class LoginScreen extends React.Component {
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
+            .then(this.checkLogin)
             .catch(error => this.setState({errorMessage: error.message}))
     }
 
