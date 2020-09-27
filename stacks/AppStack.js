@@ -97,7 +97,7 @@ const styles = StyleSheet.create({
   },
 });
 
-export default function MainScreen() {
+export default function AppStack() {
   return (
     <NavigationContainer>
       <MyTabs />
