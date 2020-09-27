@@ -28,7 +28,8 @@ if (!firebase.apps.length) {
 }
 
 const AuthStack = createStackNavigator(
-  {
+  { 
+    Loading: LoadingScreen,
     Login: LoginScreen,
     Register: RegisterScreen,
     Hello: HelloScreen,
@@ -42,12 +43,12 @@ const AuthStack = createStackNavigator(
 const AppContainer = createAppContainer(
   createSwitchNavigator(
     {
-      Loading: LoadingScreen,
+      
       Auth: AuthStack,
       App: AppStack,
     },
     {
-       initialRouteName: "Loading",
+       initialRouteName: "Auth",
     }
   )
 )

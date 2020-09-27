@@ -20,7 +20,7 @@ export default class LoginScreen extends React.Component {
     checkLogin = () => {
         firebase.auth().onAuthStateChanged(user =>{
             if (user) {
-                this.props.navigation.navigate("App")
+                this.props.navigation.navigate("Loading")
                 
             } else {
                 // No user is signed in.
@@ -31,12 +31,12 @@ export default class LoginScreen extends React.Component {
 
     handleLogin = () => {
         const {email, password} = this.state
-
+        
         firebase
             .auth()
             .signInWithEmailAndPassword(email, password)
-            .then(this.checkLogin)
             .catch(error => this.setState({errorMessage: error.message}))
+            .then(this.props.navigation.navigate("Loading"))
     }
 
     render() {
@@ -69,11 +69,11 @@ export default class LoginScreen extends React.Component {
                 secureTextEntry
                 textContentType="password"
                 />
-            {/* <Button title="Register" onPress={()=>console.log(email, password) && navigation.navigate("Welcome")} /> */}
+            
             <Button title="Login" onPress={this.handleLogin} />
 
             <TouchableOpacity style={{alignSelf: 'center', marginTop: 32}}
-                onPress={() => this.props.navigation.navigate('RegisterScreen')}>
+                onPress={() => this.props.navigation.navigate('Register')}>
                 <Text style={{color: '#414959', fontSize: 13}}>
                     New to FortuneMaker? <Text style={{fontWeight: '500', color: '#E9446A'}}>Sign in </Text>
                 </Text>
