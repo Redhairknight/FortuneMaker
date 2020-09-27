@@ -1,6 +1,6 @@
-// Import firebase here
-import firebaseConfig from './config/firebase'
-import * as firebase from 'firebase'
+// Import firebase here～
+import firebaseConfig from "./config/firebase";
+import * as firebase from "firebase";
 
 import * as React from "react";
 import { Text, View, StyleSheet, ScrollView } from "react-native";
@@ -11,16 +11,13 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 // Import screens or staccks here
 import HelloScreen from "./screens/HelloScreen";
 import AppStack from "./stacks/AppStack";
-import RegisterScreen from './screens/Register';
-import LoadingScreen from './screens/LoadingScreen';
-import LoginScreen from './screens/LoginScreen';
+import RegisterScreen from "./screens/Register";
+import LoadingScreen from "./screens/LoadingScreen";
+import LoginScreen from "./screens/LoginScreen";
 
-import { createStackNavigator} from "react-navigation-stack";
-import { createSwitchNavigator } from "react-navigation"
+import { createStackNavigator } from "react-navigation-stack";
+import { createSwitchNavigator } from "react-navigation";
 import { createAppContainer } from "react-navigation";
-
-
-
 
 // Initialize Firebase
 if (!firebase.apps.length) {
@@ -37,7 +34,7 @@ const AuthStack = createStackNavigator(
     initialRouteName: "Hello",
     headerMode: "none",
   }
-)
+);
 
 const AppContainer = createAppContainer(
   createSwitchNavigator(
@@ -47,9 +44,9 @@ const AppContainer = createAppContainer(
       App: AppStack,
     },
     {
-       initialRouteName: "Loading",
+      initialRouteName: "Loading",
     }
   )
-)
+);
 
-export default AppContainer
+export default AppContainer;
