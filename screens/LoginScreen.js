@@ -36,7 +36,8 @@ export default class LoginScreen extends React.Component {
             .auth()
             .signInWithEmailAndPassword(email, password)
             .catch(error => this.setState({errorMessage: error.message}))
-            .then(this.props.navigation.navigate("Loading"))
+            .then(this.checkLogin)
+            .then(firebase.auth.Auth.Persistence.NONE)
     }
 
     render() {
