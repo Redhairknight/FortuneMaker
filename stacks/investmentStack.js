@@ -5,6 +5,7 @@ import Investment from "../screens/investment";
 import FinancialNews from "../screens/financialNews";
 import Favorite from "../screens/favorite";
 import Products from '../screens/products'
+import RiskSurvey from '../screens/riskSurvey'
 
 import { createStackNavigator } from "react-navigation-stack";
 
@@ -50,6 +51,17 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
+  RiskSurvyDetail: {
+    screen: RiskSurvey,
+    navigationOptions: {
+      headerTitleAlign: "center",
+      headerTitle: "Favorite",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
+    },
+  },  
   FavoriteDetail: {
     screen: Favorite,
     navigationOptions: {

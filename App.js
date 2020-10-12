@@ -22,6 +22,7 @@ import { createAppContainer } from "react-navigation";
 // Initialize Firebase
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
+  //firebase.auth().signOut()
 }
 
 const AuthStack = createStackNavigator(
