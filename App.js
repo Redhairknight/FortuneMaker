@@ -18,7 +18,7 @@ import LoginScreen from "./screens/LoginScreen";
 import { createStackNavigator } from "react-navigation-stack";
 import { createSwitchNavigator } from "react-navigation";
 import { createAppContainer } from "react-navigation";
-
+import retrieveDatabse from "./components/DatabaseManager"
 // Initialize Firebase
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
