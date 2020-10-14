@@ -14,7 +14,7 @@ export default class LoadingScreen extends React.Component {
                 } else {
                     this.props.navigation.navigate("Login")
                 }
-            }, 1000);
+            }, 500);
         })
     };
 
