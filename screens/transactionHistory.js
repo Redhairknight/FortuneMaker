@@ -16,7 +16,6 @@ import {
 import { Container, Header, Item, Input, Icon, Button } from "native-base";
 
 
-var test = retrieveDatabse("/investment/financialproduct/name/price");
 
 export default class SearchBarExample extends Component {
   render() {

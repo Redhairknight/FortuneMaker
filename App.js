@@ -26,9 +26,6 @@ if (!firebase.apps.length) {
 }
 
 
-//to delete
-var test = retrieveDatabse("/investment/financialproduct/name/price");
-console.log('fuck'+test)
 
 
 

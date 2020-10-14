@@ -2,7 +2,7 @@ import firebaseConfig from "../config/firebase";
 import * as firebase from "firebase";
 
 // Retrieve data from database. link is the 
-//address of the data need to be retrieved
+//adress of the data need to be retrieved
 
 
 function retrieveDatabse(link){
