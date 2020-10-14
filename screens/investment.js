@@ -95,7 +95,9 @@ class Investment extends React.Component {
                   <Text style={styles.buttons_text}>Invest Education</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() =>
+                  this.props.navigation.navigate("TransactionHistory")
+                }>
                 <View style={styles.buttons}>
                   <Image
                     style={styles.buttonLogo}

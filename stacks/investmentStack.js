@@ -7,7 +7,7 @@ import Favorite from "../screens/favorite";
 import Products from '../screens/products'
 import RiskSurvey from '../screens/riskSurvey'
 import SurveyCompleted from '../screens/surveyComplete'
-
+import transactionHistory from '../screens/transactionHistory'
 import { createStackNavigator } from "react-navigation-stack";
 
 const InvestmentStack = createStackNavigator({
@@ -87,6 +87,19 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
+
+  TransactionHistory:{
+    screen: transactionHistory,
+    navigationOptions: {
+      headerTitleAlign: "center",
+      headerTitle: "transactionHistory",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
+    },
+
+  }
 
 
 });

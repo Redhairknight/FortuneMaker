@@ -18,12 +18,20 @@ import LoginScreen from "./screens/LoginScreen";
 import { createStackNavigator } from "react-navigation-stack";
 import { createSwitchNavigator } from "react-navigation";
 import { createAppContainer } from "react-navigation";
-
+import retrieveDatabse from "./components/DatabaseManager"
 // Initialize Firebase
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
   //firebase.auth().signOut()
 }
+
+
+//to delete
+var test = retrieveDatabse("/investment/financialproduct/name/price");
+console.log('fuck'+test)
+
+
+
 
 const AuthStack = createStackNavigator(
   { 
