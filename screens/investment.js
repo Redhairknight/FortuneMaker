@@ -162,7 +162,7 @@ class Investment extends React.Component {
                 <Text style={styles.bottom_text}>Financial News</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate("FinancialIndexDetail")}>
               <View style={styles.bottom_content}>
                 <Image
                   style={styles.bottom_Logos}
