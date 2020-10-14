@@ -9,201 +9,292 @@ const PURPLE = 'rgba(108,48,237,1)';
 const survey = [
     {
         questionType: 'Info',
-        questionText: 'Welcome2 to the React Native Simple Survey Example app! Tap next to continue'
+        questionText: 'This survey is designed to address your risk tolerance, please fill it honestly.'
     },
-    {
-        questionType: 'TextInput',
-        questionText: 'Simple Survey supports free form text input.\n\nWhat is your favorite color?',
-        questionId: 'favoriteColor',
-        placeholderText: 'Tell me your favorite color!',
-    },
-    {
-        questionType: 'NumericInput',
-        questionText: 'It also supports numeric input. Enter your favorite number here!',
-        questionId: 'favoriteNumber',
-        placeholderText: '42',
-    },
-    {
-        questionType: 'NumericInput',
-        questionText: 'New to 3.0, default values!\n\nHow many balls can you juggle at once?',
-        questionId: 'jugglingBalls',
-        defaultValue: '0'
-    },
+
     {
         questionType: 'SelectionGroup',
         questionText:
-            'Naturally Simple Survey also has multiple choice questions. By default they acts like checkboxes, answers can be selected and deselected.\n\nWhat is your favorite pet?',
+            'What is your personal or family financail condition?',
         questionId: 'favoritePet',
         options: [
-            {
-                optionText: 'Dogs',
+            {   
+                optionText: 'Have signifiant outstanding liabilities',
                 value: 'dog'
             },
             {
-                optionText: 'Cats',
+                optionText: 'Incomes just offest the spendings',
                 value: 'cat'
             },
             {
-                optionText: 'Ferrets',
+                optionText: 'Have some deposits or savings',
                 value: 'ferret'
             },
             {
-                optionText: 'Snakes',
+                optionText: 'Relatively diversified investments and reasonable savings',
                 value: 'snake'
             },
             {
-                optionText: 'Guinea pigs',
+                optionText: 'Diversived investments and significant savings',
                 value: 'guinea'
             }
         ]
     },
     {
-        questionType: 'MultipleSelectionGroup',
+        questionType: 'SelectionGroup',
         questionText:
-            'Select two or three of your favorite foods!',
-        questionId: 'favoriteFoods',
-        questionSettings: {
-            maxMultiSelect: 3,
-            minMultiSelect: 2,
-        },
+            'Based on your current financial condition, what percentage of assets you want to or already invest?',
+        questionId: 'favoritePet',
         options: [
-            {
-                optionText: 'Sticky rice dumplings',
-                value: 'sticky rice dumplings'
+            {   
+                optionText: '80 ~ 100%',
+                value: 'dog'
             },
             {
-                optionText: 'Pad Thai',
-                value: 'pad thai'
+                optionText: '50 ~ 80%',
+                value: 'cat'
             },
             {
-                optionText: 'Steak and Eggs',
-                value: 'steak and eggs'
+                optionText: '20 ~ 50%',
+                value: 'ferret'
             },
             {
-                optionText: 'Tofu',
-                value: 'tofu'
+                optionText: '10 ~ 20%',
+                value: 'snake'
             },
             {
-                optionText: 'Ice cream!',
-                value: 'ice cream'
-            },
-            {
-                optionText: 'Injera',
-                value: 'injera'
-            },
-            {
-                optionText: 'Biryani',
-                value: 'biryani'
-            },
-            {
-                optionText: 'Tamales',
-                value: 'tamales'
-            },
-        ]
-    },
-    {
-        questionType: 'MultipleSelectionGroup',
-        questionText:
-            'Simple Survey can auto advance after a question has been answered. Select two things you do to relax:',
-        questionId: 'relax',
-        questionSettings: {
-            maxMultiSelect: 2,
-            minMultiSelect: 2,
-            autoAdvance: true,
-        },
-        options: [
-            {
-                optionText: 'Reading a good book',
-                value: 'reading'
-            },
-            {
-                optionText: 'Going on vacation',
-                value: 'vacations'
-            },
-            {
-                optionText: 'Eating meals with family',
-                value: 'meals'
-            },
-            {
-                optionText: 'Heading to the ocean',
-                value: 'ocean'
+                optionText: '0 ~ 10%',
+                value: 'guinea'
             }
         ]
     },
     {
         questionType: 'SelectionGroup',
         questionText:
-            'Simple Survey can also simulate radio button behavior. Pick from below: ',
-        questionId: 'radio',
-        questionSettings: {
-            allowDeselect: false,
-        },
+            'What is your annual income?',
+        questionId: 'favoritePet',
         options: [
-            {
-                optionText: 'I was forced to pick option 1',
-                value: 'option 1'
+            {   
+                optionText: 'Below $60,000',
+                value: 'dog'
             },
             {
-                optionText: 'I have to pick option 2',
-                value: 'option 2'
+                optionText: 'Between $60,000 ~ $120,000',
+                value: 'cat'
             },
             {
-                optionText: 'I guess option 3',
-                value: 'option 3'
+                optionText: 'Between $120,000 ~ $240,000',
+                value: 'ferret'
+            },
+            {
+                optionText: 'Between $240,000 ~ $480,000',
+                value: 'snake'
+            },
+            {
+                optionText: 'More than $480,000',
+                value: 'guinea'
             }
         ]
     },
     {
         questionType: 'SelectionGroup',
         questionText:
-            'Simple Survey also supports default selections: ',
-        questionId: 'singleDefault',
-        questionSettings: {
-            defaultSelection: 0
-        },
+            'What is your planned investment horizen?',
+        questionId: 'favoritePet',
         options: [
-            {
-                optionText: 'This is the default option',
-                value: 'default'
+            {   
+                optionText: 'Less than 1 year',
+                value: 'dog'
             },
             {
-                optionText: 'This is the alternative option',
-                value: 'alternative'
+                optionText: 'Between 1 ~ 2 years',
+                value: 'cat'
             },
+            {
+                optionText: 'Between 2 ~ 3 years',
+                value: 'ferret'
+            },
+            {
+                optionText: 'Between 3 ~ 5 years',
+                value: 'snake'
+            },
+            {
+                optionText: 'Beyond 5 years',
+                value: 'guinea'
+            }
         ]
     },
     {
-        questionType: 'MultipleSelectionGroup',
+        questionType: 'SelectionGroup',
         questionText:
-            'And of course it supports multiple defaults: ',
-        questionId: 'multipleDefaults',
-        questionSettings: {
-            defaultSelection: [0, 2],
-            maxMultiSelect: 2,
-            minMultiSelect: 2,
-        },
+            'Do you have any previous invetment experience, what is the period of this investment?',
+        questionId: 'favoritePet',
         options: [
-            {
-                optionText: 'This is the first default option',
-                value: 'first default'
+            {   
+                optionText: 'I do not have',
+                value: 'dog'
             },
             {
-                optionText: 'This is the first alternate option',
-                value: 'first alternative'
+                optionText: 'Yes, less than 1 year',
+                value: 'cat'
             },
             {
-                optionText: 'This is the second default option',
-                value: 'second default'
+                optionText: 'Yes, Between 1 ~ 3 years',
+                value: 'ferret'
             },
             {
-                optionText: 'This is the second alternate option',
-                value: 'second alternative'
+                optionText: 'Yes, Between 3 ~ 5 years',
+                value: 'snake'
             },
+            {
+                optionText: 'Yes, Beyond 5 years',
+                value: 'guinea'
+            }
         ]
     },
+    {
+        questionType: 'SelectionGroup',
+        questionText:
+            'What is the purpose of your investment?',
+        questionId: 'favoritePet',
+        options: [
+            {   
+                optionText: 'For maintaining daily spendings',
+                value: 'dog'
+            },
+            {
+                optionText: 'Saving for later retirement',
+                value: 'cat'
+            },
+            {
+                optionText: "Children's education",
+                value: 'ferret'
+            },
+            {
+                optionText: 'Capital appreciation',
+                value: 'snake'
+            },
+            {
+                optionText: 'Significant increase in wealth',
+                value: 'guinea'
+            }
+        ]
+    },   
+    {
+        questionType: 'SelectionGroup',
+        questionText:
+            'What is your expected annual return?',
+        questionId: 'favoritePet',
+        options: [
+            {   
+                optionText: 'Same as deposit rate',
+                value: 'dog'
+            },
+            {
+                optionText: 'Same as the inflation rate',
+                value: 'cat'
+            },
+            {
+                optionText: "Greater than the inflation, with a little capital appreciation",
+                value: 'ferret'
+            },
+            {
+                optionText: 'Close to the stock market return',
+                value: 'snake'
+            },
+            {
+                optionText: 'Significantly above the stock market return',
+                value: 'guinea'
+            }
+        ]
+    },       
+    {
+        questionType: 'SelectionGroup',
+        questionText:
+            'What is your ideal investment style?',
+        questionId: 'favoritePet',
+        options: [
+            {   
+                optionText: 'Only 5% return, but risk free',
+                value: 'dog'
+            },
+            {
+                optionText: '15% return, but has chance to lose 5%',
+                value: 'cat'
+            },
+            {
+                optionText: "30% return, but has chance to lose 15%",
+                value: 'ferret'
+            },
+            {
+                optionText: '50% return, but has chance to lose 30%',
+                value: 'snake'
+            },
+            {
+                optionText: '100% return, but has chance to lose 60%',
+                value: 'guinea'
+            }
+        ]
+    },    
+    {
+        questionType: 'SelectionGroup',
+        questionText:
+            'If your current stock position is in 30% loss, what would you do?',
+        questionId: 'favoritePet',
+        options: [
+            {   
+                optionText: 'Can not bear the loss, close the position',
+                value: 'dog'
+            },
+            {
+                optionText: 'Hold, if the duration is between 3 ~ 6 months',
+                value: 'cat'
+            },
+            {
+                optionText: "Hold, if the duration is less than 1 year",
+                value: 'ferret'
+            },
+            {
+                optionText: 'Hold, if the duration is between 2 ~ 3 years',
+                value: 'snake'
+            },
+            {
+                optionText: 'Does not matter, I can hold it for a long time',
+                value: 'guinea'
+            }
+        ]
+    },    
+    {
+        questionType: 'SelectionGroup',
+        questionText:
+            'What type of investor you are in the view of people around you',
+        questionId: 'favoritePet',
+        options: [
+            {   
+                optionText: 'Can not bear any risk',
+                value: 'dog'
+            },
+            {
+                optionText: 'Risk aversion but can take a little risks',
+                value: 'cat'
+            },
+            {
+                optionText: "Willing to take risks, after a rational analysis",
+                value: 'ferret'
+            },
+            {
+                optionText: 'Risk seeking, relatively aggressive',
+                value: 'snake'
+            },
+            {
+                optionText: 'Risk seeking, very aggressive',
+                value: 'guinea'
+            }
+        ]
+    },   
     {
         questionType: 'Info',
-        questionText: 'That is all for the demo, tap finish to see your results!'
+        questionText: 'That is all for this survy, tap finish to see your results!'
     },
 ];
 
@@ -216,7 +307,7 @@ export default class SurveyScreen extends Component {
                 elevation: 5,
             },
             headerTintColor: '#fff',
-            headerTitle: 'Sample Survey',
+            headerTitle: 'Risk Survey',
             headerTitleStyle: {
                 flex: 1,
             }
