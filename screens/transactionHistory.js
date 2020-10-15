@@ -18,12 +18,45 @@ import { Container, Header, Item, Input, Icon, Button } from "native-base";
 
 
 export default class SearchBarExample extends Component {
+  constructor(props){
+    super(props);
+    this.state = {
+      adata:'have not set up',
+    }
+  }
+
+ 
+
+  componentDidMount(){
+    console.log("before didmount"+this.state.adata);
+    
+     }
+
+
+
+    getData(){
+      setTimeout(() => {
+        console.log('Our data is fetched');
+        this.setState({
+          adata: "app"
+        })
+      }, 2000)
+    }
+
+    componentDidMount(){
+      this.getData();
+    }
+
+
+  // componentDidMount(){
+  //   this.getData();
+  // }
+
   render() {
     var test = retrieveDatabse("/investment/financialproduct/name/price");
     var date = retrieveDatabse("/investment/transactionHistory/date")
     var productName = retrieveDatabse("/investment/transactionHistory/financialProduct")
     var price = retrieveDatabse("/investment/transactionHistory/price")
-
     return (
       <ScrollView>
         <View style={styles.container}>
