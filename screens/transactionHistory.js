@@ -25,15 +25,6 @@ export default class SearchBarExample extends Component {
     }
   }
 
- 
-
-  componentDidMount(){
-    console.log("before didmount"+this.state.adata);
-    
-     }
-
-
-
     getData(){
       setTimeout(() => {
         console.log('Our data is fetched');
@@ -48,9 +39,6 @@ export default class SearchBarExample extends Component {
     }
 
 
-  // componentDidMount(){
-  //   this.getData();
-  // }
 
   render() {
     var test = retrieveDatabse("/investment/financialproduct/name/price");
