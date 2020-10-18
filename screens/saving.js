@@ -2,11 +2,15 @@
 author: Chang Liu 
 */ 
 import React from 'react';
-import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity } from 'react-native';
+import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity, Button } from 'react-native';
 import {MaterialCommunityIcons, AntDesign, FontAwesome} from '@expo/vector-icons';
 import {Card} from 'react-native-web' 
 import {StatusBar} from 'expo-status-bar';
 import Constants from 'expo-constants';
+
+// import firebase
+import firebaseConfig from "../config/firebase";
+import * as firebase from 'firebase'
 
 // import fonts
 import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
@@ -34,6 +38,21 @@ function SavingOne ({navigation}) {
         return <AppLoading />;
     }
 
+    // insert data
+    firebase.database().ref('Transaction/1' ).set(
+        {
+            id: 3,
+            title: 'Play Station5',
+            price: 499,
+            description: 'Downtown Bestbuy',
+            image: require('../assets/Welcome/commonwealth.png')
+        }
+    ).then(() => {
+        console.log('Inserted');
+    }).catch((error) => {
+        console.log(error);
+    })
+
     return (
         <View style={styles.container}>
             <ImageBackground style={styles.usage}
@@ -45,7 +64,7 @@ function SavingOne ({navigation}) {
                     <Text style={styles.highlightText}>clothes Shopping</Text>
                 </View>
                 <View style={styles.buttonContainer}>
-                    <AppButton title = 'See detail' />
+                    <Button title = 'See detail' onPress={() => console.log("Pressed")} />
                 </View>
             </ImageBackground>
             <ImageBackground style={styles.savingGoal}
@@ -89,7 +108,7 @@ function SavingOne ({navigation}) {
                 </View>
             </ImageBackground>
             <View style={styles.creditCard}>
-                <TouchableOpacity style={styles.creditCardSection} onPress={() => navigation.navigate("Saving2")}>
+                <TouchableOpacity style={styles.creditCardSection} onPress={() => navigation.navigate("SavingDetail")}>
                     <ImageBackground style={styles.imageBackground} imageStyle={{ borderRadius: 12}}
                     source={require('../assets/Welcome/Royal.jpg')}>
                         <View style={styles.bankLogoSection}>
@@ -170,7 +189,6 @@ function SavingOne ({navigation}) {
                     </ImageBackground>
                 </TouchableOpacity>
             </View>
-            
         </View>
     );
 }

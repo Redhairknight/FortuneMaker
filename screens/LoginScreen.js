@@ -47,7 +47,7 @@ export default class LoginScreen extends React.Component {
                 source={require('../assets/Welcome/logo.png')} />
             {/* error message */}
             <View style={styles.errorMessage}>
-        {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text> }
+                {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text> }
             </View>
             <AppTextInput 
                 keyboardType="email-address"
@@ -79,7 +79,6 @@ export default class LoginScreen extends React.Component {
                 </Text>
             </TouchableOpacity>
         </View>
-
         );
     }
 }
