@@ -5,6 +5,12 @@ import donationIndex from "../screens/donationIndex";
 import donationCanTeen from "../screens/donationCanTeen";
 import donationPayment from "../screens/donationPayment";
 import donationPaymentSuccess from "../screens/donationPaymentSuccess"
+import donationAKF from "../screens/donationAKF"
+import donationCareFlight from "../screens/donationCareFlight"
+import donationFlyingDoctor from "../screens/donationFlyingDoctor"
+import donationFred from "../screens/donationFred"
+import donationGuideDogs from "../screens/donationGuideDogs"
+
 
 
 import { createStackNavigator } from "react-navigation-stack";
@@ -46,7 +52,37 @@ const DonationStack = createStackNavigator({
     navigationOptions:{
       headerShown:false
     }
-  }
+  },
+  AKF : {
+    screen: donationAKF,
+    navigationOptions:{
+      headerShown:false
+    }
+  },
+  CareFlight : {
+    screen: donationCareFlight,
+    navigationOptions:{
+      headerShown:false
+    }
+  },
+  FlyingDoctor : {
+    screen: donationFlyingDoctor,
+    navigationOptions:{
+      headerShown:false
+    }
+  },
+  Fred : {
+    screen: donationFred,
+    navigationOptions:{
+      headerShown:false
+    }
+  },
+  GuideDogs : {
+    screen: donationGuideDogs,
+    navigationOptions:{
+      headerShown:false
+    }
+  },
 
   
 });
