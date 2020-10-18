@@ -1,186 +1,148 @@
-import React, { Component } from "react";
-import {
-  StyleSheet,
-  Text,
-  TouchableWithoutFeedback,
-  TouchableOpacity,
-  View,
-  Image,
-  SafeAreaView,
-  Button,
-  Alert,
-  Platform,
-  StatusBar,
-  Dimensions,
-  PixelRatio,
-  TextInput,
-} from "react-native";
+import { StatusBar } from 'expo-status-bar';
+import React,{ Component } from 'react';
+import { SafeAreaView } from 'react-native-safe-area-context';
+import { FlatList, TextInput, TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { StyleSheet, Text, View ,Image, ScrollView} from 'react-native';
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
-import { ScrollView } from "react-native-gesture-handler";
-function donationPayment({ navigation}){
-  return(
-    <ScrollView contentContainerStyle={{flexGrow:1}}>
-    <View style={styles.container}>
-      <View
-        style={{
-          backgroundColor: "#1F4E79",
-          width: "100%",
-          height: "15%",
-        }}
-      >
-        <Text
-          style={{
-            textAlign: "center",
-            fontSize: 40,
-            marginTop:"7%",
-            color:"white",
-          }}
-        >
-          
-          Payment
-        </Text>
-      </View>
 
-      {/*main bar*/}
-      <View
-        style={{
-          backgroundColor: "white",
-          width: "100%",
-          height: "85%",
-        }}
-      >
 
-        {/** Payment Info showing frame */}
-        <View style={paymentStyle.paymengInfo}>
+class donationPayment extends React.Component{
+  render(){
+      return (
+          <SafeAreaView style={styles.container}>
+              <ScrollView contentContainerStyle={styles.contentContainer}>
+                  {/* Header of this page */}
+                  <View style={styles.head}>
+                      <Text style={styles.headText}>
+                          Step 3 - Confirm Payment Detail
+                      </Text>
+                  </View>
 
-          {/**Nominative & Anonymous */}
-          <View style={{flex:1, flexDirection:"row", borderTopLeftRadius:15, borderTopRightRadius:15}}>
-            <View style={[paymentStyle.borderTopLeftAndRight15,{flex:1, backgroundColor:"#1C4C75",borderTopRightRadius:0}]}>
-              <Text style={{fontSize:25,alignSelf:"center", top:"30%",color:"white"}}>
-                Nominative
-              </Text>
+                  {/* Main contents */}
+                  <View style={styles.bottom}>
 
-            </View>
-            <View style={[paymentStyle.borderTopLeftAndRight15, {flex:1,borderTopLeftRadius:0, backgroundColor:"lightblue"}]}>
-              <Text style={{fontSize:25,alignSelf:"center", top:"30%",color:"white"}}>
-                Anonymous
-              </Text>
-            </View>
-          </View>
-          {/**Personal Info */}
-          <View style={{flex:6, borderBottomLeftRadius:15,borderBottomRightRadius:15}}>
-            <View style={{flex:1}}>
-              <TextInput defaultValue="Your Name" clearTextOnFocus={true} style={{height:"33%", borderColor:"black",borderBottomWidth:2,marginLeft:"7.5%",marginRight:"7.5%", paddingBottom:0, fontSize:20}}/>
-              <TextInput defaultValue="Your Email" clearTextOnFocus={true} style={{height:"33%", borderColor:"black",borderBottomWidth:2,marginLeft:"7.5%",marginRight:"7.5%", paddingBottom:0, fontSize:20}}/>
-              <TextInput defaultValue="Your Phone" clearTextOnFocus={true} style={{height:"33%", borderColor:"black",borderBottomWidth:2,marginLeft:"7.5%",marginRight:"7.5%", paddingBottom:0, fontSize:20}}/>
-            </View>
-            <View style={{flex:2, alignContent:"baseline", marginTop:"5%"}}>
-              <TextInput editable={false} multiline={true} defaultValue="Here should be listed some information about payment, charity and so on" style={{height:"100%",marginLeft:"7.5%", marginRight:"7.5%",borderColor:"blue", borderWidth:1}}/>
-            </View>
-            {/** Payment method */}
-            <View style={{flex:2}}>
-              <View style={{flex:1, borderRadius:45, marginTop:"5%", marginLeft: "20%", marginRight:"20%", borderColor:"blue",borderWidth:1/PixelRatio.get(), justifyContent:"center",alignItems:"center"}}>
-                <Text onPress={()=>navigation.navigate('DonationPaymentSuccess')}>GIVE BY PayPal</Text>
-              </View>
-              <View style={{flex:1, borderRadius:45, marginTop:"5%", marginLeft: "20%", marginRight:"20%", borderColor:"blue",borderWidth:1/PixelRatio.get(),justifyContent:"center",alignItems:"center"}}>
-              <Text onPress={()=>navigation.navigate('DonationPaymentSuccess')}>GIVE BY Card</Text>
-              </View>
-              <View style={{flex:1, borderRadius:45, marginTop:"5%",marginBottom:"5%",marginLeft: "20%", marginRight:"20%", borderColor:"blue",borderWidth:1/PixelRatio.get(),justifyContent:"center",alignItems:"center"}}>
-              <Text onPress={()=>navigation.navigate('DonationPaymentSuccess')}>GIVE BY Apple</Text>
-              </View>
-            </View>
-          </View>
-        </View>
-      </View>
+                    <View style={styles.bottomHeader}>
+                      <Text style={styles.bottomEachTextTitle}>
+                        Enter your personal detail
+                      </Text>
+                    </View>
 
-      {/** Main bar finishes */}
- 
+                    <View style={styles.bottomMiddle}>
+                      <TextInput style={{marginLeft:50, marginRight:50, fontSize:25,borderBottomColor:"#1F4E79",borderBottomWidth:2, color:"black"}} placeholder="Your name" textAlign="left"/>
+                      <View style={styles.lineBreak}></View>
+                      <TextInput style={{marginLeft:50, marginRight:50, fontSize:25,borderBottomColor:"#1F4E79",borderBottomWidth:2, color:"black"}} placeholder="Your email" textAlign="left"/>
+                      <View style={styles.lineBreak}></View>
+                      <TextInput style={{marginLeft:50, marginRight:50, fontSize:25,borderBottomColor:"#1F4E79",borderBottomWidth:2, color:"black"}} placeholder="Your address(optional)" textAlign="left"/>
 
-    </View>
-    </ScrollView>
+                    </View>
 
-  )
+                    <View style={styles.bottomPayLink}>
+                      <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("DonationPaymentSuccess")} style={styles.payBtn}>
+                        <Image style={styles.payImg} source={require("../assets/paypal.png")}/>
+                        <Text style={styles.payText}> Pay by PayPal</Text>
+                      </TouchableWithoutFeedback>
+                      <View style={styles.lineBreak}></View>
+                      <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("DonationPaymentSuccess")} style={styles.payBtn}>
+                        <Image style={styles.payImg} source={require("../assets/credit-card.png")}/>
+                        <Text style={styles.payText}> Pay by Card</Text>
+                      </TouchableWithoutFeedback>
+                      <View style={styles.lineBreak}></View>
+                      <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("DonationPaymentSuccess")} style={styles.payBtn}>
+                        <Image style={styles.payImg} source={require("../assets/apple-pay.png")}/>
+                        <Text style={styles.payText}> Pay by Apple</Text>
+                      </TouchableWithoutFeedback>
+                    </View>
+                  </View>
+              </ScrollView>
+          </SafeAreaView>
+      )
+  }
 }
+
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-    // paddingTop: Platform.OS === "android" ? StatusBar.currentHeight : 0,
+  container:{
+      flex:1,
   },
-  regularAndOnceBar:{
-     marginTop:"15%",
-     marginLeft:"15%",
-     marginRight:"15%",
-     height:35,
-     flexDirection:'row',
-     borderRadius:15,
-     padding:2,
-     backgroundColor:'#2D9900'
+  contentContainer:{
+      height:"100%",
   },
-  donationMainSelectionBar:{
-    marginTop:"5%",
-    marginLeft:"15%",
-    marginRight:"15%",
-    height:35,
-    flexDirection:'row',
-    borderRadius:15,
-    padding:2,
-    backgroundColor:'#407CB3'
+  head:{
+      flex:1,
+      backgroundColor: "#1F4E79",
+      justifyContent:"center",
   },
-  regularAndOnceItem:{
+  headText:{
+      fontSize: 25,
+      color: "#FFFFFF",
+      fontWeight: "bold",
+      alignSelf:"center",
+  },
+  bottom:{
+      flex:5,
+  },
+  bottomEachTextTitle:{
+    fontSize:25,
+    color:"#1F4E79",
+    fontWeight:"bold",
+    alignSelf:"center"
+},
+  bottomHeader:{
     flex:1,
-    height: 30
+    justifyContent:"center"
   },
-  regularAndOnceCenter:{
-    justifyContent:"center",
-    alignItems:"center"
+  bottomMiddle:{
+    flex:1,
+    justifyContent:'center',
   },
-  font:{
-    color:"#FFFFFF",
-    fontSize:16,
-    fontWeight:"bold"
+  bottomPayLink:{
+    flex:2,
+    justifyContent:'center',
+    alignItems:'center'
   },
-  borderOnRight:{
-    borderRightWidth:1/PixelRatio.get(),
-    borderColor:"#FFFFFF"
+  bgRed:{
+      backgroundColor:"red"
   },
-  square: {
+  bgYellow:{
+      backgroundColor:"yellow",
+  },
+  bgGreen:{
+      backgroundColor:"green"
+  },
+  marginTop15:{
+      marginTop:30,
+  },
+  marginLeft50:{
+      marginLeft:"50%",
+  }
+  ,
+  buttonText:{
+      fontSize:20,
+      color:"white"
+  },
+  lineBreak:{
+      height:25
+  },
+  payBtn:{
+    borderRadius:45,
+    borderColor:"#1F4E79",
+    borderWidth:2,
+    justifyContent:'center',
+    alignItems:'center',
+    width:200,
+    height:40,
+    flexDirection:'row'
+  },
+  payImg:{
     width:20,
-    height:20,
-    borderColor:"black",
-    borderWidth:1/PixelRatio.get(),
-    backgroundColor:"white",
-    borderRadius:0,
+    height:20
   },
-  wrap:{
-    flex:1,
-    flexWrap:"wrap",
+  payText:{
+    color:"#1F4E79",
+    fontSize:20
   }
-});
+
+})
 
 
-
-const paymentStyle = StyleSheet.create(
-  {
-    paymengInfo:{
-      margin:"5%",
-      borderWidth:1/PixelRatio.get(),
-      borderColor:"#1C4C75",
-      borderRadius:15,
-      flex:1
-    },
-    borderTopLeftAndRight15:{
-      borderTopLeftRadius:15,
-      borderTopRightRadius:15
-    },
-    borderBottomLeftAndRight15:{
-      borderBottomLeftRadius:15,
-      borderBottomRightRadius:15,
-    }
-  }
-)
-
-export default donationPayment;
+export default donationPayment
