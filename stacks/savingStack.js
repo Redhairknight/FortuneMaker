@@ -20,7 +20,12 @@ const SavingStack = createStackNavigator({
   Saving2: {
     screen: Saving2,
     navigationOptions: {
-      
+      headerTitleAlign: "center",
+      headerTitle: "Saving Goal",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
     },
   },
   Saving3: {

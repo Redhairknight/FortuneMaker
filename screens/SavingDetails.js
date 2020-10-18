@@ -15,80 +15,6 @@ import {getTrans} from '../components/DatabaseIterate';
 import colors from '../config/colors';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-const initialMessages = [
-    {
-        id:1,
-        title: 'T1',
-        description: 'D1',
-        image: require('../assets/Welcome/commonwealth.png')
-    },
-    {
-        id:2,
-        title: 'T2',
-        description: 'D2',
-        image: require('../assets/Welcome/alipay.png')
-    },
-]
-
-// function Transaction(props) {
-//         const [messages, setMessages] = useState(initialMessages);
-//         const [refreshing, setRefreshing] = useState(false);
-
-//         const handleDelete = message => {
-//             // delete message
-//             setMessages(messages.filter(m => m.id !== message.id))
-//             // call the server
-//         }
-
-//         return (
-//             <SafeAreaView style={styles.screen}>
-//                 <Image style={styles.image} source={require('../assets/t_back.jpg')} />
-//                 <FlatList 
-//                     data={messages}
-//                     keyExtractor={message => message.id.toString()}
-//                     renderItem={({item}) => (
-//                     <ListItem
-//                         title={item.title}
-//                         subTitle={item.description}
-//                         image={item.image} 
-//                         onPress={() => console.log("Message selected", item)}
-//                         renderRightActions={() => (
-//                             <TouchableWithoutFeedback onPress={() => handleDelete(item)}>
-//                                 <View style={styles.renderContainer}>
-//                                     <MaterialCommunityIcons 
-//                                         name="trash-can"
-//                                         size={35}
-//                                         color={colors.white}
-//                                     />
-//                                 </View>
-//                             </TouchableWithoutFeedback>
-//                         )}
-//                     /> )}
-//                     ItemSeparatorComponent={() => 
-//                         <View 
-//                         style={styles.separator} />}
-//                     refreshing={refreshing}
-//                     onRefresh={() => 
-//                         setMessages([{
-//                             id:1,
-//                             title: 'T1',
-//                             description: 'D1',
-//                             image: require('../assets/Welcome/commonwealth.png')
-//                         },
-//                         {
-//                             id:2,
-//                             title: 'T2',
-//                             description: 'D2',
-//                             image: require('../assets/Welcome/alipay.png')
-//                         },   
-//                     ])
-//                     }
-//                 />
-                
-//             </SafeAreaView>
-//         );
-//     }
-
 export default class SavingDetail extends Component {
 
     constructor(props){
@@ -110,7 +36,6 @@ export default class SavingDetail extends Component {
         q.once('value', snapshot => {
             snapshot.forEach(function(data) {
                 let result = data.val();
-                console.log(result);
                 result['key'] = data.key;
                 finished.push(result);
             })
