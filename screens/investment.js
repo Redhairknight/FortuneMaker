@@ -140,7 +140,7 @@ class Investment extends React.Component {
             </View>
           </View>
           <View style={styles.bottom}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate("InvestmentRecommendation")} >
               <View style={styles.bottom_content}>
                 <Image
                   style={styles.bottom_Logos}

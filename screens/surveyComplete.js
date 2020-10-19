@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import * as firebase from 'firebase'
 
 const BLUE = '#1F4E79';
@@ -27,6 +27,11 @@ export default class SurveyCompletedScreen extends Component {
           score: score
         });
       }
+    
+    handleLogin = () => {
+        this.props.navigation.pop(2)
+        this.props.navigation.navigate("InvestmentRecommendation")
+    }
 
     render() {
         const score = this.props.navigation.getParam('score');
@@ -35,10 +40,12 @@ export default class SurveyCompletedScreen extends Component {
             <View style={styles.background}>
                 <View style={styles.container}>
                     <ScrollView>
-                        <Text style={styles.questionText}>The results are in!</Text>
+                        <Text style={styles.questionText}>The results are here!</Text>
                         <Text style={styles.questionText}>Your total score: {score}</Text>
-
-                        <Text>Raw JSON: {JSON.stringify(this.props.navigation.getParam('surveyAnswers', {}))}</Text>
+                        <Text style={styles.questionText}>Your are classified as a: {score}</Text>
+                        <TouchableOpacity style={styles.button}>
+                            <Button color='#1F4E79' title="Investment Recommendation" onPress={this.handleLogin} />
+                        </TouchableOpacity>
                     </ScrollView>
                 </View>
             </View>
@@ -61,10 +68,18 @@ const styles = StyleSheet.create({
         backgroundColor: 'white',
         elevation: 20,
         borderRadius: 10,
-        maxHeight: '80%',
+        maxHeight: '50%',
     },
     questionText: {
+        justifyContent: 'center',
         marginBottom: 20,
-        fontSize: 20
+        fontSize: 20,
+        margin: 10,
     },
+    button: {
+        marginVertical: 20,
+        maxWidth: '70%',
+        alignContent: "center",
+        alignSelf: "center",
+    }
 });
