@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { ScrollView, StyleSheet, Text, View } from 'react-native';
+import { ScrollView, StyleSheet, Text, View, Button, TouchableOpacity } from 'react-native';
 import * as firebase from 'firebase'
 
 const BLUE = '#1F4E79';
@@ -27,18 +27,43 @@ export default class SurveyCompletedScreen extends Component {
           score: score
         });
       }
+    
+    switchScreen = () => {
+        this.props.navigation.pop(2)
+        this.props.navigation.navigate("InvestmentRecommendation")
+    }
+
+    checkInvestorType = (score) => {
+        var type = ''
+        if (score < 20) {
+            type = 'Conservative'
+        } else if (20 <= score && score<40) {
+            type = 'Moderately Conservative'
+        } else if (40 <= score && score< 60) {
+            type = 'Moderate'
+        } else if (60 <= score && score< 80) {
+            type = 'Moderately Aggressive'
+        } else {
+            type = 'Aggressive'
+        }
+        return type;
+    };
 
     render() {
         const score = this.props.navigation.getParam('score');
         this.writeUserData(score);
+        var riskType = this.checkInvestorType(score)
         return (
             <View style={styles.background}>
                 <View style={styles.container}>
                     <ScrollView>
-                        <Text style={styles.questionText}>The results are in!</Text>
+                        <Text style={styles.questionText}>The results are here!</Text>
                         <Text style={styles.questionText}>Your total score: {score}</Text>
-
-                        <Text>Raw JSON: {JSON.stringify(this.props.navigation.getParam('surveyAnswers', {}))}</Text>
+                        <Text style={styles.questionText}>Your are classified as:</Text>
+                        <Text style={styles.riskResult}>{riskType}</Text>
+                        <TouchableOpacity style={styles.button}>
+                            <Button color={BLUE} title="Investment Recommendation" onPress={this.switchScreen} />
+                        </TouchableOpacity>
                     </ScrollView>
                 </View>
             </View>
@@ -60,11 +85,28 @@ const styles = StyleSheet.create({
         justifyContent: 'center',
         backgroundColor: 'white',
         elevation: 20,
-        borderRadius: 10,
-        maxHeight: '80%',
+        borderRadius: 20,
+        maxHeight: '40%',
     },
     questionText: {
-        marginBottom: 20,
-        fontSize: 20
+        justifyContent: 'center',
+        fontSize: 20,
+        margin: 5,
+        color: BLUE,
+        alignSelf: 'center',
     },
+    riskResult: {
+        color: 'black',
+        fontWeight: 'bold',
+        justifyContent: 'center',
+        fontSize: 20,
+        margin: 5,
+        alignSelf: 'center',
+    },
+    button: {
+        marginVertical: 10,
+        maxWidth: '70%',
+        alignContent: "center",
+        alignSelf: "center",
+    }
 });

@@ -8,6 +8,7 @@ import Products from '../screens/products'
 import RiskSurvey from '../screens/riskSurvey'
 import SurveyCompleted from '../screens/surveyComplete'
 import FinancialIndex from '../screens/financialIndex'
+import Recommendation from '../screens/investmentRecommendation'
 
 import transactionHistory from '../screens/transactionHistory'
 import { createStackNavigator } from "react-navigation-stack";
@@ -110,7 +111,16 @@ const InvestmentStack = createStackNavigator({
         backgroundColor: "#1F4E79",
       }
     }},
-
+    InvestmentRecommendation:{
+      screen: Recommendation,
+      navigationOptions: {
+        headerTitleAlign: "center",
+        headerTitle: "Recommendation",
+        headerTintColor: "white",
+        headerStyle: {
+          backgroundColor: "#1F4E79",
+        }
+      }},    
 });
 
 

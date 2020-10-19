@@ -11,8 +11,6 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
 } from "react-native";
-import { render } from "react-dom";
-import { createAppContainer } from "react-navigation";
 
 class Investment extends React.Component {
   render() {
@@ -140,7 +138,7 @@ class Investment extends React.Component {
             </View>
           </View>
           <View style={styles.bottom}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate("InvestmentRecommendation")} >
               <View style={styles.bottom_content}>
                 <Image
                   style={styles.bottom_Logos}
