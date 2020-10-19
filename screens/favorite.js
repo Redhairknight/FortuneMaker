@@ -3,9 +3,8 @@ import {
   Image, StyleSheet, Text, View, Button, TouchableOpacity, ColorPropType, ScrollView,
   SafeAreaView, TouchableWithoutFeedback, } from "react-native";
 import * as firebase from 'firebase'
-
 class Favorite extends React.Component {
-
+    
     render() {
        
         return (

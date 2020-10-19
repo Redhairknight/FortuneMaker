@@ -25,6 +25,9 @@ if (!firebase.apps.length) {
   //firebase.auth().signOut()
 }
 
+// disable yellow warning
+console.disableYellowBox = true;
+
 const AuthStack = createStackNavigator(
   { 
     Loading: LoadingScreen,
