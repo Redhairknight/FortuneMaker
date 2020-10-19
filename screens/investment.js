@@ -11,8 +11,6 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
 } from "react-native";
-import { render } from "react-dom";
-import { createAppContainer } from "react-navigation";
 
 class Investment extends React.Component {
   render() {

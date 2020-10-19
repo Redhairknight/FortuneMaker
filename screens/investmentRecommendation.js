@@ -1,41 +1,68 @@
-import React, { useState, useCallback, useRef } from "react";
+import React, { useEffect } from "react";
 import {
-  Image, StyleSheet, Text, View, Button, TouchableOpacity, ColorPropType, ScrollView,
-  SafeAreaView, TouchableWithoutFeedback, } from "react-native";
+  Image,
+  StyleSheet,
+  Text,
+  View,
+  Button,
+  TouchableOpacity,
+  ColorPropType,
+  ScrollView,
+  SafeAreaView,
+  TouchableWithoutFeedback,
+  ImageBackground,
+} from "react-native";
 import * as firebase from 'firebase'
-import { getDailyChart } from '../components/stockApi'
+import retrieveDatabse from "../components/DatabaseManager"
+
 
 class Recommendation extends React.Component {
-
-    componentDidMount() {
-        const fetchStockData = async () => {
-            const result = await getDailyChart('TSLA');
+    constructor(props){
+        super(props);
+        this.state = {
+          score: retrieveDatabse("/investment/riskSurvey/" + (firebase.auth().currentUser.uid) + "/score"),
         }
-        fetchStockData()
-    }
+      }
+    
+      
+    checkInvestorType = (score) => {
+        var type = ''
+        if (score < 20) {
+            type = 'Conservative'
+        } else if (20 <= score && score<40) {
+            type = 'Moderately Conservative'
+        } else if (40 <= score && score< 60) {
+            type = 'Moderate'
+        } else if (60 <= score && score< 80) {
+            type = 'Moderately Aggressive'
+        } else {
+            type = 'Aggressive'
+        }
+        return type;
+    };
 
     render() {
-       
+        var riskType = this.checkInvestorType(this.state.score)
         return (
-        <SafeAreaView style={{flex: 1, backgroundColor: "white",}}>
+        <SafeAreaView style={{flex: 1,}}>
             <ScrollView>
-                <View>
-                    <Text style={styles.questionText}>The results are here!</Text>
-                    <Text style={styles.questionText}>Your total score: </Text>
-                    <Text style={styles.questionText}>Your are classified as a: </Text>
-                </View>
+           
+                <View style={styles.top}>
+                    <Text style={styles.descriptionText}>Your risk type is:</Text>
+                    <Text style={styles.riskType}>{riskType}</Text>
+                </View> 
             </ScrollView>
         </SafeAreaView>
         );
     }
 }
-import { Form } from "native-base";
+
 
 const styles = StyleSheet.create({
-    text: {
-        fontSize: 50,
-        alignSelf: "center",
+    top: {
+        maxHeight: '20%',
     }
+
 })
 
 export default Recommendation;
