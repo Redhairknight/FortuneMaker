@@ -3,8 +3,9 @@ import {
   Image, StyleSheet, Text, View, Button, TouchableOpacity, ColorPropType, ScrollView,
   SafeAreaView, TouchableWithoutFeedback, } from "react-native";
 import * as firebase from 'firebase'
-class Favorite extends React.Component {
-    
+
+class FinancialIndex extends React.Component {
+
     render() {
        
         return (
@@ -26,4 +27,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Favorite;
+export default FinancialIndex;

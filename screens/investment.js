@@ -95,7 +95,9 @@ class Investment extends React.Component {
                   <Text style={styles.buttons_text}>Invest Education</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={() =>
+                  this.props.navigation.navigate("TransactionHistory")
+                }>
                 <View style={styles.buttons}>
                   <Image
                     style={styles.buttonLogo}
@@ -162,22 +164,13 @@ class Investment extends React.Component {
                 <Text style={styles.bottom_text}>Financial News</Text>
               </View>
             </TouchableOpacity>
-            <TouchableOpacity>
+            <TouchableOpacity onPress={() => this.props.navigation.navigate("FinancialIndexDetail")}>
               <View style={styles.bottom_content}>
                 <Image
                   style={styles.bottom_Logos}
                   source={require("../assets/button8.png")}
                 />
                 <Text style={styles.bottom_text}>Financial Indexes</Text>
-              </View>
-            </TouchableOpacity>
-            <TouchableOpacity>
-              <View style={styles.bottom_content}>
-                <Image
-                  style={styles.bottom_Logos}
-                  source={require("../assets/button9.png")}
-                />
-                <Text style={styles.bottom_text}>Portfortlios</Text>
               </View>
             </TouchableOpacity>
           </View>
@@ -203,11 +196,9 @@ const styles = StyleSheet.create({
     height: 50,
     alignItems: "center",
   },
-  contentContainer: {
-    height: "110%",
-  },
   head: {
-    flex: 5,
+    height: 350,
+    flex: 10,
     backgroundColor: "#1F4E79",
   },
   head_text: {
@@ -271,6 +262,7 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   middle: {
+    paddingVertical: 10,
     flex: 3,
     backgroundColor: "#ECECEC",
   },
@@ -286,15 +278,14 @@ const styles = StyleSheet.create({
     width: 130,
     alignItems: "center",
   },
-  botton_buttons: { width: 20, height: 20 },
+  botton_buttons: { width: 20, height: 20,},
   buttons_text: { fontSize: 10 },
   bottom_Logos: { height: 30, width: 30 },
   bottom_content: {
     height: 50,
-
     flexDirection: "row",
     alignItems: "center",
-    padding: 10,
+    marginVertical: 4,
   },
   bottom_text: { paddingLeft: 20 },
 });
