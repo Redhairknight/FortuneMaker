@@ -41,8 +41,8 @@ export default class SurveyCompletedScreen extends Component {
                 <View style={styles.container}>
                     <ScrollView>
                         <Text style={styles.questionText}>The results are here!</Text>
-                        <Text style={styles.questionText}>Your total score: {score}</Text>
-                        <Text style={styles.questionText}>Your are classified as a: {score}</Text>
+                        <Text style={styles.questionText}>Your total score: </Text>
+                        <Text style={styles.questionText}>Your are classified as a: </Text>
                         <TouchableOpacity style={styles.button}>
                             <Button color='#1F4E79' title="Investment Recommendation" onPress={this.handleLogin} />
                         </TouchableOpacity>
