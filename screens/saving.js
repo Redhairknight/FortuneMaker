@@ -85,7 +85,7 @@ class SavingOne extends React.Component {
                         <Text style={styles.highlightText}>clothes Shopping</Text>
                     </View>
                     <View style={styles.buttonContainer}>
-                        <Button title = 'See detail' onPress={() => console.log("Pressed")} />
+                        <Button title = 'See detail' onPress={() => this.props.navigation.navigate("SavingPie")} />
                     </View>
                 </ImageBackground>
                 <ImageBackground style={styles.savingGoal}
