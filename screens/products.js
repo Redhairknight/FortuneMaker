@@ -9,8 +9,44 @@ import {
   ScrollView,
 } from "react-native";
 import { Container, Header, Item, Input, Icon, Button } from "native-base";
+import firebaseConfig from "../config/firebase";
+import * as firebase from 'firebase'
+import Swipeable from "react-native-gesture-handler/Swipeable";
+
 export default class SearchBarExample extends Component {
-  render() {
+
+
+  constructor(props){
+    super(props);
+
+    this.state = {
+        listingData: []
+    }
+}
+
+componentWillMount(){
+    
+  var that = this;
+
+  let q = firebase.database().ref('investment/financialproductlist/');
+  var finished = [];
+
+  q.once('value', snapshot => {
+      snapshot.forEach(function(data) {
+          let result = data.val();
+          result['key'] = data.key;
+          finished.push(result);
+      })
+  }).then(function(){
+      that.setState({
+          listingData: finished
+      })
+  })
+  
+}
+  render() {      
+    console.log(this.state.listingData.price)
+
     return (
       <ScrollView>
         <View style={styles.container}>
@@ -49,171 +85,36 @@ export default class SearchBarExample extends Component {
               />
             </TouchableOpacity>
           </View>
-          <View style={styles.financialProductContainer}>
+
+
+        <View>
+           {this.state.listingData.map(function(x){
+             return(
+              <Swipeable key={x.key}>
+                 <View style={styles.financialProductContainer}>
             <View style={styles.productProp}>
-              <Text style={styles.productName}>US Insight Fund Z</Text>
-              <Text style={styles.productNumber}>LU1121088667</Text>
+             <Text style={styles.productName}>{x.name}</Text>
+             <Text style={styles.productNumber}>{x.number}</Text>
               <Text style={styles.productInstitution}>
-                Morgan Stanley Investment Funds
+                {x.institution}
               </Text>
             </View>
             <View style={styles.productUnit}>
-              <Text style={styles.unitProp}> USD 70.76</Text>
+             <Text style={styles.unitProp}> {x.price}$</Text>
             </View>
             <View>
-              <Text>77.83%</Text>
+             <Text>{x.rateofreturn}</Text>
             </View>
           </View>
-          <View style={styles.financialProductContainer}>
-            <View style={styles.productProp}>
-              <Text style={styles.productName}>US Insight Fund Z</Text>
-              <Text style={styles.productNumber}>LU1121088667</Text>
-              <Text style={styles.productInstitution}>
-                Morgan Stanley Investment Funds
-              </Text>
-            </View>
-            <View style={styles.productUnit}>
-              <Text style={styles.unitProp}> USD 70.76</Text>
-            </View>
-            <View>
-              <Text>77.83%</Text>
-            </View>
-          </View>
-          <View style={styles.financialProductContainer}>
-            <View style={styles.productProp}>
-              <Text style={styles.productName}>US Insight Fund Z</Text>
-              <Text style={styles.productNumber}>LU1121088667</Text>
-              <Text style={styles.productInstitution}>
-                Morgan Stanley Investment Funds
-              </Text>
-            </View>
-            <View style={styles.productUnit}>
-              <Text style={styles.unitProp}> USD 70.76</Text>
-            </View>
-            <View>
-              <Text>77.83%</Text>
-            </View>
-          </View>
-          <View style={styles.financialProductContainer}>
-            <View style={styles.productProp}>
-              <Text style={styles.productName}>US Insight Fund Z</Text>
-              <Text style={styles.productNumber}>LU1121088667</Text>
-              <Text style={styles.productInstitution}>
-                Morgan Stanley Investment Funds
-              </Text>
-            </View>
-            <View style={styles.productUnit}>
-              <Text style={styles.unitProp}> USD 70.76</Text>
-            </View>
-            <View>
-              <Text>77.83%</Text>
-            </View>
-          </View>
-          <View style={styles.financialProductContainer}>
-            <View style={styles.productProp}>
-              <Text style={styles.productName}>US Insight Fund Z</Text>
-              <Text style={styles.productNumber}>LU1121088667</Text>
-              <Text style={styles.productInstitution}>
-                Morgan Stanley Investment Funds
-              </Text>
-            </View>
-            <View style={styles.productUnit}>
-              <Text style={styles.unitProp}> USD 70.76</Text>
-            </View>
-            <View>
-              <Text>77.83%</Text>
-            </View>
-          </View>
-          <View style={styles.financialProductContainer}>
-            <View style={styles.productProp}>
-              <Text style={styles.productName}>US Insight Fund Z</Text>
-              <Text style={styles.productNumber}>LU1121088667</Text>
-              <Text style={styles.productInstitution}>
-                Morgan Stanley Investment Funds
-              </Text>
-            </View>
-            <View style={styles.productUnit}>
-              <Text style={styles.unitProp}> USD 70.76</Text>
-            </View>
-            <View>
-              <Text>77.83%</Text>
-            </View>
-          </View>
-          <View style={styles.financialProductContainer}>
-            <View style={styles.productProp}>
-              <Text style={styles.productName}>US Insight Fund Z</Text>
-              <Text style={styles.productNumber}>LU1121088667</Text>
-              <Text style={styles.productInstitution}>
-                Morgan Stanley Investment Funds
-              </Text>
-            </View>
-            <View style={styles.productUnit}>
-              <Text style={styles.unitProp}> USD 70.76</Text>
-            </View>
-            <View>
-              <Text>77.83%</Text>
-            </View>
-          </View>
-          <View style={styles.financialProductContainer}>
-            <View style={styles.productProp}>
-              <Text style={styles.productName}>US Insight Fund Z</Text>
-              <Text style={styles.productNumber}>LU1121088667</Text>
-              <Text style={styles.productInstitution}>
-                Morgan Stanley Investment Funds
-              </Text>
-            </View>
-            <View style={styles.productUnit}>
-              <Text style={styles.unitProp}> USD 70.76</Text>
-            </View>
-            <View>
-              <Text>77.83%</Text>
-            </View>
-          </View>
-          <View style={styles.financialProductContainer}>
-            <View style={styles.productProp}>
-              <Text style={styles.productName}>US Insight Fund Z</Text>
-              <Text style={styles.productNumber}>LU1121088667</Text>
-              <Text style={styles.productInstitution}>
-                Morgan Stanley Investment Funds
-              </Text>
-            </View>
-            <View style={styles.productUnit}>
-              <Text style={styles.unitProp}> USD 70.76</Text>
-            </View>
-            <View>
-              <Text>77.83%</Text>
-            </View>
-          </View>
-          <View style={styles.financialProductContainer}>
-            <View style={styles.productProp}>
-              <Text style={styles.productName}>US Insight Fund Z</Text>
-              <Text style={styles.productNumber}>LU1121088667</Text>
-              <Text style={styles.productInstitution}>
-                Morgan Stanley Investment Funds
-              </Text>
-            </View>
-            <View style={styles.productUnit}>
-              <Text style={styles.unitProp}> USD 70.76</Text>
-            </View>
-            <View>
-              <Text>77.83%</Text>
-            </View>
-          </View>
-          <View style={styles.financialProductContainer}>
-            <View style={styles.productProp}>
-              <Text style={styles.productName}>US Insight Fund Z</Text>
-              <Text style={styles.productNumber}>LU1121088667</Text>
-              <Text style={styles.productInstitution}>
-                Morgan Stanley Investment Funds
-              </Text>
-            </View>
-            <View style={styles.productUnit}>
-              <Text style={styles.unitProp}> USD 70.76</Text>
-            </View>
-            <View>
-              <Text>77.83%</Text>
-            </View>
-          </View>
+              </Swipeable>
+             )
+           }
+           )
+          }
+        </View>
+
+
+          
         </View>
       </ScrollView>
     );
