@@ -106,7 +106,7 @@ class Investment extends React.Component {
               </TouchableOpacity>
             </View>
             <View style={styles.middle_three_button}>
-              <TouchableOpacity>
+              <TouchableOpacity onPress={()=> this.props.navigation.navigate("RiskSurvyDetail")}>
                 <View style={styles.buttons}>
                   <Image
                     style={styles.buttonLogo}

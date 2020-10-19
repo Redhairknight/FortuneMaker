@@ -8,24 +8,35 @@ import * as firebase from 'firebase'
 import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 
-export default class RegisterScreen extends React.Component {
+export default class LoginScreen extends React.Component {
+
     state = {
-        name: "",
         email: "",
         password: "",
-        errorMessage: null
+        errorMessage: null,
     };
 
-    handleSignUp = () => {
+    // check if user is successfully logged in
+    checkLogin = () => {
+        firebase.auth().onAuthStateChanged(user =>{
+            if (user) {
+                this.props.navigation.navigate("Loading")
+                
+            } else {
+                // No user is signed in.
+                this.props.navigation.navigate("Login")
+            }
+            });
+    }
+
+    handleLogin = () => {
+        const {email, password} = this.state
+        
         firebase
             .auth()
-            .createUserWithEmailAndPassword(this.state.email, this.state.password)
-            .then(userCredentials => {
-                return userCredentials.user.updateProfile({
-                    displayName: this.state.name
-                });
-            })
-            .catch(error => this.setState({ errorMessage: error.message }));
+            .signInWithEmailAndPassword(email, password)
+            .catch(error => this.setState({errorMessage: error.message}))
+            .then(this.props.navigation.navigate("Loading"))
     }
 
     render() {
@@ -33,20 +44,11 @@ export default class RegisterScreen extends React.Component {
             <View>
             <Image
                 style={styles.logo} 
-                source={require('../assets/splash.png')} />
+                source={require('../assets/Welcome/logo.png')} />
             {/* error message */}
             <View style={styles.errorMessage}>
                 {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text> }
             </View>
-            <AppTextInput 
-                onChangeText={name => this.setState({ name })}
-                value = {this.state.name}
-                autoCorrect={false}
-                autoCapitalize= 'none'
-                icon = 'email'
-                placeholder="Name"
-                textContentType="emailAddress"
-                />
             <AppTextInput 
                 keyboardType="email-address"
                 onChangeText={email => this.setState({ email })}
@@ -67,12 +69,16 @@ export default class RegisterScreen extends React.Component {
                 secureTextEntry
                 textContentType="password"
                 />
-            {/* <Button title="Register" onPress={()=>console.log(email, password) && navigation.navigate("Welcome")} /> */}
-            <Button title="Register" onPress={this.handleSignUp} />
+            
+            <Button title="Login" onPress={this.handleLogin} />
 
-          
+            <TouchableOpacity style={{alignSelf: 'center', marginTop: 32}}
+                onPress={() => this.props.navigation.navigate('Register')}>
+                <Text style={{color: '#414959', fontSize: 13}}>
+                    New to FortuneMaker? <Text style={{fontWeight: '500', color: '#E9446A'}}>Sign in </Text>
+                </Text>
+            </TouchableOpacity>
         </View>
-
         );
     }
 }
