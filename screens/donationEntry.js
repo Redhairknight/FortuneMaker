@@ -10,12 +10,6 @@ class donationEntry extends React.Component{
         return (
             <SafeAreaView style={styles.container}>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
-                    {/* Header of this page */}
-                    <View style={styles.head}>
-                        <Text style={styles.headText}>
-                            Hi, Welcome to donation.
-                        </Text>
-                    </View>
                     {/* Main contents */}
                     <View style={styles.bottom}>
                         <View style={styles.bottomEach,styles.marginTop15}>
@@ -59,11 +53,25 @@ class donationEntry extends React.Component{
 
                             </View>
                             <TouchableWithoutFeedback
+                                onPress ={()=> this.props.navigation.navigate("DonationHistory")}
+                            >
+                            <View style={styles.buttons}>
+                                <Text style={styles.buttonText}>
+                                    My Donation History
+                                </Text>
+
+                            </View>
+
+                            </TouchableWithoutFeedback>
+                            <View style={styles.lineBreak}>
+
+                            </View>
+                            <TouchableWithoutFeedback
                                 onPress ={()=> this.props.navigation.navigate("DonationCharityChoose")}
                             >
                             <View style={styles.buttons}>
                                 <Text style={styles.buttonText}>
-                                    Read More
+                                    Tax Relief Calculation
                                 </Text>
 
                             </View>
@@ -134,19 +142,23 @@ const styles = StyleSheet.create({
     ,
     buttons:{
         backgroundColor:"#1F4E79",
-        width:"55%",
-        height:30,
-        marginLeft:"25%",
+        width:"65%",
+        height:60,
+        marginLeft:"17.5%",
         alignItems:"center",
-        borderRadius:15,
+        borderRadius:45,
+        flexDirection:"column",
+        justifyContent:"center"
     },
     buttonText:{
-        fontSize:20,
-        color:"white"
+        fontSize:22,
+        color:"white",
+        textAlignVertical:"center",
+        includeFontPadding:false,
     },
     lineBreak:{
         height:15
-    }
+    },
 })
 
 export default donationEntry;

@@ -12,12 +12,6 @@ class donationPayment extends React.Component{
       return (
           <SafeAreaView style={styles.container}>
               <ScrollView contentContainerStyle={styles.contentContainer}>
-                  {/* Header of this page */}
-                  <View style={styles.head}>
-                      <Text style={styles.headText}>
-                          Step 3 - Confirm Payment Detail
-                      </Text>
-                  </View>
 
                   {/* Main contents */}
                   <View style={styles.bottom}>
@@ -88,7 +82,7 @@ const styles = StyleSheet.create({
     alignSelf:"center"
 },
   bottomHeader:{
-    flex:1,
+    // flex:1,
     justifyContent:"center"
   },
   bottomMiddle:{
@@ -96,7 +90,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
   },
   bottomPayLink:{
-    flex:2,
+    flex:1,
     justifyContent:'center',
     alignItems:'center'
   },

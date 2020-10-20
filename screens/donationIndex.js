@@ -23,12 +23,7 @@ function donationIndex({navigation}){
         return (
             <SafeAreaView style={styles.container}>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
-                    {/* Header of this page */}
-                    <View style={styles.head}>
-                        <Text style={styles.headText}>
-                            Step 2 - Give Donation
-                        </Text>
-                    </View>
+
                     {/* Main contents */}
                     <View style={styles.bottom}>
                       <View style={styles.selectMoneyHeader}>

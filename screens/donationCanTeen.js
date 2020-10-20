@@ -10,12 +10,6 @@ class donationCanTeen extends React.Component{
         return (
             <SafeAreaView style={styles.container}>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
-                    {/* Header of this page */}
-                    <View style={styles.head}>
-                        <Text style={styles.headText}>
-                            CanTeen
-                        </Text>
-                    </View>
   
                     {/* Main contents */}
                     <View style={styles.bottom}>

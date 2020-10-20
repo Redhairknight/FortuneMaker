@@ -12,12 +12,6 @@ class donationCharityBrief extends React.Component{
       return (
           <SafeAreaView style={styles.container}>
               <ScrollView contentContainerStyle={styles.contentContainer}>
-                  {/* Header of this page */}
-                  <View style={styles.head}>
-                      <Text style={styles.headText}>
-                          Step 1 - Choose a Charity
-                      </Text>
-                  </View>
 
                   {/* Main contents */}
                   <View style={styles.bottom}>

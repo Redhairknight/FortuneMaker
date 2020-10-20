@@ -12,12 +12,7 @@ class donationPaymentSuccess extends React.Component{
       return (
           <SafeAreaView style={styles.container}>
               <ScrollView contentContainerStyle={styles.contentContainer}>
-                  {/* Header of this page */}
-                  <View style={styles.head}>
-                      <Text style={styles.headText}>
-                          Payment Succeed!
-                      </Text>
-                  </View>
+
 
                   {/* Main contents */}
                   <View style={styles.bottom}>
@@ -30,16 +25,16 @@ class donationPaymentSuccess extends React.Component{
                       <Text style={styles.bottomEachTextTitle}>
                         We have received your kindly payment. And we promise the money will be transfered to the charity within 7 days. 
                       </Text><Text style={styles.bottomEachTextTitle}>
-                        You can access the donation status through your profile.
+                        You can access the donation status through donation history.
                       </Text>
                     </View>
                     <View style={styles.bottomMiddle}>
                     <TouchableWithoutFeedback
-                          onPress ={()=> this.props.navigation.navigate("DonationIndex")}
+                          onPress ={()=> this.props.navigation.navigate("DonationHistory")}
                       >
                       <View style={styles.buttons}>
                           <Text style={styles.buttonText}>
-                              My Profile
+                              Donation History
                           </Text>
 
                       </View>
