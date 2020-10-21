@@ -5,20 +5,20 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableHighlight, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-function donationIndex({navigation}){
+class donationIndex extends React.Component{
 
-      const [money, setMoney] = React.useState(0);
-      const [title, setTitle] = React.useState("Please Select Your Money");
-      const [text,setText] = React.useState("");
+  constructor(props){
+    super(props);
+    this.state = {
+      money: "",
+      title:"Please Select The Amount",
+    }
+  }
+      render(){
+        const charityName = this.props.navigation.getParam('charityName');
+        const money = this.state.money;
+        const title = this.state.title;
 
-      function onPressMoney(param) {
-        setMoney(param);
-        setTitle("You are going to donate $ " + money)
-      }
-
-      function onEditMoney(){
-        setTitle("You are going to donate $ " + text);
-      }
 
         return (
             <SafeAreaView style={styles.container}>
@@ -35,31 +35,34 @@ function donationIndex({navigation}){
                         <Text style={[styles.regularyText]}>{title}</Text>
                       </View>
 
-                        <TouchableWithoutFeedback style={styles.selectMoneyHeader} onPress={()=>onPressMoney(10)}>
+                        <TouchableWithoutFeedback style={styles.selectMoneyHeader} onPress={()=>this.setState({money:10,title:"You Are Going To Donate $ 10"})}>
                           <Text style={styles.regularyText}>$ 10</Text>
                         </TouchableWithoutFeedback>
 
-                      <TouchableWithoutFeedback style={styles.selectMoney} onPress={()=>onPressMoney(20)}>
+                      <TouchableWithoutFeedback style={styles.selectMoney} onPress={()=>this.setState({money:20,title:"You Are Going To Donate $ 20"})}>
                           <Text style={styles.regularyText}>$ 20</Text>
                         </TouchableWithoutFeedback>
 
-                      <TouchableWithoutFeedback style={styles.selectMoney} onPress={()=>onPressMoney(50)}>
+                      <TouchableWithoutFeedback style={styles.selectMoney} onPress={()=>this.setState({money:50,title:"You Are Going To Donate $ 50"})}>
                           <Text style={styles.regularyText}>$ 50</Text>
                         </TouchableWithoutFeedback>
 
                       <View style={styles.selectMoney}>
-                        <TextInput textAlign="center" placeholderTextColor="white" placeholder="Set you own " keyboardType="numeric" style={styles.regularyText} onEndEditing={()=>onEditMoney()} onChangeText={(text)=>setText(text)}/>
+                        <TextInput textAlign="center" placeholderTextColor="white" placeholder="Set you own " maxLength={4}  keyboardType="numeric" style={styles.regularyText} onChangeText={(text)=>this.setState({money:text,title:"You Are Going To Donate $" + text})}/>
                       </View>
 
                       <View style={styles.selectContinue}>
-                        <Text onPress={()=> navigation.navigate("DonationPayment")} style={styles.regularyText}>Click To Continue</Text>
+                        <Text onPress={()=> this.props.navigation.navigate("DonationPayment",{
+                          charityName:charityName,money:money
+                        })} style={styles.regularyText}>Click To Continue</Text>
                       </View>
 
                     </View>
                 </ScrollView>
             </SafeAreaView>
         )
-    };
+    }
+  };
 
 const styles = StyleSheet.create({
     container:{

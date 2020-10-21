@@ -56,7 +56,12 @@ const DonationStack = createStackNavigator({
   AKF : {
     screen: donationAKF,
     navigationOptions:{
-      headerShown:false
+      headerTitleAlign: "center",
+      headerTitle: "AKF",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
     }
   },
   CareFlight : {

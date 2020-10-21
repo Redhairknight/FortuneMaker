@@ -5,9 +5,18 @@ import { FlatList, TouchableOpacity, TouchableWithoutFeedback } from 'react-nati
 import { StyleSheet, Text, View ,Image, ScrollView, ListView} from 'react-native';
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import * as firebase from 'firebase'
 
 
 class donationCharityBrief extends React.Component{
+
+  writeCharityInfo = (charityName) =>{
+    var userID = firebase.auth().currentUser.uid
+    firebase.database().ref('Donation/History/' + userID).set({
+      Charity:charityName
+    })
+  }
+
   render(){
       return (
           <SafeAreaView style={styles.container}>

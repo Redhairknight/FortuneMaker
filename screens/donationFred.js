@@ -26,7 +26,9 @@ class donationFred extends React.Component{
                         </View>
                         <View style={styles.mainPartBtnView}>
                         <TouchableWithoutFeedback
-                                onPress ={()=> this.props.navigation.navigate("DonationIndex")}
+                                onPress ={()=> this.props.navigation.navigate("DonationIndex",{
+                                    charityName:"Fred"
+                                })}
                             >
                             <View style={styles.buttons}>
                                 <Text style={styles.buttonText}>
