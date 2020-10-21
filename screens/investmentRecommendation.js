@@ -16,6 +16,7 @@ import {
 import * as firebase from 'firebase'
 import retrieveDatabse from "../components/DatabaseManager"
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { VictoryPie, VictoryLegend, } from 'victory-native'
 
 class Recommendation extends React.Component {
     constructor(props){
@@ -23,19 +24,21 @@ class Recommendation extends React.Component {
         this.state = {
           score: retrieveDatabse("/investment/riskSurvey/" + (firebase.auth().currentUser.uid) + "/score"),
           modalOpen: false,
+          description: "",
+          assetAllocation: null,
         }
       }
     
       
     checkInvestorType = (score) => {
         var type = ''
-        if (score < 20) {
+        if (score <= 30) {
             type = 'Conservative'
-        } else if (20 <= score && score<40) {
+        } else if (31 <= score && score<= 45) {
             type = 'Moderately Conservative'
-        } else if (40 <= score && score< 60) {
+        } else if (46 <= score && score<= 65) {
             type = 'Moderate'
-        } else if (60 <= score && score< 80) {
+        } else if (66 <= score && score<= 80) {
             type = 'Moderately Aggressive'
         } else {
             type = 'Aggressive'
@@ -48,23 +51,121 @@ class Recommendation extends React.Component {
         this.props.navigation.navigate('RiskSurvyDetail')
     }
 
+    setModalText = (riskType) => {
+        if (riskType == 'Conservative') {
+            this.setState({description: "For investors who seek current income and stability and are less concerned about growth"})
+            this.setState({assetAllocation: [
+                { x: 1, y: 10, label: "10%" },
+                { x: 2, y: 5, label: "5%" },
+                { x: 3, y: 5, label: "5%" },
+                { x: 3, y: 50, label: "50%" },
+                { x: 3, y: 30, label: "30%" },
+            ]})
+        } else if (riskType == 'Moderately Conservative') {
+            this.setState({description: "For investors who seek current income and stability, with modest potential for increase in the value of their investments"})
+            this.setState({assetAllocation: [
+                { x: 1, y: 25, label: "25%" },
+                { x: 2, y: 5, label: "5%" },
+                { x: 3, y: 10, label: "10%" },
+                { x: 3, y: 50, label: "50%" },
+                { x: 3, y: 10, label: "10%" },
+            ]})
+        } else if (riskType == 'Moderate') {
+            this.setState({description: "For long-term investors who don’t need current income and want some growth potential. Likely to entail some fluctuations in value, but presents less volatility than the overall equity market."})
+            this.setState({assetAllocation: [
+                { x: 1, y: 35, label: "35%" },
+                { x: 2, y: 10, label: "10%" },
+                { x: 3, y: 15, label: "15%" },
+                { x: 3, y: 35, label: "35%" },
+                { x: 3, y: 5, label: "5%" },
+            ]})
+        } else if (riskType == 'Moderately Aggressive') {
+            this.setState({description: "For long-term investors who want good growth potential and don’t need current income. Entails a fair amount of volatility, but not as much as a portfolio invested exclusively in equities."})
+            this.setState({assetAllocation: [
+                { x: 1, y: 45, label: "45%" },
+                { x: 2, y: 15, label: "15%" },
+                { x: 3, y: 20, label: "20%" },
+                { x: 3, y: 15, label: "15%" },
+                { x: 3, y: 5, label: "5%" },
+            ]})
+        } else {
+            this.setState({description: "For long-term investors who want high growth potential and don’t need current income. May entail substantial year-to-year volatility in value in exchange for potentially high long-term returns."})
+            this.setState({assetAllocation: [
+                { x: 1, y: 50, label: "50%" },
+                { x: 2, y: 20, label: "20%" },
+                { x: 3, y: 20, label: "20%" },
+                { x: 3, y: 5, label: "5%" },
+                { x: 3, y: 5, label: "5%" },
+            ]})
+        }
+    }
+
     render() {
         var riskType = this.checkInvestorType(this.state.score)
+
+        const colorScale = ['#1F7954', 'gray', 'orange', '#1F4E79', '#79491F'];
         return (
         <SafeAreaView style={{flex: 1, backgroundColor: "white",}}>
             <ScrollView>
                 <Modal visible={this.state.modalOpen} animationType='slide'>
-                    <TouchableOpacity style={styles.modalCloseButton} onPress={() => this.setState({modalOpen: false})}>
-                        <MaterialCommunityIcons
-                            name='close'
-                            size={36}
-                            color='white'
+                    <ScrollView>
+                        <TouchableOpacity style={styles.modalCloseButton} onPress={() => this.setState({modalOpen: false})}>
+                            <MaterialCommunityIcons
+                                name='close'
+                                size={36}
+                                color='white'
+                            />
+                        </TouchableOpacity>
+                        <View >
+                            <View style={styles.modalTopRiskType}>
+                                <Text style={styles.modalRiskType}>{riskType}</Text>
+                            </View>
+                            <View style={styles.modalTopDescription}>
+                                <Text style={styles.modalDescription}>
+                                    {this.state.description}
+                                </Text>
+                            </View>
+                        </View>
+                        <View style={styles.modalPie}>
+                            <VictoryPie
+                            colorScale={colorScale}
+                            data={this.state.assetAllocation}
+                            height={400}
+                            width={400}
+                            innerRadius={70}
+                            padAngle={2}
+                            />
+                            <VictoryLegend
+                            padding={{ top: 0, left: 0 }}
+                            title="Asset classes"
+                            orientation="vertical"
+
+                            data={[
+                                {
+                                    name: 'Large-Cap Equity',
+                                    symbol: { fill: 'green', type: 'square' },
+                                },
+                                {
+                                    name: 'Small-Cap Equity',
+                                    symbol: { fill: 'gray', type: 'square' },
+                                },
+                                {
+                                    name: 'International Equity',
+                                    symbol: { fill: 'gold', type: 'square' },
+                                },
+                                {
+                                    name: 'Fixed Income',
+                                    symbol: { fill: 'navy', type: 'square' },
+                                },
+                                {
+                                    name: 'Cash Investments',
+                                    symbol: { fill: 'brown', type: 'square' },
+                                }
+                            ]}
+                            width={(250)}
                         />
-                    </TouchableOpacity>
-                    <Text>
-                        Modal
-                    </Text>
-                   
+                        </View>
+                    </ScrollView>
                 </Modal>
                 <View style={styles.top}>
                     <View style={styles.topText} >
@@ -80,7 +181,7 @@ class Recommendation extends React.Component {
                     </Text>
                     <View style={styles.bulbIcon}>
                         <MaterialCommunityIcons name="lightbulb-on" size={36} color="#1F4E79"/>
-                        <TouchableWithoutFeedback onPress={() =>this.setState({modalOpen: true})}>
+                        <TouchableWithoutFeedback onPress={() => {this.setState({modalOpen: true}); this.setModalText(riskType)}}>
                             <Text style={styles.bulbIconText} >Your Recommendation</Text>
                         </TouchableWithoutFeedback>
                     </View>
@@ -212,6 +313,37 @@ const styles = StyleSheet.create({
         padding: 10,
         borderRadius: 10,
         backgroundColor: "#1F4E79",
+    },
+    modalRiskType: {
+        alignSelf: 'center',
+        fontSize: 25,
+        fontWeight: "bold",
+        color: "#1F4E79",
+    },
+    modalTopRiskType: {
+        width: 350,
+        paddingVertical: 20,
+        borderBottomWidth: 1,
+        alignSelf: "center",
+        borderColor: "#1F4E79"
+    },
+    modalTopDescription: {
+        width: 300,
+        alignSelf: "center",
+    },
+    modalDescription: {
+        fontSize: 20,
+        color: "gray",
+        marginTop: 20,
+        borderWidth: 1,
+        borderStyle: "dashed",
+        borderRadius: 0.5,
+        padding: 10,
+        margin: 10,
+    },
+    modalPie: {
+        alignItems: "center",
+        width: '100%',
     }
 })
 
