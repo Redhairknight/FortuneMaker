@@ -38,6 +38,7 @@ export default class SavingDetail extends Component {
                 let result = data.val();
                 result['key'] = data.key;
                 finished.push(result);
+                console.log("finished:" + finished)
             })
         }).then(function(){
             that.setState({

@@ -66,7 +66,8 @@ class donationEntry extends React.Component{
                             <View style={styles.lineBreak}>
 
                             </View>
-                            <TouchableWithoutFeedback
+                            {/* <TouchableWithoutFeedback
+
                                 onPress ={()=> this.props.navigation.navigate("DonationCharityChoose")}
                             >
                             <View style={styles.buttons}>
@@ -76,7 +77,7 @@ class donationEntry extends React.Component{
 
                             </View>
 
-                            </TouchableWithoutFeedback>
+                            </TouchableWithoutFeedback> */}
                         </View>
                     </View>
                 </ScrollView>

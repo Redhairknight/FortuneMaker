@@ -1,4 +1,6 @@
 import React, { Component, useState } from 'react';
+import {  SafeAreaView, StyleSheet, Platform, StatusBar,Text, View, ScrollView, ImageBackground, Image, Button, TouchableHighlight } from 'react-native';
+import retrieveDatabse from "../components/DatabaseManager";
 import { FlatList, SafeAreaView, StyleSheet, Platform, StatusBar,Text, View, ScrollView, ImageBackground, Image, Button, TouchableHighlight } from 'react-native';
 import { ceil } from 'react-native-reanimated';
 import retrieveDatabse from "../components/DatabaseManager";
@@ -7,11 +9,9 @@ import { ListItem, Divider } from 'react-native-elements';
 import  Swipeable  from 'react-native-gesture-handler/Swipeable';
 // import firebase
 import firebaseConfig from "../config/firebase";
-import * as firebase from 'firebase'
-// import component
-// import ListItem from '../components/ListItem';
+import * as firebase from 'firebase';
 import {getTrans} from '../components/DatabaseIterate';
-// import ListItemDeleteAction from '../components/ListItemDeleteAction';
+
 import colors from '../config/colors';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
@@ -30,15 +30,16 @@ export default class donationHistory extends Component {
 componentWillMount(){
 
     var that = this;
-
-    let q = firebase.database().ref('Donation/History');
+    var userID = firebase.auth().currentUser.uid;
+    let q = firebase.database().ref('Donation/History/' + userID).ord;
     var finished = [];
 
     q.once('value', snapshot => {
         snapshot.forEach(function(data) {
-            let result = data.val();
-            result['key'] = data.key;
-            finished.push(result);
+          let result = data.val();
+          result['key'] = data.key;
+          finished.push(result);
+
         })
     }).then(function(){
         that.setState({
@@ -56,17 +57,29 @@ render() {
               <Image style={styles.image} source={require('../assets/thankyou.jpg')} />
               {
                   this.state.listingData.map(function(x){
+                      function getPath(){
+                        var url = ''
+                        if (x.charityName == "AKF"){url = require('../assets/check1.png')}
+                        else if (x.charityName == "GuideDogs"){url=require('../assets/check2.png')}
+                        else if (x.charityName == "CanTeen"){url = require('../assets/check3.png')}
+                        else if (x.charityName == "FlyingDoctor"){url = require('../assets/check4.png')}
+                        else if (x.charityName == "CareFlight"){url = require('../assets/check5.png')}
+                        else if (x.charityName == 'Fred'){url = require('../assets/check6.png')}
+                        return url;
+                      }
+
+                        var url = getPath();
                       return(
                           <Swipeable key={x.key}>
                               <TouchableHighlight 
                                   underlayColor={colors.light}>
                                   <View style={styles.containter}>
-                                      <Image style={styles.imageL}source={require('../assets/heart.png')}/>
+                                      <Image style={styles.imageL} source={url}/>
                                       <View>
-                                          <Text style={styles.title}>You Donate To: {x.Charity}</Text>
-                                          <Text style={styles.subTitle}>Dear {x.name}</Text>
-                                          <Text style={styles.price}>Thanks for your ${x.Amount}</Text>
-                                          <Text>{x.Date}</Text>
+                                          <Text style={styles.title}>Donate To: {x.charityName}</Text>
+                                          <Text style={styles.subTitle}>Dear {x.userName}</Text>
+                                          <Text style={styles.price}>Thanks for your ${x.money}</Text>
+                                          <Text style={styles.price}>Date: {x.date}</Text>
                                       </View>
                                   </View>
                               </TouchableHighlight>
@@ -74,6 +87,18 @@ render() {
                       )
                   })
               }
+              <TouchableWithoutFeedback
+                  onPress ={()=> this.props.navigation.navigate("DonationEntry")}
+              >
+              <View style={styles.buttons}>
+                  <Text style={styles.buttonText}>
+                      Back to Index Page
+                  </Text>
+
+              </View>
+
+              </TouchableWithoutFeedback>
+
           </ScrollView>
       </SafeAreaView>
   );
@@ -120,5 +145,22 @@ subTitle: {
 },
 price: {
   color: 'blue',
-}
+},
+buttons:{
+  backgroundColor:"#1F4E79",
+  width:"40%",
+  height:40,
+  marginLeft:"30%",
+  alignItems:"center",
+  borderRadius:45,
+  flexDirection:"column",
+  justifyContent:"center"
+},
+buttonText:{
+  fontSize:15,
+  color:"white",
+  textAlignVertical:"center",
+  includeFontPadding:false,
+},
+
 });

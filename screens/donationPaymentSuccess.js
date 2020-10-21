@@ -5,10 +5,31 @@ import { FlatList, TextInput, TouchableOpacity, TouchableWithoutFeedback } from 
 import { StyleSheet, Text, View ,Image, ScrollView} from 'react-native';
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import * as firebase from 'firebase'
 
 
 class donationPaymentSuccess extends React.Component{
+
+  componentWillMount(){
+    var userId = firebase.auth().currentUser.uid;
+    const charityName = this.props.navigation.getParam('charityName');
+    const money = this.props.navigation.getParam('money');
+    const userName = this.props.navigation.getParam('userName');
+    const email = this.props.navigation.getParam('email');
+    const month = new Date().getMonth() + 1;
+    const date = new Date().getFullYear() +'-'+ month +'-' + new Date().getDate();
+    const gmtDate = new Date().toString();
+    firebase.database().ref('Donation/History/' + userId + "/" + gmtDate).set({
+      charityName:charityName,
+      money:money,
+      userName:userName,
+      email:email,
+      date:date,
+    });
+  }
+
   render(){
+
       return (
           <SafeAreaView style={styles.container}>
               <ScrollView contentContainerStyle={styles.contentContainer}>

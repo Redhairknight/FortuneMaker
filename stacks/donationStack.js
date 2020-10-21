@@ -88,7 +88,7 @@ const DonationStack = createStackNavigator({
     screen: donationAKF,
     navigationOptions:{
       headerTitleAlign: "center",
-      headerTitle: "AFK",
+      headerTitle: "AKF",
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",
