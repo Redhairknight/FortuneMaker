@@ -52,12 +52,6 @@ class donationPayment extends React.Component{
 
       return (
               <ScrollView contentContainerStyle={styles.contentContainer}>
-                  {/* Header of this page */}
-                  <View style={styles.head}>
-                      <Text style={styles.headText}>
-                          Step 3 - Confirm Payment Detail
-                      </Text>
-                  </View>
 
 
                     <View style={styles.bottomMiddle}>
@@ -147,7 +141,7 @@ bottomEachTextContent:{
   alignSelf:"center"
 },
   bottomHeader:{
-    flex:1,
+    // flex:1,
     justifyContent:"center"
   },
   bottomMiddle:{
@@ -155,7 +149,7 @@ bottomEachTextContent:{
     justifyContent:'center',
   },
   bottomPayLink:{
-    flex:2,
+    flex:1,
     justifyContent:'center',
     alignItems:'center'
   },

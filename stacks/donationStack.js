@@ -10,6 +10,7 @@ import donationCareFlight from "../screens/donationCareFlight"
 import donationFlyingDoctor from "../screens/donationFlyingDoctor"
 import donationFred from "../screens/donationFred"
 import donationGuideDogs from "../screens/donationGuideDogs"
+import donationHistory from "../screens/donationHistory"
 
 
 
@@ -19,38 +20,68 @@ import { createAppContainer } from "react-navigation";
 const DonationStack = createStackNavigator({
   DonationEntry: {
     screen: donationEntry,
-    navigationOptions: {
-      headerShown: false,
-    },
+    navigationOptions:{
+      headerTitleAlign: "center",
+      headerTitle: "Welcome to Donation",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
+    }
   },
   DonationCharityChoose : {
     screen: donationCharityBrief,
     navigationOptions:{
-      headerShown: false,
+      headerTitleAlign: "center",
+      headerTitle: "Step 1 : Choose a charity",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
     }
   },
   DonationIndex : {
     screen: donationIndex,
     navigationOptions:{
-      headerShown: false,
+      headerTitleAlign: "center",
+      headerTitle: "Step 2 : Give Donation",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
     }
   },
   CanTeen :{
     screen: donationCanTeen,
     navigationOptions:{
-      headerShown: false
+      headerTitleAlign: "center",
+      headerTitle: "CanTeen",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
     }
   },
   DonationPayment :{
     screen: donationPayment,
     navigationOptions:{
-      headerShown: false
+      headerTitleAlign: "center",
+      headerTitle: "Step 3 : Confirm your detail",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
     }
   },
   DonationPaymentSuccess : {
     screen: donationPaymentSuccess,
     navigationOptions:{
-      headerShown:false
+      headerTitleAlign: "center",
+      headerTitle: "Payment Succeed",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
     }
   },
   AKF : {
@@ -67,25 +98,56 @@ const DonationStack = createStackNavigator({
   CareFlight : {
     screen: donationCareFlight,
     navigationOptions:{
-      headerShown:false
+      headerTitleAlign: "center",
+      headerTitle: "CareFlight",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
     }
   },
   FlyingDoctor : {
     screen: donationFlyingDoctor,
     navigationOptions:{
-      headerShown:false
+      headerTitleAlign: "center",
+      headerTitle: "FlyingDoctor",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
     }
   },
   Fred : {
     screen: donationFred,
     navigationOptions:{
-      headerShown:false
+      headerTitleAlign: "center",
+      headerTitle: "Fred",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
     }
   },
   GuideDogs : {
     screen: donationGuideDogs,
     navigationOptions:{
-      headerShown:false
+      headerTitleAlign: "center",
+      headerTitle: "GuideDogs",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
+    }
+  },
+  DonationHistory : {
+    screen: donationHistory,
+    navigationOptions:{
+      headerTitleAlign: "center",
+      headerTitle: "Donation History",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
     }
   },
 

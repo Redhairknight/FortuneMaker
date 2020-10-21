@@ -1,10 +1,17 @@
 import React, { Component, useState } from 'react';
 import {  SafeAreaView, StyleSheet, Platform, StatusBar,Text, View, ScrollView, ImageBackground, Image, Button, TouchableHighlight } from 'react-native';
 import retrieveDatabse from "../components/DatabaseManager";
+import { FlatList, SafeAreaView, StyleSheet, Platform, StatusBar,Text, View, ScrollView, ImageBackground, Image, Button, TouchableHighlight } from 'react-native';
+import { ceil } from 'react-native-reanimated';
+import retrieveDatabse from "../components/DatabaseManager";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { ListItem, Divider } from 'react-native-elements';
 import  Swipeable  from 'react-native-gesture-handler/Swipeable';
 // import firebase
 import firebaseConfig from "../config/firebase";
-import * as firebase from 'firebase'
+import * as firebase from 'firebase';
+import {getTrans} from '../components/DatabaseIterate';
+
 import colors from '../config/colors';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
@@ -32,6 +39,7 @@ componentWillMount(){
           let result = data.val();
           result['key'] = data.key;
           finished.push(result);
+
         })
     }).then(function(){
         that.setState({
@@ -49,7 +57,6 @@ render() {
               <Image style={styles.image} source={require('../assets/thankyou.jpg')} />
               {
                   this.state.listingData.map(function(x){
-                    
                       function getPath(){
                         var url = ''
                         if (x.charityName == "AKF"){url = require('../assets/check1.png')}
@@ -63,7 +70,6 @@ render() {
 
                         var url = getPath();
                       return(
-                          
                           <Swipeable key={x.key}>
                               <TouchableHighlight 
                                   underlayColor={colors.light}>
@@ -92,6 +98,7 @@ render() {
               </View>
 
               </TouchableWithoutFeedback>
+
           </ScrollView>
       </SafeAreaView>
   );
@@ -155,4 +162,5 @@ buttonText:{
   textAlignVertical:"center",
   includeFontPadding:false,
 },
+
 });
