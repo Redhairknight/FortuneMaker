@@ -130,8 +130,8 @@ class Recommendation extends React.Component {
                             <VictoryPie
                             colorScale={colorScale}
                             data={this.state.assetAllocation}
-                            height={400}
-                            width={400}
+                            height={350}
+                            width={350}
                             innerRadius={70}
                             padAngle={2}
                             />
