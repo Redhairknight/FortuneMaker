@@ -1,6 +1,6 @@
 import React, { Component, useState } from 'react';
-import {  SafeAreaView, StyleSheet, Platform, StatusBar,Text, View, ScrollView, ImageBackground, Image, Button, TouchableHighlight } from 'react-native';
-import retrieveDatabse from "../components/DatabaseManager";
+// import {  SafeAreaView, StyleSheet, Platform, StatusBar,Text, View, ScrollView, ImageBackground, Image, Button, TouchableHighlight } from 'react-native';
+// import retrieveDatabse from "../components/DatabaseManager";
 import { FlatList, SafeAreaView, StyleSheet, Platform, StatusBar,Text, View, ScrollView, ImageBackground, Image, Button, TouchableHighlight } from 'react-native';
 import { ceil } from 'react-native-reanimated';
 import retrieveDatabse from "../components/DatabaseManager";
@@ -26,12 +26,12 @@ export default class donationHistory extends Component {
     }
 }
 
-// capture the data before it loads
-componentWillMount(){
+  // capture the data before it loads
+  componentWillMount(){
 
     var that = this;
     var userID = firebase.auth().currentUser.uid;
-    let q = firebase.database().ref('Donation/History/' + userID).ord;
+    let q = firebase.database().ref('Donation/History/' + userID);
     var finished = [];
 
     q.once('value', snapshot => {
