@@ -2,8 +2,9 @@ import { Input, Item } from "native-base";
 import React, { useState, useCallback, useRef } from "react";
 import {
   Image, StyleSheet, Text, View, Button, TouchableOpacity, ColorPropType, ScrollView,
-  SafeAreaView, TouchableWithoutFeedback, FlatList, Modal} from "react-native";
+  SafeAreaView, TouchableWithoutFeedback, FlatList, Modal, TextInput} from "react-native";
 import { MaterialCommunityIcons } from "@expo/vector-icons";
+import AppTextInput from '../components/indexInput';
 
 class FinancialIndex extends React.Component {
 
@@ -11,24 +12,30 @@ class FinancialIndex extends React.Component {
         super(props);
         this.state = {
           stockChartYValues: [],
-          StockSymbol: ['TSLA', 'AAPL', 'GE', 'BAC', 'FB', 'VZ', 'CSCO', 'NFLX', 'BA'
+          stockSymbol: ['TSLA', 'AAPL', 'GE', 'BAC', 'FB', 'VZ', 'CSCO', 'NFLX', 'BA'
                         ,'DAL', 'MS', 'JPM', 'ORCL'],
+          modalOpen: false,
+          tickerInput: "",
         }
       }
       
       
       componentDidMount() {
-          this.state.StockSymbol.forEach(symbol => {
-            this.fetchStock(symbol);
-          });
-
+        this.fetchData()
       }
-    
+      
+      fetchData() {
+        this.setState({stockChartYValues: []})
+        this.state.stockSymbol.forEach(symbol => {
+          this.fetchStock(symbol);
+        });
+      }
+
       fetchStock(symbol) {
         const pointerToThis = this;
         const API_KEY = '33USA38GJYOUEIHD';
-        let StockSymbol = symbol;
-        let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${StockSymbol}&outputsize=compact&apikey=${API_KEY}`;
+        let stockSymbol = symbol;
+        let API_Call = `https://www.alphavantage.co/query?function=TIME_SERIES_DAILY_ADJUSTED&symbol=${stockSymbol}&outputsize=compact&apikey=${API_KEY}`;
         let stockChartYValuesFunction = [];
     
         fetch(API_Call)
@@ -52,50 +59,33 @@ class FinancialIndex extends React.Component {
       }
 
       processData(price) {
-
         if (price != null && price != "") {
             return price
         }
+      }
+
+      tickerInput() {
+        const ticker = this.state.tickerInput
+        const symbol = this.state.stockSymbol
+        symbol.push(ticker)
+        this.setState({stockSymbol: symbol})
+        this.fetchData()
       }
 
     render() {
 
         var price = this.state.stockChartYValues
         var data = this.processData(price)
-        /*
-        [
-            {
-              "price": "1000",
-              "ticker": "GE",
-            },
-            {
-              "price": "100",
-              "ticker": "BAC",
-            },
-            {
-              "price": "100",
-              "ticker": "AAPL",
-            },
-            {
-              "price": "100",
-              "ticker": "TSLA",
-            },
-            {
-              "price": "100",
-              "ticker": "FB",
-            },
-          ]
-          */
 
           const format = amount => {
             return Number(amount)
               .toFixed(2)
               .replace(/\d(?=(\d{3})+\.)/g, '$&,');
           };
-
+          
         return (
         <SafeAreaView style={{flex: 1, }}>
-            <TouchableOpacity style={styles.addButton}>
+            <TouchableOpacity style={styles.addButton} onPress={() => this.setState({modalOpen: true})}>
                 <MaterialCommunityIcons
                     name='plus'
                     size={30}
@@ -112,9 +102,46 @@ class FinancialIndex extends React.Component {
                     </View>
                 )}
             />
-            <Modal visible={false} animationType='slide'>
-                <Text></Text>
-                <Input></Input>
+            <Modal
+                presentationStyle="overFullScreen"
+                transparent
+                visible={this.state.modalOpen}
+            >
+                <View style={{
+                    flex: 1,
+                    flexDirection: 'column',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                }}>
+                    <View style={{
+                        backgroundColor: "white",
+                        width: 300,
+                        height: 200,
+                        borderRadius: 20,
+                        alignItems: "center",
+                  }}>
+                      <TouchableOpacity style={styles.modalCloseButton} onPress={() => this.setState({modalOpen: false})}>
+                          <MaterialCommunityIcons
+                              name='close'
+                              size={24}
+                              color='white'
+                          />
+                      </TouchableOpacity>
+                      <Text style={styles.modalText}>Type your stock ticker here</Text>
+                      <AppTextInput
+                        autoCapitalize="none"
+                        autoCorrect={false}
+                        icon='ticket-account'
+                        onChangeText={ticker => this.setState({ tickerInput: ticker })}
+                        value = {this.state.tickerInput}
+                        placeholder="Type a ticker"
+                        textContentType="none"
+                      />
+                      <TouchableOpacity style={styles.modalConfirm} onPress={() =>{this.setState({modalOpen: false}); this.tickerInput()}}>
+                          <Text style={styles.modalConfirmText}>Confirm</Text>
+                      </TouchableOpacity>
+                    </View>
+                </View>
             </Modal>
         </SafeAreaView>
         );
@@ -153,7 +180,41 @@ const styles = StyleSheet.create({
         padding: 5,
         borderRadius: 100,
         borderStyle: "dashed"
-    }
+    },
+    modalStyle: {
+      width: 300,
+      height: 300,
+    },
+    modalCloseButton: {
+      alignSelf: "flex-end",
+      marginVertical: 10,
+      marginHorizontal: 20,
+      borderWidth: 1,
+      borderColor: "#1F4E79",
+      padding: 5,
+      borderRadius: 10,
+      backgroundColor: "#1F4E79",
+  },
+  modalText: {
+    color: "#1F4E79",
+    fontSize: 15,
+    fontWeight: "bold",
+    alignSelf: "center"
+  },
+  modalConfirm: {
+    width: 100,
+    alignSelf: "center",
+    backgroundColor: "#1F4E79",
+    height: 30,
+    justifyContent: "center",
+    margin: 15,
+    borderRadius: 10,
+  },
+  modalConfirmText: {
+    alignSelf: "center",
+    color: "white",
+    fontWeight: "bold",
+  }
 })
 
 export default FinancialIndex;
