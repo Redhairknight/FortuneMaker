@@ -57,10 +57,10 @@ class Investment extends React.Component {
             <View style={styles.head_bottom}>
               <View style={styles.head_bottom_up}>
                 <View style={styles.head_bottom_up_left}>
-                  <Text style={{alignSelf: "center", paddingTop: 40, fontSize: 20,}}>Short term</Text>
+                  <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, }}>Short term</Text>
                 </View>
                 <View style={styles.head_bottom_up_right}>
-                  <Text style={{alignSelf: "center", paddingTop: 40, fontSize: 20,}}>Short term</Text>
+                  <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, }}>Short term</Text>
                 </View>
               </View>
               <View style={styles.head_bottom_down}></View>
@@ -69,7 +69,7 @@ class Investment extends React.Component {
           <View style={styles.middle}>
             <View style={styles.middle_three_button}>
               <TouchableOpacity
-                onPress={()=> this.props.navigation.navigate("ProductsDetail")}
+                onPress={() => this.props.navigation.navigate("ProductsDetail")}
               >
                 <View style={styles.buttons}>
                   <Image
@@ -94,8 +94,8 @@ class Investment extends React.Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity onPress={() =>
-                  this.props.navigation.navigate("TransactionHistory")
-                }>
+                this.props.navigation.navigate("TransactionHistory")
+              }>
                 <View style={styles.buttons}>
                   <Image
                     style={styles.buttonLogo}
@@ -106,7 +106,7 @@ class Investment extends React.Component {
               </TouchableOpacity>
             </View>
             <View style={styles.middle_three_button}>
-              <TouchableOpacity onPress={()=> this.props.navigation.navigate("RiskSurvyDetail")}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate("RiskSurvyDetail")}>
                 <View style={styles.buttons}>
                   <Image
                     style={styles.buttonLogo}
@@ -116,8 +116,8 @@ class Investment extends React.Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={()=> this.props.navigation.navigate("FavoriteDetail")}
-                >
+                onPress={() => this.props.navigation.navigate("FavoriteDetail")}
+              >
                 <View style={styles.buttons}>
                   <Image
                     style={styles.buttonLogo}
@@ -126,7 +126,9 @@ class Investment extends React.Component {
                   <Text style={styles.buttons_text}>Favorite</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("InvestmentHot")}
+              >
                 <View style={styles.buttons}>
                   <Image
                     style={styles.buttonLogo}
@@ -276,7 +278,7 @@ const styles = StyleSheet.create({
     width: 130,
     alignItems: "center",
   },
-  botton_buttons: { width: 20, height: 20,},
+  botton_buttons: { width: 20, height: 20, },
   buttons_text: { fontSize: 10 },
   bottom_Logos: { height: 30, width: 30 },
   bottom_content: {
