@@ -1,9 +1,12 @@
 import React from "react";
 import { StyleSheet, Text, View, ScrollView, Image, ImageBackground } from "react-native";
 import { Assets } from "react-navigation-stack";
+import firebaseConfig from "../config/firebase";
+import * as firebase from 'firebase'
 
 export default class App extends React.Component {
     render() {
+        console.log(firebase.auth().currentUser.uid)
         return (
             <ScrollView>
                 <View style={styles.container}>
