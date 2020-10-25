@@ -43,7 +43,7 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
-  
+
   ProductsDetail: {
     screen: Products,
     navigationOptions: {
@@ -65,8 +65,8 @@ const InvestmentStack = createStackNavigator({
         backgroundColor: "#1F4E79",
       }
     },
-  }, 
-  
+  },
+
   SurveyCompleted: {
     screen: SurveyCompleted,
     navigationOptions: {
@@ -77,13 +77,13 @@ const InvestmentStack = createStackNavigator({
         backgroundColor: "#1F4E79",
       }
     },
-  },   
+  },
 
   FavoriteDetail: {
     screen: Favorite,
     navigationOptions: {
       headerTitleAlign: "center",
-      headerTitle: "Risk Survey",
+      headerTitle: "Favorite",
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",
@@ -101,7 +101,7 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
-  TransactionHistory:{
+  TransactionHistory: {
     screen: transactionHistory,
     navigationOptions: {
       headerTitleAlign: "center",
@@ -110,17 +110,19 @@ const InvestmentStack = createStackNavigator({
       headerStyle: {
         backgroundColor: "#1F4E79",
       }
-    }},
-    InvestmentRecommendation:{
-      screen: Recommendation,
-      navigationOptions: {
-        headerTitleAlign: "center",
-        headerTitle: "Recommendation",
-        headerTintColor: "white",
-        headerStyle: {
-          backgroundColor: "#1F4E79",
-        }
-      }},    
+    }
+  },
+  InvestmentRecommendation: {
+    screen: Recommendation,
+    navigationOptions: {
+      headerTitleAlign: "center",
+      headerTitle: "Recommendation",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
+    }
+  },
 });
 
 
