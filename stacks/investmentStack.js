@@ -59,7 +59,7 @@ const InvestmentStack = createStackNavigator({
     screen: RiskSurvey,
     navigationOptions: {
       headerTitleAlign: "center",
-      headerTitle: "Favorite",
+      headerTitle: "Risk Survey",
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",

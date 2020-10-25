@@ -11,9 +11,25 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
 } from "react-native";
+import retrieveDatabse from "../components/DatabaseManager"
+import * as firebase from 'firebase'
 
 class Investment extends React.Component {
+
+  constructor(props){
+    super(props);
+    this.state = {
+      totalInvestment: retrieveDatabse("/Account/account1/Available"),
+    }
+  }
+  
+
   render() {
+    const format = amount => {
+      return Number(amount)
+        .toFixed(2)
+        .replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    };
     return (
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -21,11 +37,11 @@ class Investment extends React.Component {
             <TouchableWithoutFeedback style={styles.head_top_up}>
               <View style={styles.head_top}>
                 <View style={styles.head_top_up}>
-                  <Text style={styles.head_text}>Total pull</Text>
+                  <Text style={styles.head_text}>Total Investment</Text>
                 </View>
                 <View style={styles.head_top_middle}>
                   <Text style={styles.head_top_middle_text}>
-                    300555
+                  $ {format(this.state.totalInvestment)}
                     <Image
                       style={styles.tinyLogo}
                       source={require("../assets/tiny_arrow.png")}
@@ -57,10 +73,12 @@ class Investment extends React.Component {
             <View style={styles.head_bottom}>
               <View style={styles.head_bottom_up}>
                 <View style={styles.head_bottom_up_left}>
-                  <Text style={{alignSelf: "center", paddingTop: 40, fontSize: 20,}}>Short term</Text>
+                  <Text style={{alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800"}}>Short term</Text>
+                  <Text style={{alignSelf: "center", fontSize: 18, color: "#1F4E79"}}>$ {format(3000)}</Text>
                 </View>
                 <View style={styles.head_bottom_up_right}>
-                  <Text style={{alignSelf: "center", paddingTop: 40, fontSize: 20,}}>Short term</Text>
+                  <Text style={{alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800"}}>Long term</Text>
+                  <Text style={{alignSelf: "center", fontSize: 18, color: "#1F4E79"}}>$ {format(3000)}</Text>
                 </View>
               </View>
               <View style={styles.head_bottom_down}></View>
@@ -284,6 +302,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 4,
+    marginLeft: 10,
   },
   bottom_text: { paddingLeft: 20 },
 });
