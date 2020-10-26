@@ -2,60 +2,108 @@ import { StatusBar } from 'expo-status-bar';
 import React,{ Component } from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { FlatList, TextInput, TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
-import { StyleSheet, Text, View ,Image, ScrollView} from 'react-native';
+import { StyleSheet, Text, View ,Image, ScrollView, Alert} from 'react-native';
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
 
+
+
 class donationPayment extends React.Component{
+
+  constructor(props){
+    super(props);
+    this.state = {
+      userName: "",
+      email:"",
+    }
+  }
+
+
+
   render(){
+
+    const charityName = this.props.navigation.getParam('charityName');
+    const money = this.props.navigation.getParam('money');
+    const userName = this.state.userName;
+    const email = this.state.email;
+    const navi = this.props.navigation;
+    function checkNameAndEmail(){
+      if (userName == "" || email == ""){
+        Alert.alert("Missing something","Please fill your information",
+        [
+          {
+            text: "Cancel",
+            onPress: () => console.log("Cancel Pressed"),
+            style: "cancel"
+          },
+          { text: "OK", onPress: () => console.log("OK Pressed") }
+        ])
+      } else{
+        navi.navigate("DonationPaymentSuccess",
+        {
+          charityName: charityName,
+          money: money,
+          userName: userName,
+          email: email,
+        })
+      }
+    }
+
       return (
-          <SafeAreaView style={styles.container}>
               <ScrollView contentContainerStyle={styles.contentContainer}>
-                  {/* Header of this page */}
-                  <View style={styles.head}>
-                      <Text style={styles.headText}>
-                          Step 3 - Confirm Payment Detail
-                      </Text>
-                  </View>
 
-                  {/* Main contents */}
-                  <View style={styles.bottom}>
-
-                    <View style={styles.bottomHeader}>
-                      <Text style={styles.bottomEachTextTitle}>
-                        Enter your personal detail
-                      </Text>
-                    </View>
 
                     <View style={styles.bottomMiddle}>
-                      <TextInput style={{marginLeft:50, marginRight:50, fontSize:25,borderBottomColor:"#1F4E79",borderBottomWidth:2, color:"black"}} placeholder="Your name" textAlign="left"/>
+                      <Text style={styles.bottomEachTextTitle}>
+                        Please input your information
+                      </Text>
                       <View style={styles.lineBreak}></View>
-                      <TextInput style={{marginLeft:50, marginRight:50, fontSize:25,borderBottomColor:"#1F4E79",borderBottomWidth:2, color:"black"}} placeholder="Your email" textAlign="left"/>
+                      <TextInput onChangeText={(text)=>this.setState({userName:text})} style={{marginLeft:50, marginRight:50, fontSize:25,borderBottomColor:"#1F4E79",borderBottomWidth:2, color:"black"}} placeholder="Your name" textAlign="left"/>
                       <View style={styles.lineBreak}></View>
-                      <TextInput style={{marginLeft:50, marginRight:50, fontSize:25,borderBottomColor:"#1F4E79",borderBottomWidth:2, color:"black"}} placeholder="Your address(optional)" textAlign="left"/>
+                      <TextInput onChangeText={(text)=>this.setState({email:text})} style={{marginLeft:50, marginRight:50, fontSize:25,borderBottomColor:"#1F4E79",borderBottomWidth:2, color:"black"}} placeholder="Your email" textAlign="left"/>
 
+                    </View>
+
+                    
+                    <View style={styles.bottomMiddle}>
+                      <Text style={styles.bottomEachTextTitle}>
+                        Confirm your donation detail
+                      </Text>
+                      <View style={styles.lineBreak}></View>
+                      <View style={{borderColor:"#1F4E79",borderWidth:2,width:"80%",marginLeft:"10%"}}>
+                      <Text style={styles.bottomEachTextContent}>
+                        Charity Name: {charityName}
+                      </Text>
+                      <Text style={styles.bottomEachTextContent}>
+                        Donation Amount: $ {money}
+                      </Text>
+                      <Text style={styles.bottomEachTextContent}>
+                        Your Name: {this.state.userName}
+                      </Text>
+                      <Text style={styles.bottomEachTextContent}>
+                        Your Email: {this.state.email}
+                      </Text>
+                      </View>
                     </View>
 
                     <View style={styles.bottomPayLink}>
-                      <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("DonationPaymentSuccess")} style={styles.payBtn}>
+                      <TouchableWithoutFeedback onPress={()=>checkNameAndEmail()} style={styles.payBtn}>
                         <Image style={styles.payImg} source={require("../assets/paypal.png")}/>
                         <Text style={styles.payText}> Pay by PayPal</Text>
                       </TouchableWithoutFeedback>
                       <View style={styles.lineBreak}></View>
-                      <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("DonationPaymentSuccess")} style={styles.payBtn}>
+                      <TouchableWithoutFeedback onPress={()=>checkNameAndEmail()} style={styles.payBtn}>
                         <Image style={styles.payImg} source={require("../assets/credit-card.png")}/>
                         <Text style={styles.payText}> Pay by Card</Text>
                       </TouchableWithoutFeedback>
                       <View style={styles.lineBreak}></View>
-                      <TouchableWithoutFeedback onPress={()=>this.props.navigation.navigate("DonationPaymentSuccess")} style={styles.payBtn}>
+                      <TouchableWithoutFeedback onPress={()=>checkNameAndEmail()} style={styles.payBtn}>
                         <Image style={styles.payImg} source={require("../assets/apple-pay.png")}/>
                         <Text style={styles.payText}> Pay by Apple</Text>
                       </TouchableWithoutFeedback>
                     </View>
-                  </View>
               </ScrollView>
-          </SafeAreaView>
       )
   }
 }
@@ -65,7 +113,7 @@ const styles = StyleSheet.create({
       flex:1,
   },
   contentContainer:{
-      height:"100%",
+      flexGrow:1
   },
   head:{
       flex:1,
@@ -79,7 +127,7 @@ const styles = StyleSheet.create({
       alignSelf:"center",
   },
   bottom:{
-      flex:5,
+      flex:1,
   },
   bottomEachTextTitle:{
     fontSize:25,
@@ -87,8 +135,13 @@ const styles = StyleSheet.create({
     fontWeight:"bold",
     alignSelf:"center"
 },
+bottomEachTextContent:{
+  fontSize:20,
+  color:"#1F4E79",
+  alignSelf:"center"
+},
   bottomHeader:{
-    flex:1,
+    // flex:1,
     justifyContent:"center"
   },
   bottomMiddle:{
@@ -96,7 +149,7 @@ const styles = StyleSheet.create({
     justifyContent:'center',
   },
   bottomPayLink:{
-    flex:2,
+    flex:1,
     justifyContent:'center',
     alignItems:'center'
   },

@@ -10,12 +10,6 @@ class donationFred extends React.Component{
         return (
             <SafeAreaView style={styles.container}>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
-                    {/* Header of this page */}
-                    <View style={styles.head}>
-                        <Text style={styles.headText}>
-                            Fred Hollows Foundation
-                        </Text>
-                    </View>
   
                     {/* Main contents */}
                     <View style={styles.bottom}>
@@ -26,7 +20,9 @@ class donationFred extends React.Component{
                         </View>
                         <View style={styles.mainPartBtnView}>
                         <TouchableWithoutFeedback
-                                onPress ={()=> this.props.navigation.navigate("DonationIndex")}
+                                onPress ={()=> this.props.navigation.navigate("DonationIndex",{
+                                    charityName:"Fred"
+                                })}
                             >
                             <View style={styles.buttons}>
                                 <Text style={styles.buttonText}>

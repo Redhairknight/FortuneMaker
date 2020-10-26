@@ -21,7 +21,7 @@ class Investment extends React.Component {
     this.state = {
       totalInvestment: retrieveDatabse("/Account/account1/Available"),
       adata: "a",
-      riskScore: retrieveDatabse("/investment/riskSurvey/" + (firebase.auth().currentUser.uid) + "/score"),
+      score: retrieveDatabse("/investment/riskSurvey/" + (firebase.auth().currentUser.uid) + "/score"),
     }
   }
 
@@ -97,13 +97,13 @@ class Investment extends React.Component {
                     <Text style={styles.head_top_down_text}>
                       Risk score
                     </Text>
-                    <Text style={styles.head_top_down_number}>{this.state.riskScore}</Text>
+                    <Text style={styles.head_top_down_number}>{this.state.score}</Text>
                   </View>
                   <View style={styles.row_container}>
                     <Text style={styles.head_top_down_text}>
                       Risk type
                     </Text>
-                    <Text style={styles.head_top_down_number}>{this.checkInvestorType(this.state.riskScore)}</Text>
+                    <Text style={styles.head_top_down_number}>{this.checkInvestorType(this.state.score)}</Text>
                   </View>
                 </View>
               </View>

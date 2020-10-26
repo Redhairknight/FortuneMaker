@@ -5,19 +5,35 @@ import { FlatList, TextInput, TouchableOpacity, TouchableWithoutFeedback } from 
 import { StyleSheet, Text, View ,Image, ScrollView} from 'react-native';
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
+import * as firebase from 'firebase'
 
 
 class donationPaymentSuccess extends React.Component{
+
+  componentWillMount(){
+    var userId = firebase.auth().currentUser.uid;
+    const charityName = this.props.navigation.getParam('charityName');
+    const money = this.props.navigation.getParam('money');
+    const userName = this.props.navigation.getParam('userName');
+    const email = this.props.navigation.getParam('email');
+    const month = new Date().getMonth() + 1;
+    const date = new Date().getFullYear() +'-'+ month +'-' + new Date().getDate();
+    const gmtDate = new Date().toString();
+    firebase.database().ref('Donation/History/' + userId + "/" + gmtDate).set({
+      charityName:charityName,
+      money:money,
+      userName:userName,
+      email:email,
+      date:date,
+    });
+  }
+
   render(){
+
       return (
           <SafeAreaView style={styles.container}>
               <ScrollView contentContainerStyle={styles.contentContainer}>
-                  {/* Header of this page */}
-                  <View style={styles.head}>
-                      <Text style={styles.headText}>
-                          Payment Succeed!
-                      </Text>
-                  </View>
+
 
                   {/* Main contents */}
                   <View style={styles.bottom}>
@@ -30,16 +46,16 @@ class donationPaymentSuccess extends React.Component{
                       <Text style={styles.bottomEachTextTitle}>
                         We have received your kindly payment. And we promise the money will be transfered to the charity within 7 days. 
                       </Text><Text style={styles.bottomEachTextTitle}>
-                        You can access the donation status through your profile.
+                        You can access the donation status through donation history.
                       </Text>
                     </View>
                     <View style={styles.bottomMiddle}>
                     <TouchableWithoutFeedback
-                          onPress ={()=> this.props.navigation.navigate("DonationIndex")}
+                          onPress ={()=> this.props.navigation.navigate("DonationHistory")}
                       >
                       <View style={styles.buttons}>
                           <Text style={styles.buttonText}>
-                              My Profile
+                              Donation History
                           </Text>
 
                       </View>
