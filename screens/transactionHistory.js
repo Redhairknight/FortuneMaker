@@ -34,7 +34,8 @@ export default class SearchBarExample extends Component {
 
     var that = this;
 
-    let q = firebase.database().ref('investment/newTransHistory');
+    let q = firebase.database().ref('investment/newTransHistory/' + firebase.auth().currentUser.uid);
+
     var finished = [];
 
     q.once('value', snapshot => {

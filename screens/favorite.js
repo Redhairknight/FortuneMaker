@@ -29,7 +29,7 @@ export default class SearchBarExample extends Component {
 
         var that = this;
 
-        let q = firebase.database().ref('investment/Favorite');
+        let q = firebase.database().ref('investment/Favorite/' + firebase.auth().currentUser.uid);
         var finished = [];
 
         q.once('value', snapshot => {
@@ -74,7 +74,8 @@ export default class SearchBarExample extends Component {
                     <View>
                         {
                             this.state.listingData.map(function (x) {
-                                let toRemove = firebase.database().ref(`/investment/Favorite/${x.name}`);
+
+
                                 return (
                                     <Swipeable key={x.key}>
                                         <View style={styles.financialProductContainer}>

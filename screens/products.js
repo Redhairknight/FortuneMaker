@@ -88,7 +88,7 @@ export default class SearchBarExample extends Component {
           ></TextInput>
           <Text>You need to pay ${this.state.productNumber * this.state.price} </Text>
           <TouchableOpacity onPress={() => {
-            this.setState({ pop: false }); firebase.database().ref(`investment/Favorite/` + this.state.name).set
+            this.setState({ pop: false }); firebase.database().ref(`investment/Favorite/` + firebase.auth().currentUser.uid + `/` + this.state.name).set
               ({
                 name: this.state.name,
                 price: this.state.price,
@@ -97,7 +97,7 @@ export default class SearchBarExample extends Component {
               })
           }}><Text>Add to favorite</Text></TouchableOpacity>
           <Button title='CONFIRM' onPress={() => {
-            this.setState({ pop: false }); firebase.database().ref('investment/newTransHistory/' + this.getCurrentDates()).set
+            this.setState({ pop: false }); firebase.database().ref('investment/newTransHistory/' + firebase.auth().currentUser.uid + '/' + this.getCurrentDates()).set
               ({
                 name: this.state.name,
                 price: this.state.productNumber * this.state.price,
