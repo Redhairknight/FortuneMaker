@@ -29,15 +29,15 @@ class Investment extends React.Component {
     console.log(score)
     var type = ''
     if (score <= 30) {
-        type = 'Conservative'
-    } else if (31 <= score && score<= 45) {
-        type = 'Moderately Conservative'
-    } else if (46 <= score && score<= 65) {
-        type = 'Moderate'
-    } else if (66 <= score && score<= 80) {
-        type = 'Moderately Aggressive'
+      type = 'Conservative'
+    } else if (31 <= score && score <= 45) {
+      type = 'Moderately Conservative'
+    } else if (46 <= score && score <= 65) {
+      type = 'Moderate'
+    } else if (66 <= score && score <= 80) {
+      type = 'Moderately Aggressive'
     } else {
-        type = 'Aggressive'
+      type = 'Aggressive'
     }
     return type;
   };
@@ -69,6 +69,8 @@ class Investment extends React.Component {
   }
   render() {
     var totalInvestment = retrieveDatabse("/Account/account1/Available")
+    var score = retrieveDatabse("/investment/riskSurvey/" + (firebase.auth().currentUser.uid) + "/score")
+    console.log(totalInvestment)
     const format = amount => {
       return Number(amount)
         .toFixed(2)
@@ -101,13 +103,13 @@ class Investment extends React.Component {
                     <Text style={styles.head_top_down_text}>
                       Risk score
                     </Text>
-                    <Text style={styles.head_top_down_number}>{this.state.score}</Text>
+                    <Text style={styles.head_top_down_number}>{score}</Text>
                   </View>
                   <View style={styles.row_container}>
                     <Text style={styles.head_top_down_text}>
                       Risk type
                     </Text>
-                    <Text style={styles.head_top_down_number}>{riskType}</Text>
+                    <Text style={styles.head_top_down_number}>{this.checkInvestorType(score)}</Text>
                   </View>
                 </View>
               </View>
