@@ -21,11 +21,12 @@ class Investment extends React.Component {
     this.state = {
       totalInvestment: retrieveDatabse("/Account/account1/Available"),
       adata: "a",
-      score: retrieveDatabse("/investment/riskSurvey/" + (firebase.auth().currentUser.uid) + "/score"),
+      score: retrieveDatabse("/investment/riskSurvey/" + firebase.auth().currentUser.uid + "/score"),
     }
   }
 
   checkInvestorType = (score) => {
+    console.log(score)
     var type = ''
     if (score <= 30) {
         type = 'Conservative'
@@ -73,7 +74,10 @@ class Investment extends React.Component {
         .toFixed(2)
         .replace(/\d(?=(\d{3})+\.)/g, '$&,');
     };
+
+    var riskType = this.checkInvestorType(this.state.score)
     return (
+      
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.contentContainer}>
           <View style={styles.head}>
@@ -103,7 +107,7 @@ class Investment extends React.Component {
                     <Text style={styles.head_top_down_text}>
                       Risk type
                     </Text>
-                    <Text style={styles.head_top_down_number}>{this.checkInvestorType(this.state.score)}</Text>
+                    <Text style={styles.head_top_down_number}>{riskType}</Text>
                   </View>
                 </View>
               </View>
@@ -245,7 +249,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     width: '50%',
-    paddingBottom: 15,
+    
   },
   tinyLogo: {
     width: 20,
@@ -293,10 +297,11 @@ const styles = StyleSheet.create({
   head_top_down_text: {
     color: "#BEBEBE",
     fontSize: 12,
+    marginVertical: 5,
   },
   head_top_down_number: {
     color: "#FFFFFF",
-    fontSize: 25,
+    fontSize: 16,
     alignSelf: "center",
     fontWeight: "bold",
   },
