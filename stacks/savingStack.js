@@ -63,7 +63,8 @@ const SavingStack = createStackNavigator({
       headerStyle: {
         backgroundColor: "#1F4E79",
     },
-  },
+  }
+},
   SavingGoal: {
     screen: SavingGoal,
     navigationOptions: {
@@ -86,7 +87,7 @@ const SavingStack = createStackNavigator({
       },
     }
   }
-  }
+  
 });
 
 

@@ -39,7 +39,7 @@ const Tab = createBottomTabNavigator();
 function MyTabs() {
   return (
     <Tab.Navigator
-      initialRouteName="Investment"
+      initialRouteName="Saving"
       tabBarOptions={{
         activeTintColor: "#1F4E79",
         inactiveBackgroundColor: "#1F4E79",

@@ -28,8 +28,8 @@ export default class SavingPie extends Component {
     componentWillMount() {
 
         var that = this;
-
-        let q = firebase.database().ref('Transaction');
+        var userId = firebase.auth().currentUser.uid;
+        let q = firebase.database().ref('Transaction/' + userId);
         var finished = [];
 
         q.once('value', snapshot => {
@@ -59,10 +59,31 @@ export default class SavingPie extends Component {
 
     render() {
         var dataList = [];
+        var investment = 0;
+        var donation = 0;
+        var entertainment = 0;
+        var shopping = 0;
+        var transportation = 0;
         this.state.listingData.map(function (receive) {
-            dataList.push({ x: receive.Category, y: receive.price });
-            console.log(dataList);
+            if (receive.category === 'investment') {
+                investment = investment + parseInt(receive.price);
+            } else if (receive.category === 'donation') {
+                donation = donation + parseInt(receive.price);
+            } else if (receive.category === 'entertainment') {
+                entertainment = entertainment + parseInt(receive.price);
+            } else if (receive.category === 'shopping') {
+                shopping = shopping + parseInt(receive.price);
+            } else if (receive.category === 'transportation') {
+                transportation = transportation + parseInt(receive.price);
+            }
+            // dataList.push({ x: receive.category, y: receive.price });
         })
+        dataList.push({x: 'donation', y: donation})
+        dataList.push({x: 'investment', y: investment})
+        dataList.push({x: 'entertainment', y: entertainment})
+        dataList.push({x: 'shopping', y: shopping})
+        dataList.push({x: 'transportation', y: transportation})
+        console.log(dataList);
 
         return (
             <View style={styles.container}>
@@ -86,23 +107,23 @@ export default class SavingPie extends Component {
                     gutter={(25)}
                     data={[
                         {
-                            name: 'Entertainment',
+                            name: 'Donation',
                             symbol: { fill: 'tomato', type: 'square' },
                         },
                         {
-                            name: 'Clothing',
+                            name: 'Investment',
                             symbol: { fill: 'orange', type: 'square' },
                         },
                         {
-                            name: 'Gocery',
+                            name: 'Entertainment',
                             symbol: { fill: 'gold', type: 'square' },
                         },
                         {
-                            name: 'Learning',
+                            name: 'Shopping',
                             symbol: { fill: 'navy', type: 'square' },
                         },
                         {
-                            name: 'Other',
+                            name: 'transportation',
                             symbol: { fill: 'pink', type: 'square' },
                         }
                     ]}

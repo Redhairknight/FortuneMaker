@@ -111,8 +111,19 @@ export default class SearchBarExample extends Component {
                 date: this.getCurrentDates()
 
               });
+            // insert to Total transaction - Chang Liu
+            firebase.database().ref('Transaction/' + firebase.auth().currentUser.uid + '/' + this.getCurrentDates()).set
+              ({
+                name: this.state.name,
+                price: this.state.productNumber * this.state.price,
+                date: this.getCurrentDates(),
+                category: 'investment',
+                description: 'financial product'
+              });
+
             firebase.database().ref("/Account/account1/").set({
-              Available: this.state.totalInvestment - this.state.productNumber * this.state.price
+              Available: this.state.totalInvestment - this.state.productNumber * this.state.price,
+              Balance: 63000
             })
 
           }} ></Button>

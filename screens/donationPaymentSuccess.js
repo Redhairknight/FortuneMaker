@@ -28,6 +28,14 @@ class donationPaymentSuccess extends React.Component{
       email:email,
       date:date,
     });
+    // insert to Transaction - Chang
+    firebase.database().ref('Transaction/' + firebase.auth().currentUser.uid + '/' + gmtDate).set({
+      name:charityName,
+      price:money,
+      date:date,
+      category: 'donation',
+      description: 'donate to ' + charityName
+    });
   }
 
   render(){

@@ -16,7 +16,7 @@ import { getTrans } from '../components/DatabaseIterate';
 import colors from '../config/colors';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-export default class SavingDetail extends Component {
+export default class SavingGoal extends Component {
 
     constructor(props) {
         super(props);

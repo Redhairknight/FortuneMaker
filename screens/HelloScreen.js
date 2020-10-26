@@ -23,7 +23,7 @@ function HelloScreen({navigation}) {
         >   
             <View style={styles.logoContainer}>
                 <Image style={styles.logo} source={require('../assets/Welcome/logo.png')}/>
-                <AppText style={styles.logoText}>Fortune Finder</AppText>
+                <Text style={styles.logoText}>Fortune Maker</Text>
             </View>
             <View style={styles.loginButton}>
                 
@@ -112,6 +112,8 @@ const styles = StyleSheet.create({
         textTransform: "capitalize",
     },
     logoText: {
+        marginTop: 20,
+        color: colors.white,
         fontFamily: "Roboto",
         fontSize: 30,
         fontStyle: 'italic',

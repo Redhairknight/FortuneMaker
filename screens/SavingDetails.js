@@ -29,8 +29,8 @@ export default class SavingDetail extends Component {
     componentWillMount(){
     
         var that = this;
-
-        let q = firebase.database().ref('Transaction');
+        var userId = firebase.auth().currentUser.uid;
+        let q = firebase.database().ref('Transaction/' + userId);
         var finished = [];
 
         q.once('value', snapshot => {
@@ -61,7 +61,7 @@ export default class SavingDetail extends Component {
                                         <View style={styles.containter}>
                                             <Image style={styles.imageL}source={require('../assets/Welcome/commonwealth.png')}/>
                                             <View>
-                                                <Text style={styles.title}>{x.title}</Text>
+                                                <Text style={styles.title}>{x.name}</Text>
                                                 <Text style={styles.subTitle}>{x.description}</Text>
                                                 <Text style={styles.price}>${x.price}</Text>
                                             </View>
