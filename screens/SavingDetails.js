@@ -47,7 +47,7 @@ export default class SavingDetail extends Component {
         })
     }
     
-    render() {             
+    render() {
         return (
             <SafeAreaView style={styles.screen}>
                 <ScrollView>

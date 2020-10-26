@@ -93,7 +93,7 @@ class SavingOne extends React.Component {
                     <Image style={styles.shopLogo} source={require('../assets/Welcome/money.png')}/>
                     <Text style={styles.goalHeader}>Current Saving Goal: {item}</Text>
                     <View style={styles.buttonContainer2}>
-                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("Saving2")}>
+                    <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("SavingGoal")}>
                         <Text style={styles.text}>Set up Goal!</Text>
                     </TouchableOpacity>
                     </View>

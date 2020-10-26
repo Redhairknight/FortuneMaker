@@ -9,6 +9,8 @@ import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import LoginScreen from "../screens/LoginScreen";
 import SavingPie from "../screens/SavingPie";
+import SavingGoal from "../screens/SavingGoal";
+import SavingSuccess from "../screens/SavingSuccess";
 
 const SavingStack = createStackNavigator({
 
@@ -61,8 +63,29 @@ const SavingStack = createStackNavigator({
       headerStyle: {
         backgroundColor: "#1F4E79",
     },
-  }}
-
+  },
+  SavingGoal: {
+    screen: SavingGoal,
+    navigationOptions: {
+      headerTitleAlign: "center",
+      headerTitle: "Saving Goal",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
+    }
+  },
+  SavingSuccess: {
+    screen: SavingSuccess,
+    navigationOptions: {
+      headerTitleAlign: "center",
+      headerTitle: "Saving Goal",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      },
+    }
+  }
 
 });
 
