@@ -55,9 +55,13 @@ const SavingStack = createStackNavigator({
   SavingPie: {
     screen: SavingPie,
     navigationOptions: {
-      
+      headerTitleAlign: "center",
+      headerTitle: "Saving Pie",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
     },
-  }
+  }}
 
 
 });

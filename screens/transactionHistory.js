@@ -3,6 +3,7 @@ import { render } from "react-dom";
 import firebaseConfig from "../config/firebase";
 import * as firebase from "firebase";
 import retrieveDatabse from "../components/DatabaseManager"
+import Swipeable from 'react-native-gesture-handler/Swipeable';
 
 
 import {
@@ -18,27 +19,37 @@ import { Container, Header, Item, Input, Icon, Button } from "native-base";
 
 
 export default class SearchBarExample extends Component {
-  constructor(props){
+
+
+  constructor(props) {
     super(props);
+
     this.state = {
-      adata:'have not set up',
+      listingData: []
     }
   }
 
-    getData(){
-      setTimeout(() => {
-        console.log('Our data is fetched');
-        this.setState({
-          adata: "app"
-        })
-      }, 2000)
-    }
+  // capture the data before it loads
+  componentWillMount() {
 
-    componentDidMount(){
-      this.getData();
-    }
+    var that = this;
 
+    let q = firebase.database().ref('investment/newTransHistory/' + firebase.auth().currentUser.uid);
 
+    var finished = [];
+
+    q.once('value', snapshot => {
+      snapshot.forEach(function (data) {
+        let result = data.val();
+        result['key'] = data.key;
+        finished.push(result);
+      })
+    }).then(function () {
+      that.setState({
+        listingData: finished
+      })
+    })
+  }
 
   render() {
     var test = retrieveDatabse("/investment/financialproduct/name/price");
@@ -49,7 +60,7 @@ export default class SearchBarExample extends Component {
       <ScrollView>
         <View style={styles.container}>
 
-          
+
           <View style={styles.productLabelContainer}>
             <TouchableOpacity style={styles.productLabels}>
               <Text>Transaction date</Text>
@@ -74,22 +85,36 @@ export default class SearchBarExample extends Component {
               />
             </TouchableOpacity>
           </View>
-          <View style={styles.financialProductContainer}>
-            <View style={styles.productProp}>
-    <Text style={styles.productName}>{date}</Text>
 
-            </View>
-            <View style={styles.productUnit}>
-    <Text style={styles.unitProp}> {productName}</Text>
-            </View>
-            <View>
-    <Text>{price}$</Text>
-            </View>
+          <View>
+            {
+              this.state.listingData.map(function (x) {
+                return (
+                  <Swipeable key={x.key}>
+                    <View style={styles.financialProductContainer}>
+                      <View style={styles.productProp}>
+                        <Text style={styles.productName}>{x.date}</Text>
+
+                      </View>
+                      <View style={styles.productUnit}>
+                        <Text style={styles.unitProp}> {x.name}</Text>
+                      </View>
+                      <View>
+                        <Text>${x.price}</Text>
+                      </View>
+                    </View>
+                  </Swipeable>
+                )
+              })
+            }
+
+
+
+
           </View>
-          
-          
-          
-          
+
+
+
         </View>
       </ScrollView>
     );

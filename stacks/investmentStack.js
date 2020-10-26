@@ -9,6 +9,7 @@ import RiskSurvey from '../screens/riskSurvey'
 import SurveyCompleted from '../screens/surveyComplete'
 import FinancialIndex from '../screens/financialIndex'
 import Recommendation from '../screens/investmentRecommendation'
+import investmentHot from '../screens/investmentHot'
 
 import transactionHistory from '../screens/transactionHistory'
 import { createStackNavigator } from "react-navigation-stack";
@@ -43,7 +44,7 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
-  
+
   ProductsDetail: {
     screen: Products,
     navigationOptions: {
@@ -59,14 +60,14 @@ const InvestmentStack = createStackNavigator({
     screen: RiskSurvey,
     navigationOptions: {
       headerTitleAlign: "center",
-      headerTitle: "Favorite",
+      headerTitle: "Risk Survey",
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",
       }
     },
-  }, 
-  
+  },
+
   SurveyCompleted: {
     screen: SurveyCompleted,
     navigationOptions: {
@@ -77,13 +78,13 @@ const InvestmentStack = createStackNavigator({
         backgroundColor: "#1F4E79",
       }
     },
-  },   
+  },
 
   FavoriteDetail: {
     screen: Favorite,
     navigationOptions: {
       headerTitleAlign: "center",
-      headerTitle: "Risk Survey",
+      headerTitle: "Favorite",
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",
@@ -101,7 +102,7 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
-  TransactionHistory:{
+  TransactionHistory: {
     screen: transactionHistory,
     navigationOptions: {
       headerTitleAlign: "center",
@@ -110,17 +111,30 @@ const InvestmentStack = createStackNavigator({
       headerStyle: {
         backgroundColor: "#1F4E79",
       }
-    }},
-    InvestmentRecommendation:{
-      screen: Recommendation,
-      navigationOptions: {
-        headerTitleAlign: "center",
-        headerTitle: "Recommendation",
-        headerTintColor: "white",
-        headerStyle: {
-          backgroundColor: "#1F4E79",
-        }
-      }},    
+    }
+  },
+  InvestmentRecommendation: {
+    screen: Recommendation,
+    navigationOptions: {
+      headerTitleAlign: "center",
+      headerTitle: "Recommendation",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
+    }
+  },
+  InvestmentHot: {
+    screen: investmentHot,
+    navigationOptions: {
+      headerTitleAlign: "center",
+      headerTitle: "Hot",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
+    }
+  },
 });
 
 

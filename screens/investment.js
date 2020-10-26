@@ -11,21 +11,86 @@ import {
   SafeAreaView,
   TouchableWithoutFeedback,
 } from "react-native";
+import retrieveDatabse from "../components/DatabaseManager"
+import * as firebase from 'firebase'
 
 class Investment extends React.Component {
+
+  constructor(props) {
+    super(props);
+    this.state = {
+      totalInvestment: retrieveDatabse("/Account/account1/Available"),
+      adata: "a",
+      score: retrieveDatabse("/investment/riskSurvey/" + firebase.auth().currentUser.uid + "/score"),
+    }
+  }
+
+  checkInvestorType = (score) => {
+    console.log(score)
+    var type = ''
+    if (score <= 30) {
+      type = 'Conservative'
+    } else if (31 <= score && score <= 45) {
+      type = 'Moderately Conservative'
+    } else if (46 <= score && score <= 65) {
+      type = 'Moderate'
+    } else if (66 <= score && score <= 80) {
+      type = 'Moderately Aggressive'
+    } else {
+      type = 'Aggressive'
+    }
+    return type;
+  };
+
+
+  getData() {
+    setTimeout(() => {
+      console.log('Our data is fetched');
+      this.setState({
+        adata: "app",
+      })
+    }, 2000)
+  }
+
+
+  componentDidMount() {
+    this.getData();
+    //Here is the Trick
+    const { navigation } = this.props;
+    //Adding an event listner om focus
+    //So whenever the screen will have focus it will set the state to zero
+    this.focusListener = navigation.addListener('didFocus', () => {
+      this.setState({ count: 0 });
+    });
+  }
+  componentWillUnmount() {
+    // Remove the event listener before removing the screen from the stack
+    this.focusListener.remove();
+  }
   render() {
+    var totalInvestment = retrieveDatabse("/Account/account1/Available")
+    var score = retrieveDatabse("/investment/riskSurvey/" + (firebase.auth().currentUser.uid) + "/score")
+    console.log(totalInvestment)
+    const format = amount => {
+      return Number(amount)
+        .toFixed(2)
+        .replace(/\d(?=(\d{3})+\.)/g, '$&,');
+    };
+
+    var riskType = this.checkInvestorType(this.state.score)
     return (
+      
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.contentContainer}>
           <View style={styles.head}>
             <TouchableWithoutFeedback style={styles.head_top_up}>
               <View style={styles.head_top}>
                 <View style={styles.head_top_up}>
-                  <Text style={styles.head_text}>Total pull</Text>
+                  <Text style={styles.head_text}>Total Investment</Text>
                 </View>
                 <View style={styles.head_top_middle}>
                   <Text style={styles.head_top_middle_text}>
-                    300555
+                    $ {format(totalInvestment)}
                     <Image
                       style={styles.tinyLogo}
                       source={require("../assets/tiny_arrow.png")}
@@ -33,43 +98,40 @@ class Investment extends React.Component {
                   </Text>
                 </View>
                 <View style={styles.head_top_down}>
+
                   <View style={styles.row_container}>
                     <Text style={styles.head_top_down_text}>
-                      Earings yesterday
+                      Risk score
                     </Text>
-                    <Text style={styles.head_top_down_number}>+455.73</Text>
+                    <Text style={styles.head_top_down_number}>{score}</Text>
                   </View>
                   <View style={styles.row_container}>
                     <Text style={styles.head_top_down_text}>
-                      Rate of return
+                      Risk type
                     </Text>
-                    <Text style={styles.head_top_down_number}>2.41%</Text>
-                  </View>
-                  <View style={styles.row_container}>
-                    <Text style={styles.head_top_down_text}>
-                      Accumulated earnings
-                    </Text>
-                    <Text style={styles.head_top_down_number}>+455.73</Text>
+                    <Text style={styles.head_top_down_number}>{this.checkInvestorType(score)}</Text>
                   </View>
                 </View>
               </View>
             </TouchableWithoutFeedback>
-            <View style={styles.head_bottom}>
+            {/* <View style={styles.head_bottom}>
               <View style={styles.head_bottom_up}>
                 <View style={styles.head_bottom_up_left}>
-                  <Text style={{alignSelf: "center", paddingTop: 40, fontSize: 20,}}>Short term</Text>
+                  <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800" }}>Goal</Text>
+                  <Text style={{ alignSelf: "center", fontSize: 18, color: "#1F4E79", fontWeight: "bold"}}>$ {format(3000)}</Text>
                 </View>
                 <View style={styles.head_bottom_up_right}>
-                  <Text style={{alignSelf: "center", paddingTop: 40, fontSize: 20,}}>Short term</Text>
+                  <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800" }}>Description</Text>
+                  <Text style={{ alignSelf: "center", fontSize: 18, color: "#1F4E79", fontWeight: "bold"}}>$ {format(3000)}</Text>
                 </View>
               </View>
               <View style={styles.head_bottom_down}></View>
-            </View>
+            </View> */}
           </View>
           <View style={styles.middle}>
             <View style={styles.middle_three_button}>
               <TouchableOpacity
-                onPress={()=> this.props.navigation.navigate("ProductsDetail")}
+                onPress={() => this.props.navigation.navigate("ProductsDetail")}
               >
                 <View style={styles.buttons}>
                   <Image
@@ -94,8 +156,8 @@ class Investment extends React.Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity onPress={() =>
-                  this.props.navigation.navigate("TransactionHistory")
-                }>
+                this.props.navigation.navigate("TransactionHistory")
+              }>
                 <View style={styles.buttons}>
                   <Image
                     style={styles.buttonLogo}
@@ -106,7 +168,7 @@ class Investment extends React.Component {
               </TouchableOpacity>
             </View>
             <View style={styles.middle_three_button}>
-              <TouchableOpacity onPress={()=> this.props.navigation.navigate("RiskSurvyDetail")}>
+              <TouchableOpacity onPress={() => this.props.navigation.navigate("RiskSurvyDetail")}>
                 <View style={styles.buttons}>
                   <Image
                     style={styles.buttonLogo}
@@ -116,8 +178,8 @@ class Investment extends React.Component {
                 </View>
               </TouchableOpacity>
               <TouchableOpacity
-                onPress={()=> this.props.navigation.navigate("FavoriteDetail")}
-                >
+                onPress={() => this.props.navigation.navigate("FavoriteDetail")}
+              >
                 <View style={styles.buttons}>
                   <Image
                     style={styles.buttonLogo}
@@ -126,7 +188,9 @@ class Investment extends React.Component {
                   <Text style={styles.buttons_text}>Favorite</Text>
                 </View>
               </TouchableOpacity>
-              <TouchableOpacity>
+              <TouchableOpacity
+                onPress={() => this.props.navigation.navigate("InvestmentHot")}
+              >
                 <View style={styles.buttons}>
                   <Image
                     style={styles.buttonLogo}
@@ -184,6 +248,10 @@ const styles = StyleSheet.create({
   },
   row_container: {
     justifyContent: "center",
+    alignItems: "center",
+    alignSelf: "center",
+    width: '50%',
+    
   },
   tinyLogo: {
     width: 20,
@@ -195,7 +263,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   head: {
-    height: 350,
+    height: 250,
     flex: 10,
     backgroundColor: "#1F4E79",
   },
@@ -224,17 +292,20 @@ const styles = StyleSheet.create({
   },
   head_top_down: {
     flex: 1,
-    justifyContent: "space-around",
+    justifyContent: "center",
     flexDirection: "row",
+    alignItems: "center"
   },
   head_top_down_text: {
     color: "#BEBEBE",
-    fontSize: 10,
+    fontSize: 12,
+    marginVertical: 5,
   },
   head_top_down_number: {
     color: "#FFFFFF",
-    fontSize: 18,
+    fontSize: 16,
     alignSelf: "center",
+    fontWeight: "bold",
   },
   head_bottom: {
     flex: 4,
@@ -260,12 +331,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   middle: {
-    paddingVertical: 10,
+    paddingVertical: 20,
     flex: 3,
     backgroundColor: "#ECECEC",
   },
   bottoms: { flex: 1, flexDirection: "row" },
-  middle_three_button: { flex: 1, flexDirection: "row", padding: 5 },
+  middle_three_button: { flex: 1, flexDirection: "row", padding: 5, paddingVertical: 20, },
 
   bottom: {
     flex: 3,
@@ -276,7 +347,7 @@ const styles = StyleSheet.create({
     width: 130,
     alignItems: "center",
   },
-  botton_buttons: { width: 20, height: 20,},
+  botton_buttons: { width: 20, height: 20, },
   buttons_text: { fontSize: 10 },
   bottom_Logos: { height: 30, width: 30 },
   bottom_content: {
@@ -284,6 +355,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     alignItems: "center",
     marginVertical: 4,
+    marginLeft: 10,
   },
   bottom_text: { paddingLeft: 20 },
 });
