@@ -77,7 +77,7 @@ export default class SavingSuccess extends React.Component {
                         <View style={styles.bottomMiddle}>
                             <TouchableWithoutFeedback onPress={() => {
                                 this.props.navigation.navigate(
-                                    'Investment',
+                                    'InvestmentHome',
                                     {},
                                     NavigationActions.navigate({
                                         routeName: 'ProductsDetail'
