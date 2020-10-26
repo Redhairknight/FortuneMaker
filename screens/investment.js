@@ -108,19 +108,19 @@ class Investment extends React.Component {
                 </View>
               </View>
             </TouchableWithoutFeedback>
-            <View style={styles.head_bottom}>
+            {/* <View style={styles.head_bottom}>
               <View style={styles.head_bottom_up}>
                 <View style={styles.head_bottom_up_left}>
-                  <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800" }}>Short term</Text>
+                  <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800" }}>Goal</Text>
                   <Text style={{ alignSelf: "center", fontSize: 18, color: "#1F4E79", fontWeight: "bold"}}>$ {format(3000)}</Text>
                 </View>
                 <View style={styles.head_bottom_up_right}>
-                  <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800" }}>Long term</Text>
+                  <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800" }}>Description</Text>
                   <Text style={{ alignSelf: "center", fontSize: 18, color: "#1F4E79", fontWeight: "bold"}}>$ {format(3000)}</Text>
                 </View>
               </View>
               <View style={styles.head_bottom_down}></View>
-            </View>
+            </View> */}
           </View>
           <View style={styles.middle}>
             <View style={styles.middle_three_button}>
@@ -254,7 +254,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   head: {
-    height: 350,
+    height: 250,
     flex: 10,
     backgroundColor: "#1F4E79",
   },
@@ -320,12 +320,12 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   middle: {
-    paddingVertical: 10,
+    paddingVertical: 20,
     flex: 3,
     backgroundColor: "#ECECEC",
   },
   bottoms: { flex: 1, flexDirection: "row" },
-  middle_three_button: { flex: 1, flexDirection: "row", padding: 5 },
+  middle_three_button: { flex: 1, flexDirection: "row", padding: 5, paddingVertical: 20, },
 
   bottom: {
     flex: 3,
