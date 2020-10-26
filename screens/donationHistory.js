@@ -1,6 +1,4 @@
 import React, { Component, useState } from 'react';
-// import {  SafeAreaView, StyleSheet, Platform, StatusBar,Text, View, ScrollView, ImageBackground, Image, Button, TouchableHighlight } from 'react-native';
-// import retrieveDatabse from "../components/DatabaseManager";
 import { FlatList, SafeAreaView, StyleSheet, Platform, StatusBar,Text, View, ScrollView, ImageBackground, Image, Button, TouchableHighlight } from 'react-native';
 import { ceil } from 'react-native-reanimated';
 import retrieveDatabse from "../components/DatabaseManager";
@@ -15,8 +13,7 @@ import {getTrans} from '../components/DatabaseIterate';
 import colors from '../config/colors';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-
-
+// Get and show donation history of user
 export default class donationHistory extends Component {
   constructor(props){
     super(props);
@@ -57,6 +54,7 @@ render() {
               <Image style={styles.image} source={require('../assets/thankyou.jpg')} />
               {
                   this.state.listingData.map(function(x){
+                    {/* Return corresponding img url of charities */}
                       function getPath(){
                         var url = ''
                         if (x.charityName == "AKF"){url = require('../assets/check1.png')}
@@ -69,6 +67,7 @@ render() {
                       }
 
                         var url = getPath();
+                        {/* Recursively render the page */}
                       return(
                           <Swipeable key={x.key}>
                               <TouchableHighlight 

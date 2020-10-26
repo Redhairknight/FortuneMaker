@@ -7,22 +7,15 @@ import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as firebase from 'firebase'
 
-
+//Choose the charity
 class donationCharityBrief extends React.Component{
-
-  writeCharityInfo = (charityName) =>{
-    var userID = firebase.auth().currentUser.uid
-    firebase.database().ref('Donation/History/' + userID).set({
-      Charity:charityName
-    })
-  }
 
   render(){
       return (
           <SafeAreaView style={styles.container}>
               <ScrollView contentContainerStyle={styles.contentContainer}>
 
-                  {/* Main contents */}
+                  {/* Six different charities display */}
                   <View style={styles.bottom}>
 
 

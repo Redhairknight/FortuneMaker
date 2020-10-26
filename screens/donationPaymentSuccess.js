@@ -7,9 +7,11 @@ import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as firebase from 'firebase'
 
-
+// Paid succeed and show results
+// Can navigate to donation home page or donation history page
 class donationPaymentSuccess extends React.Component{
 
+  // Insert data into firebase, including all necessary info
   componentWillMount(){
     var userId = firebase.auth().currentUser.uid;
     const charityName = this.props.navigation.getParam('charityName');
@@ -49,6 +51,7 @@ class donationPaymentSuccess extends React.Component{
                         You can access the donation status through donation history.
                       </Text>
                     </View>
+                    {/* Navigate to Donation History */}
                     <View style={styles.bottomMiddle}>
                     <TouchableWithoutFeedback
                           onPress ={()=> this.props.navigation.navigate("DonationHistory")}
@@ -63,6 +66,7 @@ class donationPaymentSuccess extends React.Component{
                       </TouchableWithoutFeedback>
                       <View style={styles.lineBreak}></View>
                       
+                      {/* Navigate to donation home page */}
                       <TouchableWithoutFeedback
                           onPress ={()=> this.props.navigation.navigate("DonationCharityChoose")}
                       >

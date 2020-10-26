@@ -5,8 +5,10 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableHighlight, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
+// Donating money set page
 class donationIndex extends React.Component{
 
+  //Record money selected and dynamically change the title
   constructor(props){
     super(props);
     this.state = {
@@ -24,12 +26,13 @@ class donationIndex extends React.Component{
             <SafeAreaView style={styles.container}>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
 
-                    {/* Main contents */}
+                    {/* Title for user to see how much money will donate */}
                     <View style={styles.bottom}>
                       <View style={styles.selectMoneyHeader}>
                         <Text style={[styles.regularyText]}>{title}</Text>
                       </View>
 
+                    {/* Different buttons to click and choose */}
                         <TouchableWithoutFeedback style={styles.selectMoneyHeader} onPress={()=>this.setState({money:10,title:"You Are Going To Donate $ 10"})}>
                           <Text style={styles.regularyText}>$ 10</Text>
                         </TouchableWithoutFeedback>
