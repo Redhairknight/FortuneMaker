@@ -55,11 +55,11 @@ class Recommendation extends React.Component {
         if (riskType == 'Conservative') {
             this.setState({description: "For investors who seek current income and stability and are less concerned about growth"})
             this.setState({assetAllocation: [
-                { x: 1, y: 10, label: "10%" },
-                { x: 2, y: 5, label: "5%" },
-                { x: 3, y: 5, label: "5%" },
-                { x: 3, y: 50, label: "50%" },
-                { x: 3, y: 30, label: "30%" },
+                { x: 1, y: 10, label: "10% typeA" },
+                { x: 2, y: 5, label: "5% typeB" },
+                { x: 3, y: 5, label: "5% typeC" },
+                { x: 3, y: 50, label: "50% typeD" },
+                { x: 3, y: 30, label: "30% typeE" },
             ]})
         } else if (riskType == 'Moderately Conservative') {
             this.setState({description: "For investors who seek current income and stability, with modest potential for increase in the value of their investments"})
@@ -142,23 +142,23 @@ class Recommendation extends React.Component {
 
                             data={[
                                 {
-                                    name: 'Large-Cap Equity',
+                                    name: 'Large-Cap Equity (typeA)',
                                     symbol: { fill: 'green', type: 'square' },
                                 },
                                 {
-                                    name: 'Small-Cap Equity',
+                                    name: 'Small-Cap Equity (typeB)',
                                     symbol: { fill: 'gray', type: 'square' },
                                 },
                                 {
-                                    name: 'International Equity',
+                                    name: 'International Equity (typeC)',
                                     symbol: { fill: 'gold', type: 'square' },
                                 },
                                 {
-                                    name: 'Fixed Income',
+                                    name: 'Fixed Income (typeD)',
                                     symbol: { fill: 'navy', type: 'square' },
                                 },
                                 {
-                                    name: 'Cash Investments',
+                                    name: 'Cash Investments (typeE)',
                                     symbol: { fill: 'brown', type: 'square' },
                                 }
                             ]}
