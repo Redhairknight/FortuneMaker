@@ -46,9 +46,12 @@ export default class SavingDetail extends Component {
     // capture the data before it loads
     componentWillMount() {
         var that = this;
+        var userId = firebase.auth().currentUser.uid;
 
         let q = firebase.database().ref('Transaction');
         var finished = [];
+
+        let i = firebase.database().ref('investment')
 
         q.once('value', snapshot => {
             snapshot.forEach(function (data) {

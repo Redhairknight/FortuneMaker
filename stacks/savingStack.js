@@ -86,7 +86,7 @@ const SavingStack = createStackNavigator({
       },
     }
   }
-
+  }
 });
 
 
