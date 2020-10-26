@@ -243,6 +243,9 @@ const styles = StyleSheet.create({
   row_container: {
     justifyContent: "center",
     alignItems: "center",
+    alignSelf: "center",
+    width: '50%',
+    paddingBottom: 15,
   },
   tinyLogo: {
     width: 20,
@@ -283,8 +286,9 @@ const styles = StyleSheet.create({
   },
   head_top_down: {
     flex: 1,
-    justifyContent: "space-around",
+    justifyContent: "center",
     flexDirection: "row",
+    alignItems: "center"
   },
   head_top_down_text: {
     color: "#BEBEBE",
@@ -292,7 +296,7 @@ const styles = StyleSheet.create({
   },
   head_top_down_number: {
     color: "#FFFFFF",
-    fontSize: 18,
+    fontSize: 25,
     alignSelf: "center",
     fontWeight: "bold",
   },
