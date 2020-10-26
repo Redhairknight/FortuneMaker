@@ -32,7 +32,10 @@ export default class SearchBarExample extends Component {
       name: 0,
       rateofreturn: 0,
       intitution: 0,
-      number: 0
+      number: 0,
+      totalInvestment: 0,
+      type: null
+
 
     }
     this.testFunction = this.testFunction.bind(this)
@@ -71,8 +74,11 @@ export default class SearchBarExample extends Component {
     var price1 = retrieveDatabse(`/investment/financialproductlist/${a}/price`);
     var rateofreturn1 = retrieveDatabse(`/investment/financialproductlist/${a}/rateofreturn`);
     var institution1 = retrieveDatabse(`/investment/financialproductlist/${a}/institution`);
+    var totalInvestment1 = retrieveDatabse("/Account/account1/Available");
+    var type1 = retrieveDatabse(`/investment/financialproductlist/${a}/type`);
 
-    return (<TouchableOpacity onPress={() => this.setState({ price: price1, pop: true, name: name1, institution: institution1, rateofreturn: rateofreturn1, number: number1 })}>
+
+    return (<TouchableOpacity onPress={() => this.setState({ price: price1, pop: true, name: name1, institution: institution1, rateofreturn: rateofreturn1, number: number1, totalInvestment: totalInvestment1, type: type1 })}>
       <Modal
         transparent={this.state.pop}
         visible={this.state.pop}>
@@ -97,13 +103,18 @@ export default class SearchBarExample extends Component {
               })
           }}><Text>Add to favorite</Text></TouchableOpacity>
           <Button title='CONFIRM' onPress={() => {
-            this.setState({ pop: false }); firebase.database().ref('investment/newTransHistory/' + firebase.auth().currentUser.uid + '/' + this.getCurrentDates()).set
+            this.setState({ pop: false });
+            firebase.database().ref('investment/newTransHistory/' + firebase.auth().currentUser.uid + '/' + this.getCurrentDates()).set
               ({
                 name: this.state.name,
                 price: this.state.productNumber * this.state.price,
                 date: this.getCurrentDates()
 
-              })
+              });
+            firebase.database().ref("/Account/account1/").set({
+              Available: this.state.totalInvestment - this.state.productNumber * this.state.price
+            })
+
           }} ></Button>
 
           <Button title='CANCEL' onPress={() => this.setState({ pop: false })} ></Button>
@@ -120,13 +131,18 @@ export default class SearchBarExample extends Component {
         <View style={styles.productUnit}>
           <Text style={styles.unitProp}> {price1}</Text>
         </View>
+        <View style={styles.productType}>
+          <Text>{type1}</Text>
+        </View>
         <View>
           <Text>{rateofreturn1}</Text>
         </View>
       </View>
     </TouchableOpacity >)
   }
+
   render() {
+
     const getCurrentDate = () => {
       var date = new Date().getDate();
       var month = new Date().getMonth() + 1;
@@ -150,28 +166,21 @@ export default class SearchBarExample extends Component {
           </View>
 
           <View style={styles.productLabelContainer}>
-            <TouchableOpacity style={styles.productLabels}>
+            <TouchableOpacity style={styles.productNameLabel}>
               <Text>Product Name</Text>
-              <Image
-                style={styles.labelLogo}
-                source={require("../assets/product_button1.png")}
-              />
+
             </TouchableOpacity>
 
             <TouchableOpacity style={styles.productLabels}>
               <Text> Units</Text>
-              <Image
-                style={styles.labelLogo}
-                source={require("../assets/product_button1.png")}
-              />
+
+            </TouchableOpacity>
+            <TouchableOpacity style={styles.productLabels}>
+              <Text>Type</Text>
             </TouchableOpacity>
             <TouchableOpacity style={styles.productLabels}>
               <Text>Rate of Return</Text>
 
-              <Image
-                style={styles.labelLogo}
-                source={require("../assets/product_button1.png")}
-              />
             </TouchableOpacity>
           </View>
 
@@ -199,8 +208,9 @@ const styles = {
   },
   searchBar: { backgroundColor: "#1F4E79" },
   headerText: { fontSize: 20, color: "white" },
-  productLabelContainer: { height: 30, flexDirection: "row" },
-  productLabels: { width: "34%", flexDirection: "row" },
+  productLabelContainer: { height: 50, flexDirection: "row" },
+  productNameLabel: { width: "40%", flexDirection: "row" },
+  productLabels: { width: "20%", flexDirection: "row" },
   financialProductContainer: {
     height: 80,
     flexDirection: "row",
@@ -208,14 +218,16 @@ const styles = {
     borderWidth: 1,
     borderColor: "#DBDBDB",
   },
+
   productProp: {
-    width: "35%",
+    width: "40%",
   },
   labelLogo: { height: 10, width: 10, bottom: -3 },
   productName: { fontWeight: "bold" },
   productNumber: { fontSize: 10, padding: 5 },
   productInstitution: { fontSize: 5 },
-  productUnit: { fontWeight: "bold", width: "40%" },
+  productUnit: { fontWeight: "bold", width: "24%" },
+  productType: { width: "20%" },
   unitProp: { fontWeight: "bold", fontSize: 18 },
   popWindow: { backgroundColor: "white", flex: 1, margin: 60, padding: 40, borderRadius: 10 },
   numberInput: {

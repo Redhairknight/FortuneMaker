@@ -16,15 +16,40 @@ import * as firebase from 'firebase'
 
 class Investment extends React.Component {
 
-  constructor(props){
+  constructor(props) {
     super(props);
     this.state = {
       totalInvestment: retrieveDatabse("/Account/account1/Available"),
+      adata: "a"
     }
   }
-  
 
+  getData() {
+    setTimeout(() => {
+      console.log('Our data is fetched');
+      this.setState({
+        adata: "app",
+      })
+    }, 2000)
+  }
+
+
+  componentDidMount() {
+    this.getData();
+    //Here is the Trick
+    const { navigation } = this.props;
+    //Adding an event listner om focus
+    //So whenever the screen will have focus it will set the state to zero
+    this.focusListener = navigation.addListener('didFocus', () => {
+      this.setState({ count: 0 });
+    });
+  }
+  componentWillUnmount() {
+    // Remove the event listener before removing the screen from the stack
+    this.focusListener.remove();
+  }
   render() {
+    var totalInvestment = retrieveDatabse("/Account/account1/Available")
     const format = amount => {
       return Number(amount)
         .toFixed(2)
@@ -41,7 +66,7 @@ class Investment extends React.Component {
                 </View>
                 <View style={styles.head_top_middle}>
                   <Text style={styles.head_top_middle_text}>
-                  $ {format(this.state.totalInvestment)}
+                    $ {format(totalInvestment)}
                     <Image
                       style={styles.tinyLogo}
                       source={require("../assets/tiny_arrow.png")}
@@ -73,12 +98,12 @@ class Investment extends React.Component {
             <View style={styles.head_bottom}>
               <View style={styles.head_bottom_up}>
                 <View style={styles.head_bottom_up_left}>
-                  <Text style={{alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800"}}>Short term</Text>
-                  <Text style={{alignSelf: "center", fontSize: 18, color: "#1F4E79"}}>$ {format(3000)}</Text>
+                  <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800" }}>Short term</Text>
+                  <Text style={{ alignSelf: "center", fontSize: 18, color: "#1F4E79" }}>$ {format(3000)}</Text>
                 </View>
                 <View style={styles.head_bottom_up_right}>
-                  <Text style={{alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800"}}>Long term</Text>
-                  <Text style={{alignSelf: "center", fontSize: 18, color: "#1F4E79"}}>$ {format(3000)}</Text>
+                  <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800" }}>Long term</Text>
+                  <Text style={{ alignSelf: "center", fontSize: 18, color: "#1F4E79" }}>$ {format(3000)}</Text>
                 </View>
               </View>
               <View style={styles.head_bottom_down}></View>
