@@ -22,7 +22,7 @@ import retrieveDatabse from "./components/DatabaseManager"
 // Initialize Firebase
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
-  //firebase.auth().signOut()
+  firebase.auth().signOut()
 }
 
 // disable yellow warning

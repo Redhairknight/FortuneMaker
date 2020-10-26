@@ -1,0 +1,13 @@
+diff a/components/DatabaseManager.js b/components/DatabaseManager.js	(rejected hunks)
+@@ -2,11 +2,7 @@
+ import * as firebase from "firebase";
+ 
+ // Retrieve data from database. link is the 
+-<<<<<<< HEAD
+-//adress of the data need to be retrieved
+-=======
+ //address of the data need to be retrieved
+->>>>>>> 9189322... transaction
+ 
+ 
+ function retrieveDatabse(link){

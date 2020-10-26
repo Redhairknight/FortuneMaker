@@ -5,6 +5,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
+// Welcome page of donation
 class donationEntry extends React.Component{
     render(){
         return (
@@ -37,6 +38,7 @@ class donationEntry extends React.Component{
                                 - Convenient
                             </Text>
                         </View>
+                        {/* Navigate to Charity Choose Step */}
                         <View style={styles.buttomEach,styles.marginTop15}>
                             <TouchableWithoutFeedback
                                 onPress ={()=> this.props.navigation.navigate("DonationCharityChoose")}
@@ -52,6 +54,7 @@ class donationEntry extends React.Component{
                             <View style={styles.lineBreak}>
 
                             </View>
+                            {/* Navigate to Donation History */}
                             <TouchableWithoutFeedback
                                 onPress ={()=> this.props.navigation.navigate("DonationHistory")}
                             >
@@ -66,18 +69,6 @@ class donationEntry extends React.Component{
                             <View style={styles.lineBreak}>
 
                             </View>
-                            {/* <TouchableWithoutFeedback
-
-                                onPress ={()=> this.props.navigation.navigate("DonationCharityChoose")}
-                            >
-                            <View style={styles.buttons}>
-                                <Text style={styles.buttonText}>
-                                    Tax Relief Calculation
-                                </Text>
-
-                            </View>
-
-                            </TouchableWithoutFeedback> */}
                         </View>
                     </View>
                 </ScrollView>

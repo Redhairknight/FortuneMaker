@@ -35,13 +35,13 @@ export default class SurveyCompletedScreen extends Component {
 
     checkInvestorType = (score) => {
         var type = ''
-        if (score < 20) {
+        if (score <= 30) {
             type = 'Conservative'
-        } else if (20 <= score && score<40) {
+        } else if (31 <= score && score<= 45) {
             type = 'Moderately Conservative'
-        } else if (40 <= score && score< 60) {
+        } else if (46 <= score && score<= 65) {
             type = 'Moderate'
-        } else if (60 <= score && score< 80) {
+        } else if (66 <= score && score<= 80) {
             type = 'Moderately Aggressive'
         } else {
             type = 'Aggressive'

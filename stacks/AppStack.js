@@ -2,7 +2,7 @@ import * as React from "react";
 import { Text, View, StyleSheet, ScrollView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
 import InvestmentStack from "./investmentStack";
 import InvestmentEducation from "../screens/investmentEducation";
@@ -53,7 +53,7 @@ function MyTabs() {
         options={{
           tabBarLabel: "Saving",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="settings" color={color} size={size} />
+            <MaterialIcons name="attach-money" size={size} color={color} />
           ),
         }}
       />
@@ -63,7 +63,7 @@ function MyTabs() {
         options={{
           tabBarLabel: "Investment",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="dog" color={color} size={size} />
+            <MaterialCommunityIcons name="chart-areaspline" size={size} color={color} />
           ),
         }}
       />
@@ -73,7 +73,7 @@ function MyTabs() {
         options={{
           tabBarLabel: "Donation",
           tabBarIcon: ({ color, size }) => (
-            <MaterialCommunityIcons name="cat" color={color} size={size} />
+            <MaterialCommunityIcons name="charity" size={size} color={color} />
           ),
         }}
       />

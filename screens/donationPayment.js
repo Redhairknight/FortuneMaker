@@ -6,11 +6,10 @@ import { StyleSheet, Text, View ,Image, ScrollView, Alert} from 'react-native';
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-
-
-
+// Record user status and give pay link
 class donationPayment extends React.Component{
 
+  //Record user information and display on the screen
   constructor(props){
     super(props);
     this.state = {
@@ -19,8 +18,6 @@ class donationPayment extends React.Component{
     }
   }
 
-
-
   render(){
 
     const charityName = this.props.navigation.getParam('charityName');
@@ -28,6 +25,7 @@ class donationPayment extends React.Component{
     const userName = this.state.userName;
     const email = this.state.email;
     const navi = this.props.navigation;
+    // Alter message if user didn't input the email and name
     function checkNameAndEmail(){
       if (userName == "" || email == ""){
         Alert.alert("Missing something","Please fill your information",
@@ -54,6 +52,7 @@ class donationPayment extends React.Component{
               <ScrollView contentContainerStyle={styles.contentContainer}>
 
 
+                    {/* User input info */}
                     <View style={styles.bottomMiddle}>
                       <Text style={styles.bottomEachTextTitle}>
                         Please input your information
@@ -65,7 +64,7 @@ class donationPayment extends React.Component{
 
                     </View>
 
-                    
+                    {/* Let user confirm the info */}
                     <View style={styles.bottomMiddle}>
                       <Text style={styles.bottomEachTextTitle}>
                         Confirm your donation detail
@@ -87,6 +86,7 @@ class donationPayment extends React.Component{
                       </View>
                     </View>
 
+                    {/* Provide pay link */}
                     <View style={styles.bottomPayLink}>
                       <TouchableWithoutFeedback onPress={()=>checkNameAndEmail()} style={styles.payBtn}>
                         <Image style={styles.payImg} source={require("../assets/paypal.png")}/>
