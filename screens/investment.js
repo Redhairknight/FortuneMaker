@@ -20,9 +20,27 @@ class Investment extends React.Component {
     super(props);
     this.state = {
       totalInvestment: retrieveDatabse("/Account/account1/Available"),
-      adata: "a"
+      adata: "a",
+      riskScore: retrieveDatabse("/investment/riskSurvey/" + (firebase.auth().currentUser.uid) + "/score"),
     }
   }
+
+  checkInvestorType = (score) => {
+    var type = ''
+    if (score <= 30) {
+        type = 'Conservative'
+    } else if (31 <= score && score<= 45) {
+        type = 'Moderately Conservative'
+    } else if (46 <= score && score<= 65) {
+        type = 'Moderate'
+    } else if (66 <= score && score<= 80) {
+        type = 'Moderately Aggressive'
+    } else {
+        type = 'Aggressive'
+    }
+    return type;
+  };
+
 
   getData() {
     setTimeout(() => {
@@ -74,23 +92,18 @@ class Investment extends React.Component {
                   </Text>
                 </View>
                 <View style={styles.head_top_down}>
+
                   <View style={styles.row_container}>
                     <Text style={styles.head_top_down_text}>
-                      Earings yesterday
+                      Risk score
                     </Text>
-                    <Text style={styles.head_top_down_number}>+455.73</Text>
+                    <Text style={styles.head_top_down_number}>{this.state.riskScore}</Text>
                   </View>
                   <View style={styles.row_container}>
                     <Text style={styles.head_top_down_text}>
-                      Rate of return
+                      Risk type
                     </Text>
-                    <Text style={styles.head_top_down_number}>2.41%</Text>
-                  </View>
-                  <View style={styles.row_container}>
-                    <Text style={styles.head_top_down_text}>
-                      Accumulated earnings
-                    </Text>
-                    <Text style={styles.head_top_down_number}>+455.73</Text>
+                    <Text style={styles.head_top_down_number}>{this.checkInvestorType(this.state.riskScore)}</Text>
                   </View>
                 </View>
               </View>
@@ -99,11 +112,11 @@ class Investment extends React.Component {
               <View style={styles.head_bottom_up}>
                 <View style={styles.head_bottom_up_left}>
                   <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800" }}>Short term</Text>
-                  <Text style={{ alignSelf: "center", fontSize: 18, color: "#1F4E79" }}>$ {format(3000)}</Text>
+                  <Text style={{ alignSelf: "center", fontSize: 18, color: "#1F4E79", fontWeight: "bold"}}>$ {format(3000)}</Text>
                 </View>
                 <View style={styles.head_bottom_up_right}>
                   <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800" }}>Long term</Text>
-                  <Text style={{ alignSelf: "center", fontSize: 18, color: "#1F4E79" }}>$ {format(3000)}</Text>
+                  <Text style={{ alignSelf: "center", fontSize: 18, color: "#1F4E79", fontWeight: "bold"}}>$ {format(3000)}</Text>
                 </View>
               </View>
               <View style={styles.head_bottom_down}></View>
@@ -229,6 +242,7 @@ const styles = StyleSheet.create({
   },
   row_container: {
     justifyContent: "center",
+    alignItems: "center",
   },
   tinyLogo: {
     width: 20,
@@ -274,12 +288,13 @@ const styles = StyleSheet.create({
   },
   head_top_down_text: {
     color: "#BEBEBE",
-    fontSize: 10,
+    fontSize: 12,
   },
   head_top_down_number: {
     color: "#FFFFFF",
     fontSize: 18,
     alignSelf: "center",
+    fontWeight: "bold",
   },
   head_bottom: {
     flex: 4,
