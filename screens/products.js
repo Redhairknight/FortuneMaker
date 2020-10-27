@@ -282,5 +282,5 @@ const styles = {
     borderColor: '#777'
   },
   purchaseSuccess: { backgroundColor: "white", margin: 60, padding: 40, borderRadius: 10, height: 200 },
-  buttonStyle: { padding: 10 }
+  buttonStyle: { padding: 5 }
 };
