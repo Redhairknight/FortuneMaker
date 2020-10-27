@@ -52,10 +52,11 @@ class SavingOne extends React.Component {
           this.setState({ count: 0 });
         });
       }
-      componentWillUnmount() {
-        // Remove the event listener before removing the screen from the stack
-        this.focusListener.remove();
-      }
+
+    componentWillUnmount() {
+    // Remove the event listener before removing the screen from the stack
+    this.focusListener.remove();
+    }
 
     render() {
         var userId = firebase.auth().currentUser.uid;
@@ -63,8 +64,9 @@ class SavingOne extends React.Component {
         var available = retrieveDatabse("/Account/account1/Available");
         var key = retrieveDatabse("/Transaction/Updated Transaction/" 
             + userId + '/key');
-        var price = retrieveDatabse("/Transaction/" + userId  + '/' +
-            key + '/price');
+        var price = retrieveDatabse("/Transaction/" + firebase.auth().currentUser.uid  + '/' +
+        retrieveDatabse("/Transaction/Updated Transaction/" 
+        + firebase.auth().currentUser.uid + '/key') + '/price');
         var name = retrieveDatabse("/Transaction/" + userId  + '/' +
             key + '/name');    
         return (
@@ -259,6 +261,7 @@ const styles = StyleSheet.create({
         position: 'relative',
         alignItems: 'center',
         marginBottom: 100,
+        top: 75
     },
     sectionText: {
         color: colors.light,
