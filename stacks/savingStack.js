@@ -4,7 +4,6 @@ import Saving2 from "../screens/Saving2";
 import Saving3 from "../screens/Saving3";
 import SavingDetail from "../screens/SavingDetails";
 
-
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 import LoginScreen from "../screens/LoginScreen";
@@ -15,27 +14,28 @@ import SavingSuccess from "../screens/SavingSuccess";
 import Investment from "../stacks/investmentStack";
 import Donation from "../stacks/donationStack";
 
-const SavingStack = createStackNavigator({
+import upBankTransaction from "../screens/upBankTransaction";
 
+const SavingStack = createStackNavigator({
   SavingHome: {
     screen: Saving,
     navigationOptions: {
       headerShown: false,
     },
   },
-  Investment:{
-    screen: Investment
+  Investment: {
+    screen: Investment,
   },
-  Donation:{
+  Donation: {
     screen: Donation,
-    navigationOptions:{
+    navigationOptions: {
       headerTitleAlign: "center",
       headerTitle: "Welcome to Donation",
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",
-      }
-    }
+      },
+    },
   },
   Saving2: {
     screen: Saving2,
@@ -45,14 +45,12 @@ const SavingStack = createStackNavigator({
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",
-      }
+      },
     },
   },
   Saving3: {
     screen: Saving3,
-    navigationOptions: {
-      
-    },
+    navigationOptions: {},
   },
   LoginScreen: {
     screen: LoginScreen,
@@ -68,7 +66,7 @@ const SavingStack = createStackNavigator({
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",
-      }
+      },
     },
   },
   SavingPie: {
@@ -79,9 +77,9 @@ const SavingStack = createStackNavigator({
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",
+      },
     },
-  }
-},
+  },
   SavingGoal: {
     screen: SavingGoal,
     navigationOptions: {
@@ -90,8 +88,8 @@ const SavingStack = createStackNavigator({
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",
-      }
-    }
+      },
+    },
   },
   SavingSuccess: {
     screen: SavingSuccess,
@@ -102,10 +100,13 @@ const SavingStack = createStackNavigator({
       headerStyle: {
         backgroundColor: "#1F4E79",
       },
-    }
-  }
-  
-});
+    },
+  },
 
+  UpBankTransaction: {
+    screen: upBankTransaction,
+    navigationOptions: {},
+  },
+});
 
 export default createAppContainer(SavingStack);

@@ -1,7 +1,7 @@
 /**
 author: Chang Liu 
 */
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity, Button } from 'react-native';
 import { MaterialCommunityIcons, AntDesign, FontAwesome } from '@expo/vector-icons';
 import { Card } from 'react-native-web'
@@ -23,6 +23,7 @@ import AppButton from '../components/AppButton';
 import ProcessBar from '../components/ProcessBar';
 import AppText from '../components/AppText/AppText';
 import colors from '../config/colors';
+// import retrieveApi from "../components/ApiManager";
 
 class SavingOne extends React.Component {
     constructor(props) {
@@ -60,116 +61,132 @@ class SavingOne extends React.Component {
         var item = retrieveDatabse("/Transaction/1/title");
 
         return (
-            <View style={styles.container}>
-                <ImageBackground style={styles.usage}
-                    source={require('../assets/Welcome/Royal.jpg')}>
-                    <Image style={styles.shopLogo} source={require('../assets/transaction.png')} />
-                    {
-                        this.state.listingData.map(function (x) {
-                            return (
-                    <View style={styles.textContainer} key={x.key}>
-                        <Text style={styles.sectionText}>Your last spending is</Text>
-                        <Text style={styles.sectionText}>${x.price} On</Text>
-                        <Text style={styles.highlightText}>{x.name}</Text>
+          <View style={styles.container}>
+            <ImageBackground
+              style={styles.usage}
+              source={require("../assets/Welcome/Royal.jpg")}
+            >
+              <Image
+                style={styles.shopLogo}
+                source={require("../assets/transaction.png")}
+              />
+              {this.state.listingData.map(function (x) {
+                return (
+                  <View style={styles.textContainer} key={x.key}>
+                    <Text style={styles.sectionText}>
+                      Your last spending is
+                    </Text>
+                    <Text style={styles.sectionText}>${x.price} On</Text>
+                    <Text style={styles.highlightText}>{x.name}</Text>
+                  </View>
+                );
+              })}
+              <View style={styles.buttonContainer}>
+                <Button
+                  title="See detail"
+                  onPress={() => this.props.navigation.navigate("SavingPie")}
+                />
+              </View>
+            </ImageBackground>
+            <ImageBackground
+              style={styles.savingGoal}
+              source={require("../assets/Welcome/Joomla.jpg")}
+            >
+              <Image
+                style={styles.shopLogo}
+                source={require("../assets/Welcome/money.png")}
+              />
+              <Text style={styles.goalHeader}>Saving for your future</Text>
+              <View style={styles.buttonContainer2}>
+                <TouchableOpacity
+                  style={styles.button}
+                  onPress={() => this.props.navigation.navigate("SavingGoal")}
+                >
+                  <Text style={styles.text}>Set up Goal!</Text>
+                </TouchableOpacity>
+              </View>
+            </ImageBackground>
+            <View style={styles.creditCard}>
+              <TouchableOpacity
+                style={styles.creditCardSection}
+                onPress={() => this.props.navigation.navigate("SavingDetail")}
+              >
+                <ImageBackground
+                  style={styles.imageBackground}
+                  imageStyle={{ borderRadius: 12 }}
+                  source={require("../assets/Welcome/Royal.jpg")}
+                >
+                  <View style={styles.bankLogoSection}>
+                    <Image
+                      style={styles.bankLogo}
+                      source={require("../assets/Welcome/commonwealth.png")}
+                    />
+                  </View>
+                  <View style={styles.bankDetail}>
+                    <View style={styles.bankDetailText}>
+                      <Text style={styles.creditText}>Available Funds:</Text>
+                      <Text style={styles.creditValue}>${available}</Text>
                     </View>
-                            )})}
-                    <View style={styles.buttonContainer}>
-                        <Button title='See detail' onPress={() => this.props.navigation.navigate("SavingPie")} />
+                    <View style={styles.bankDetailText}>
+                      <Text style={styles.creditText}>Current Balance:</Text>
+                      <Text style={styles.creditValue}>${balance}</Text>
                     </View>
+                  </View>
                 </ImageBackground>
-                <ImageBackground style={styles.savingGoal}
-                    source={require('../assets/Welcome/Joomla.jpg')}>
-                    <Image style={styles.shopLogo} source={require('../assets/Welcome/money.png')} />
-                    <Text style={styles.goalHeader}>Saving for your future</Text>
-                    <View style={styles.buttonContainer2}>
-                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("SavingGoal")}>
-                            <Text style={styles.text}>Set up Goal!</Text>
-                        </TouchableOpacity>
+              </TouchableOpacity>
+              <TouchableOpacity
+                style={styles.creditCardSection}
+                onPress={() => this.props.navigation.navigate("UpBankTransaction")}
+              >
+                <ImageBackground
+                  style={styles.imageBackground}
+                  imageStyle={{ borderRadius: 12 }}
+                  source={require("../assets/Welcome/Royal.jpg")}
+                >
+                  <View style={styles.bankLogoSection}>
+                    <Image
+                      style={styles.bankLogo}
+                      source={require("../assets/Welcome/upbank.png")}
+                    />
+                  </View>
+                  <View style={styles.bankDetail}>
+                    <View style={styles.bankDetailText}>
+                      <Text style={styles.creditText}>Available Funds:</Text>
+                      <Text style={styles.creditValue}>$64,000</Text>
                     </View>
+                    <View style={styles.bankDetailText}>
+                      <Text style={styles.creditText}>Current Balance:</Text>
+                      <Text style={styles.creditValue}>$73,653</Text>
+                    </View>
+                  </View>
                 </ImageBackground>
-                <View style={styles.creditCard}>
-                    <TouchableOpacity style={styles.creditCardSection} onPress={() => this.props.navigation.navigate("SavingDetail")}>
-                        <ImageBackground style={styles.imageBackground} imageStyle={{ borderRadius: 12 }}
-                            source={require('../assets/Welcome/Royal.jpg')}>
-                            <View style={styles.bankLogoSection}>
-                                <Image style={styles.bankLogo} source={require('../assets/Welcome/commonwealth.png')} />
-                            </View>
-                            <View style={styles.bankDetail}>
-                                <View style={styles.bankDetailText}>
-                                    <Text style={styles.creditText}>
-                                        Available Funds:
-                                    </Text>
-                                    <Text style={styles.creditValue}>
-                                        ${available}
-                                    </Text>
-                                </View>
-                                <View style={styles.bankDetailText}>
-                                    <Text style={styles.creditText}>
-                                        Current Balance:
-                                    </Text>
-                                    <Text style={styles.creditValue}>
-                                        ${balance}
-                                    </Text>
-                                </View>
-                            </View>
-                        </ImageBackground>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.creditCardSection}>
-                        <ImageBackground style={styles.imageBackground}
-                            imageStyle={{ borderRadius: 12 }}
-                            source={require('../assets/Welcome/Royal.jpg')}>
-                            <View style={styles.bankLogoSection}>
-                                <Image style={styles.bankLogo} source={require('../assets/Welcome/alipay.png')} />
-                            </View>
-                            <View style={styles.bankDetail}>
-                                <View style={styles.bankDetailText}>
-                                    <Text style={styles.creditText}>
-                                        Available Funds:
-                                    </Text>
-                                    <Text style={styles.creditValue}>
-                                        $64,000
-                                    </Text>
-                                </View>
-                                <View style={styles.bankDetailText}>
-                                    <Text style={styles.creditText}>
-                                        Current Balance:
-                                    </Text>
-                                    <Text style={styles.creditValue}>
-                                        $73,653
-                                    </Text>
-                                </View>
-                            </View>
-                        </ImageBackground>
-                    </TouchableOpacity>
-                    <TouchableOpacity style={styles.creditCardSection}>
-                        <ImageBackground style={styles.imageBackground}
-                            imageStyle={{ borderRadius: 12 }}
-                            source={require('../assets/Welcome/Royal.jpg')}>
-                            <View style={styles.bankLogoSection}>
-                                <Image style={styles.bankLogo} source={require('../assets/Welcome/citibank.png')} />
-                            </View>
-                            <View style={styles.bankDetail}>
-                                <View style={styles.bankDetailText}>
-                                    <Text style={styles.creditText}>
-                                        Available Funds:
-                                    </Text>
-                                    <Text style={styles.creditValue}>
-                                        $64,000
-                                    </Text>
-                                </View>
-                                <View style={styles.bankDetailText}>
-                                    <Text style={styles.creditText}>
-                                        Current Balance:
-                                    </Text>
-                                    <Text style={styles.creditValue}>
-                                        $73,653
-                                    </Text>
-                                </View>
-                            </View>
-                        </ImageBackground>
-                    </TouchableOpacity>
-                </View>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.creditCardSection}>
+                <ImageBackground
+                  style={styles.imageBackground}
+                  imageStyle={{ borderRadius: 12 }}
+                  source={require("../assets/Welcome/Royal.jpg")}
+                >
+                  <View style={styles.bankLogoSection}>
+                    <Image
+                      style={styles.bankLogo}
+                      source={require("../assets/Welcome/citibank.png")}
+                    />
+                  </View>
+                  <View style={styles.bankDetail}>
+                    <View style={styles.bankDetailText}>
+                      <Text style={styles.creditText}>Available Funds:</Text>
+                      <Text style={styles.creditValue}>$64,000</Text>
+                    </View>
+                    <View style={styles.bankDetailText}>
+                      <Text style={styles.creditText}>Current Balance:</Text>
+                      <Text style={styles.creditValue}>$73,653</Text>
+                    </View>
+                  </View>
+                </ImageBackground>
+              </TouchableOpacity>
             </View>
+          </View>
         );
     }
 

@@ -86,7 +86,7 @@ export default class SavingPie extends Component {
         <VictoryPie
           style={styles.container}
           colorScale={colorScale}
-          //   data={dataList}
+            // data={dataList}
           data={sampleData}
           //set the labels
           innerRadius={45}
