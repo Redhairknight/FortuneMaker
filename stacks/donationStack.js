@@ -11,6 +11,7 @@ import donationFlyingDoctor from "../screens/donationFlyingDoctor"
 import donationFred from "../screens/donationFred"
 import donationGuideDogs from "../screens/donationGuideDogs"
 import donationHistory from "../screens/donationHistory"
+import donationCalculator from '../screens/donationCalculator'
 
 
 
@@ -150,6 +151,17 @@ const DonationStack = createStackNavigator({
       }
     }
   },
+  DonationCalculator:{
+    screen: donationCalculator,
+    navigationOptions:{
+      headerTitleAlign: "center",
+      headerTitle: "Donation Calculator",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
+    }
+  }
 
   
 });

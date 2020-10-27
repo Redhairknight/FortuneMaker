@@ -3,11 +3,40 @@ import { StyleSheet, Text, View ,Image, ScrollView} from 'react-native';
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { TextInput, TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
-// Welcome page of donation
-class donationEntry extends React.Component{
-    render(){
+// Tax deduction calculator
+class donationCalculator extends React.Component{
+
+    constructor(props){
+        super(props);
+        this.state = {
+          money: "",
+          output:"",
+        }
+      }
+
+    
+
+    render()
+    
+    
+    {
+
+
+        
+        var money = this.state.money;
+        var out = this.state.output;
+        var that = this;
+
+        function writeOut(){
+            var deduction = Math.ceil(money*0.0267937891);
+            out = "$ " + deduction + "per week"
+            that.setState({output:out})
+            console.log(deduction)
+            console.log(out)
+        }
+
         return (
             <SafeAreaView style={styles.container}>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
@@ -15,31 +44,27 @@ class donationEntry extends React.Component{
                     <View style={styles.bottom}>
                         <View style={styles.bottomEach,styles.marginTop15}>
                             <Text style={styles.bottomEachTextTitle}>
-                                WHY DONATE?
+                                Enter your weekly income
                             </Text>
                             <Text style={styles.bottomEachTextContent}>
-                                - Wealth Benefit
+                                - Find out best donation rate
                             </Text>
                             <Text style={styles.bottomEachTextContent}>
-                                - Eduate your kids
+                                - Get best tax deduction
                             </Text>
                             <Text style={styles.bottomEachTextContent}>
-                                - Help Needed People
+                                - Improve wealth management
                             </Text>
                         </View>
-                        <View style={styles.buttomEach,styles.marginTop15}>
-                            <Text style={styles.bottomEachTextTitle}>
-                                WHY US?
-                            </Text>
-                            <Text style={styles.bottomEachTextContent}>
-                                - Professional
-                            </Text>
-                            <Text style={styles.bottomEachTextContent}>
-                                - Convenient
-                            </Text>
+
+                        <View style={styles.bottomCalculator}>
+                        <TextInput textAlign="center" placeholderTextColor="#1F4E79" placeholder="Input your weekly income   " maxLength={6}  keyboardType="numeric" style={styles.regularyText} onChangeText={(text)=>this.setState({money:text})} onEndEditing={()=>writeOut()}/>
+                        <Text style={styles.regularyTextOut}>We recommend you to donate</Text>
+                        <Text style={styles.regularyTextOut}>{out}</Text>
                         </View>
+
                         {/* Navigate to Charity Choose Step */}
-                        <View style={styles.buttomEach,styles.marginTop15}>
+                        <View style={styles.buttomEach}>
                             <TouchableWithoutFeedback
                                 onPress ={()=> this.props.navigation.navigate("DonationCharityChoose")}
                             >
@@ -51,36 +76,7 @@ class donationEntry extends React.Component{
                             </View>
 
                             </TouchableWithoutFeedback>
-                            <View style={styles.lineBreak}>
-
-                            </View>
-                            {/* Navigate to Donation History */}
-                            <TouchableWithoutFeedback
-                                onPress ={()=> this.props.navigation.navigate("DonationHistory")}
-                            >
-                            <View style={styles.buttons}>
-                                <Text style={styles.buttonText}>
-                                    My Donation History
-                                </Text>
-
-                            </View>
-
-                            </TouchableWithoutFeedback>
-                            <View style={styles.lineBreak}>
-
-                            </View>
-
-                            <TouchableWithoutFeedback
-                                onPress ={()=> this.props.navigation.navigate("DonationCalculator")}
-                            >
-                            <View style={styles.buttons}>
-                                <Text style={styles.buttonText}>
-                                    Calcualte Tax Deduction
-                                </Text>
-
-                            </View>
-
-                            </TouchableWithoutFeedback>
+                            
                         </View>
                     </View>
                 </ScrollView>
@@ -111,8 +107,12 @@ const styles = StyleSheet.create({
         flex:2,
         // backgroundColor: "pink",
     },
-    bottomEach:{
-        flex:1,
+    bottomCalculator:{
+        flex:1
+    }
+    ,
+    buttomEach:{
+        flex:4,
         justifyContent:"center",
 
     },
@@ -163,6 +163,27 @@ const styles = StyleSheet.create({
     lineBreak:{
         height:15
     },
+    regularyText:{
+        fontSize:30,
+        color:"#1F4E79",
+        fontWeight:"bold",
+        alignSelf:"center",
+        textAlignVertical:"center",
+        includeFontPadding:false,
+        height:"100%",
+  
+      },
+      regularyTextOut:{
+        fontSize:20,
+        color:"#1F4E79",
+        fontWeight:"bold",
+        alignSelf:"center",
+        textAlignVertical:"center",
+        includeFontPadding:false,
+        // height:"100%",
+        marginBottom:10
+  
+      }
 })
 
-export default donationEntry;
+export default donationCalculator;

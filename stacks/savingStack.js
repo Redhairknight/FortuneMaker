@@ -12,6 +12,9 @@ import SavingPie from "../screens/SavingPie";
 import SavingGoal from "../screens/SavingGoal";
 import SavingSuccess from "../screens/SavingSuccess";
 
+import Investment from "../stacks/investmentStack";
+import Donation from "../stacks/donationStack";
+
 const SavingStack = createStackNavigator({
 
   SavingHome: {
@@ -19,6 +22,20 @@ const SavingStack = createStackNavigator({
     navigationOptions: {
       headerShown: false,
     },
+  },
+  Investment:{
+    screen: Investment
+  },
+  Donation:{
+    screen: Donation,
+    navigationOptions:{
+      headerTitleAlign: "center",
+      headerTitle: "Welcome to Donation",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      }
+    }
   },
   Saving2: {
     screen: Saving2,
