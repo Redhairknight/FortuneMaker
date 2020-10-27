@@ -102,22 +102,27 @@ export default class SearchBarExample extends Component {
 
               })
           }}><Text>Add to favorite</Text></TouchableOpacity>
-          <Button title='CONFIRM' onPress={() => {
-            this.setState({ pop: false });
-            firebase.database().ref('investment/newTransHistory/' + firebase.auth().currentUser.uid + '/' + this.getCurrentDates()).set
-              ({
-                name: this.state.name,
-                price: this.state.productNumber * this.state.price,
-                date: this.getCurrentDates()
+          <View style={{ padding: 5 }}>
+            <Button title='CONFIRM' onPress={() => {
+              this.setState({ pop: false });
+              firebase.database().ref('investment/newTransHistory/' + firebase.auth().currentUser.uid + '/' + this.getCurrentDates()).set
+                ({
+                  name: this.state.name,
+                  price: this.state.productNumber * this.state.price,
+                  date: this.getCurrentDates()
 
-              });
-            firebase.database().ref("/Account/account1/").set({
-              Available: this.state.totalInvestment - this.state.productNumber * this.state.price
-            })
+                });
+              firebase.database().ref("/Account/account1/").set({
+                Available: this.state.totalInvestment - this.state.productNumber * this.state.price
+              })
 
-          }} ></Button>
+            }} ></Button>
+          </View>
 
-          <Button title='CANCEL' onPress={() => this.setState({ pop: false })} ></Button>
+          <View style={{ padding: 5 }}>
+            <Button title='CANCEL' onPress={() => this.setState({ pop: false })} ></Button>
+
+          </View>
         </View>
       </Modal>
       <View style={styles.financialProductContainer}>
