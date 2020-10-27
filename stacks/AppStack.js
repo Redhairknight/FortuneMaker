@@ -5,9 +5,9 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { MaterialCommunityIcons, MaterialIcons } from "@expo/vector-icons";
 
 import InvestmentStack from "./investmentStack";
-import InvestmentEducation from "../screens/investmentEducation";
 import SavingStack from "./savingStack"
 import DonationStack from "./donationStack"
+import ProfileStack from './profileStack'
 
 
 function Feed() {
@@ -19,20 +19,13 @@ function Investment() {
 }
 
 function Profile() {
-  return <InvestmentEducation />;
+  return <ProfileStack />;
 }
 
 function Donation(){
   return <DonationStack />;
 }
 
-function Notifications() {
-  return (
-    <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-      <Text>Notifications!</Text>
-    </View>
-  );
-}
 
 const Tab = createBottomTabNavigator();
 

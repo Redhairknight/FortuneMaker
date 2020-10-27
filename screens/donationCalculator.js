@@ -31,7 +31,7 @@ class donationCalculator extends React.Component{
 
         function writeOut(){
             var deduction = Math.ceil(money*0.0267937891);
-            out = "$ " + deduction + "per week"
+            out = "$ " + deduction + " per week"
             that.setState({output:out})
             console.log(deduction)
             console.log(out)
@@ -71,6 +71,20 @@ class donationCalculator extends React.Component{
                             <View style={styles.buttons}>
                                 <Text style={styles.buttonText}>
                                     Start Donating
+                                </Text>
+
+                            </View>
+
+                            </TouchableWithoutFeedback>
+
+                            <View style={styles.lineBreak}></View>
+
+                            <TouchableWithoutFeedback
+                                onPress ={()=> this.props.navigation.navigate("DonationEntry")}
+                            >
+                            <View style={styles.buttons}>
+                                <Text style={styles.buttonText}>
+                                    Back to Home Page
                                 </Text>
 
                             </View>
