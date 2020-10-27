@@ -15,6 +15,7 @@ import { getTrans } from '../components/DatabaseIterate';
 // import ListItemDeleteAction from '../components/ListItemDeleteAction';
 import colors from '../config/colors';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import AppText from '../components/AppText/AppText';
 
 export default class SavingGoal extends Component {
 
@@ -26,6 +27,7 @@ export default class SavingGoal extends Component {
             modalVisible: false,
             description: "",
             price: "",
+            initial: "",
         }
     }
     
@@ -33,11 +35,8 @@ export default class SavingGoal extends Component {
         this.setModalVisible(true);
         this.state.description = ''
         this.state.price = ''
+        this.state.initial = ''
     };
-
-    // onNavigate = () => {
-    //     this.setState({isModalVisible: false}, () => formValidation())
-    // };
 
     setModalVisible = (visible) => {
         this.setState({ modalVisible: visible });
@@ -47,11 +46,8 @@ export default class SavingGoal extends Component {
     componentWillMount() {
         var that = this;
         var userId = firebase.auth().currentUser.uid;
-
-        let q = firebase.database().ref('Transaction');
+        let q = firebase.database().ref('Saving/' + userId + '/Goals/');
         var finished = [];
-
-        let i = firebase.database().ref('investment')
 
         q.once('value', snapshot => {
             snapshot.forEach(function (data) {
@@ -68,37 +64,41 @@ export default class SavingGoal extends Component {
     }
 
     render() {
-
         const price = this.state.price;
         const description = this.state.description;
+        const initial = this.state.initial;
         const navi = this.props.navigation;
 
         function formValidation() {
-            console.log(price);
-            console.log(description);
-            if (price == '' || description == '') {
+            if (price == "" || description == "" || initial == ""){
                 Alert.alert("Missing something","Please fill your information",
                 [
-                    {
-                      text: "Cancel",
-                      style: "cancel"
-                    },
-                    { text: "OK" }
-                  ])
-            } else {
-                modal = true;
-                navi.navigate("SavingSuccess",
-                    {
-                        description: description,
-                        price: price,
-                    })
+                  {
+                    text: "Cancel",
+                    onPress: () => console.log("Cancel Pressed"),
+                    style: "cancel"
+                  },
+                  { text: "OK", onPress: () => console.log("OK Pressed") }
+                ])
+              } else {
+                navi.navigate("SavingSuccess", {
+                    description: description,
+                    price: price,
+                    initial: initial
+                })
             } 
         } 
 
         var dataList = [];
         this.state.listingData.map(function (receive) {
-            dataList.push({ x: receive.Category, y: receive.price });
-            // console.log(dataList);
+            dataList.push({ 
+                id: receive.date, 
+                title: receive.description,
+                description: receive.price,
+                value: receive.initial,
+                date: receive.date,
+                image: require('../assets/Welcome/money.png')
+            });
         })
 
         var modalBackgroundStyle = {
@@ -116,53 +116,60 @@ export default class SavingGoal extends Component {
                     <View style={[styles.modalContainer, modalBackgroundStyle]}>
                     <View style={[styles.modalView, innerStyle]}>
                     <AntDesign name="close" size={24} color="black" style={styles.closeTag} onPress={this.setModalVisible.bind(this, false)}/>
+                    <Text style={styles.warning}>Add new Saving Goal</Text>
                     <AppTextInput onChangeText={(text)=>this.setState({description:text})}
                         autoCorrect={false}
                         autoCapitalize= 'none'
-                        icon = 'email'
+                        icon = 'playlist-check'
                         placeholder="Description"
                         />
                     <AppTextInput onChangeText={(text)=>this.setState({price:text})}
                         autoCorrect={false}
                         autoCapitalize= 'none'
-                        icon = 'lock'
+                        icon = 'currency-usd'
+                        placeholder="Price"
+                        />
+                    <AppTextInput onChangeText={(text)=>this.setState({initial:text})}
+                        autoCorrect={false}
+                        autoCapitalize= 'none'
+                        icon = 'currency-usd'
                         placeholder="Price"
                         />
                     {/* <Button title="Create" onPress={()=>formValidation() && this.setModalVisible.bind(this, false)} /> */}
-                    <TouchableHighlight style={styles.button} onPress={() => formValidation(this.setModalVisible(false))}>
+                    <TouchableHighlight style={styles.buttonTwo} onPress={() => formValidation(this.setModalVisible(false))}>
                         <Text style={styles.text}>Create</Text>
                     </TouchableHighlight>
 
                     </View>
                     </View>
                 </Modal>
-                <ScrollView>
-                    <Image style={styles.image} source={require('../assets/g_back.jpg')} />
-                    <View style={styles.inLine}>
-                        <TouchableHighlight style={styles.button} onPress={this.DisplayModal}>
-                            <Text style={styles.text}>Set up Goal!</Text>
-                        </TouchableHighlight>
-                    </View>
-                    {
-                        this.state.listingData.map(function (x) {
-                            return (
-                                <Swipeable key={x.key}>
-                                    <TouchableHighlight
-                                        underlayColor={colors.light}>
-                                        <View style={styles.containter}>
-                                            <Image style={styles.imageL} source={require('../assets/Welcome/commonwealth.png')} />
-                                            <View>
-                                                <Text style={styles.title}>{x.title}</Text>
-                                                <Text style={styles.subTitle}>{x.description}</Text>
-                                                <Text style={styles.price}>${x.price}</Text>
-                                            </View>
-                                        </View>
-                                    </TouchableHighlight>
-                                </Swipeable>
-                            )
-                        })
-                    }
-                </ScrollView>
+                
+                <Image style={styles.image} source={require('../assets/g_back.jpg')} />
+                <FlatList 
+                    data={dataList}
+                    renderItem={({item}) => (
+                    <ListItem
+                        title={item.title}
+                        subTitle={item.description}
+                        image={item.image} 
+                        value={item.value}
+                        date={item.date}
+                        onPress={() => this.setState({date: item.date})}
+                        renderRightActions={() => (
+                            <TouchableWithoutFeedback onPress={this.DisplayModal}>
+                                <View style={styles.renderContainer}>
+                                    <MaterialCommunityIcons 
+                                        name="plus"
+                                        size={35}
+                                        color={colors.white}
+                                    />
+                                </View>
+                            </TouchableWithoutFeedback>
+                        )}
+                    /> )}
+                    ItemSeparatorComponent={() => 
+                        <View 
+                        style={styles.separator} />}/>
             </SafeAreaView>
         );
     }
@@ -170,7 +177,6 @@ export default class SavingGoal extends Component {
 
 const styles = StyleSheet.create({
     screen: {
-        // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         flex: 1,
     },
     separator: {
@@ -180,7 +186,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     renderContainer: {
-        backgroundColor: colors.danger,
+        backgroundColor: 'rgba(41, 241, 195, 1)',
         width: 70,
         justifyContent: 'center',
         alignItems: 'center',
@@ -198,6 +204,11 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         marginRight: 10
+    },
+    warning: {
+        marginTop: 20,
+        fontWeight: 'bold',
+        fontSize: 25,
     },
     title: {
         fontWeight: '500',
@@ -217,6 +228,15 @@ const styles = StyleSheet.create({
         padding: 5,
         width: '100%'
     },
+    buttonTwo: {
+        backgroundColor: colors.primary,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 5,
+        width: '60%',
+        marginTop: 30,
+    },
     text: {
         color: colors.white,
         fontSize: 20,
@@ -224,12 +244,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     inLine: {
-        position: 'absolute',
-        width: 200,
-        top: 0,
-        bottom: 200,
-        left: 95,
-        right: 0,
+        position: 'relative',
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
     },

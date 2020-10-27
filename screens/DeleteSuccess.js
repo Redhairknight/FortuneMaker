@@ -77,26 +77,11 @@ export default class SavingSuccess extends React.Component {
                         </View>
                         <View style={styles.bottomMiddle}>
                             <TouchableWithoutFeedback onPress={()=> this.props.navigation.navigate("SavingGoal")} 
-                            // {
-                            //     this.props.navigation.navigate(
-                            //         'InvestmentHome',
-                            //         {},
-                            //         NavigationActions.navigate({
-                            //             routeName: 'ProductsDetail'
-                            //         })
-                            //     )
-                            //     console.log('it is clicked')
-                            // }
+
                             style={styles.payBtn}>
                                 <Image style={styles.payImg} source={require("../assets/investment.png")} />
                                 <Text style={styles.payText}> Saving Page</Text>
                             </TouchableWithoutFeedback>
-                            {/* <View style={styles.lineBreak}></View> */}
-
-                            {/* <TouchableWithoutFeedback onPress={() => checkNameAndEmail()} style={styles.payBtn}>
-                                <Image style={styles.payImg} source={require("../assets/heart.png")} />
-                                <Text style={styles.payText}> Donation</Text>
-                            </TouchableWithoutFeedback> */}
                         </View>
                     </View>
                 </ScrollView>

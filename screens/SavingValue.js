@@ -10,13 +10,7 @@ import * as firebase from 'firebase'
 import retrieveDatabse from "../components/DatabaseManager"
 import { NavigationActions } from 'react-navigation';
 
-// Change StackActions to NavigationActions if using v1
-const resetAction = CommonActions.reset({
-    index: 0,
-    actions: [NavigationActions.navigate({ routeName: 'Investment' })],
-});
-
-export default class SavingSuccess extends React.Component {
+export default class SavingValue extends React.Component {
 
     constructor(props) {
         super(props);
@@ -40,17 +34,15 @@ export default class SavingSuccess extends React.Component {
     componentWillMount() {
         var userId = firebase.auth().currentUser.uid;
         // fetch data passed from previous page
-        const description = this.props.navigation.getParam('description');
         const price = this.props.navigation.getParam('price');
-        const initial = this.props.navigation.getParam('initial');
         const month = new Date().getMonth() + 1;
         const date = new Date().getFullYear() + '-' + month + '-' + new Date().getDate();
         const gmtDate = new Date().toString();
         firebase.database().ref('Saving/' + userId + "/" + 'Goals/' + gmtDate).set({
             description: description,
             price: price,
-            initial: initial,
             date: gmtDate,
+            initial: 0
         });
     }
 
@@ -76,27 +68,25 @@ export default class SavingSuccess extends React.Component {
                       </Text>
                         </View>
                         <View style={styles.bottomMiddle}>
-                            <TouchableWithoutFeedback onPress={()=> this.props.navigation.navigate("SavingGoal")} 
-                            // {
-                            //     this.props.navigation.navigate(
-                            //         'InvestmentHome',
-                            //         {},
-                            //         NavigationActions.navigate({
-                            //             routeName: 'ProductsDetail'
-                            //         })
-                            //     )
-                            //     console.log('it is clicked')
-                            // }
-                            style={styles.payBtn}>
+                            <TouchableWithoutFeedback onPress={() => {
+                                this.props.navigation.navigate(
+                                    'InvestmentHome',
+                                    {},
+                                    NavigationActions.navigate({
+                                        routeName: 'ProductsDetail'
+                                    })
+                                )
+                                console.log('it is clicked')
+                            }} style={styles.payBtn}>
                                 <Image style={styles.payImg} source={require("../assets/investment.png")} />
-                                <Text style={styles.payText}> Saving Page</Text>
+                                <Text style={styles.payText}> Investment</Text>
                             </TouchableWithoutFeedback>
-                            {/* <View style={styles.lineBreak}></View> */}
+                            <View style={styles.lineBreak}></View>
 
-                            {/* <TouchableWithoutFeedback onPress={() => checkNameAndEmail()} style={styles.payBtn}>
+                            <TouchableWithoutFeedback onPress={() => checkNameAndEmail()} style={styles.payBtn}>
                                 <Image style={styles.payImg} source={require("../assets/heart.png")} />
                                 <Text style={styles.payText}> Donation</Text>
-                            </TouchableWithoutFeedback> */}
+                            </TouchableWithoutFeedback>
                         </View>
                     </View>
                 </ScrollView>

@@ -5,7 +5,7 @@ import  Swipeable  from 'react-native-gesture-handler/Swipeable';
 // native import
 import colors from '../config/colors';
 
-function ListItem({title, subTitle, image, onPress, renderRightActions}) {
+function ListItem({title, subTitle, image, onPress, renderRightActions, value, date}) {
     return (
         <Swipeable renderRightActions={renderRightActions}>
             <TouchableHighlight 
@@ -15,7 +15,8 @@ function ListItem({title, subTitle, image, onPress, renderRightActions}) {
                     <Image style={styles.image}source={image}/>
                     <View>
                         <Text style={styles.title}>{title}</Text>
-                        <Text style={styles.subTitle}>{subTitle}</Text>
+                        <Text style={styles.price}>${value}/${subTitle}</Text>
+                        <Text style={styles.subTitle}>{Math.round((value/subTitle) * 100)}% achieved. Click "+" to add more value</Text>
                     </View>
                 </View>
             </TouchableHighlight>
@@ -39,6 +40,9 @@ const styles = StyleSheet.create({
     },
     subTitle: {
         color: colors.medium,
+    },
+    price: {
+        color: 'blue',
     }
 })
 

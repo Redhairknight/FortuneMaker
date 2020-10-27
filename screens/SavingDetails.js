@@ -67,12 +67,6 @@ export default class SavingDetail extends Component {
                                             </View>
                                         </View>
                                     </TouchableHighlight>
-                                
-                                {/* <View>
-                                <Text>{x.description}</Text>
-                                <Text>{x.price}</Text>
-                                <Text>{x.title}</Text>
-                                </View> */}
                                 </Swipeable>
                             )
                         })

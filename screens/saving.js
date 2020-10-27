@@ -59,16 +59,10 @@ class SavingOne extends React.Component {
     }
 
     render() {
-        var userId = firebase.auth().currentUser.uid;
         var balance = retrieveDatabse("/Account/account1/Balance");
         var available = retrieveDatabse("/Account/account1/Available");
-        var key = retrieveDatabse("/Transaction/Updated Transaction/" 
-            + userId + '/key');
-        var price = retrieveDatabse("/Transaction/" + firebase.auth().currentUser.uid  + '/' +
-        retrieveDatabse("/Transaction/Updated Transaction/" 
-        + firebase.auth().currentUser.uid + '/key') + '/price');
-        var name = retrieveDatabse("/Transaction/" + userId  + '/' +
-            key + '/name');    
+        var price = retrieveDatabse("/Account/account1/price");
+        var name = retrieveDatabse("/Account/account1/name");    
         return (
             <View style={styles.container}>
                 <ImageBackground style={styles.usage}
@@ -258,10 +252,10 @@ const styles = StyleSheet.create({
         height: 70,
     },
     textContainer: {
-        position: 'relative',
+        position: 'absolute',
         alignItems: 'center',
         marginBottom: 100,
-        top: 75
+        top: 100
     },
     sectionText: {
         color: colors.light,

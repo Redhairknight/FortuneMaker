@@ -119,15 +119,11 @@ export default class SearchBarExample extends Component {
                 description: 'financial product'
               });
 
-            // pass updated key to the latest transaction
-            firebase.database().ref('/Transaction/Updated Transaction/' + firebase.auth().currentUser.uid).set
-              ({
-                key: this.getCurrentDates()
-              });
-
             firebase.database().ref("/Account/account1/").set({
               Available: Math.round((this.state.totalInvestment - this.state.productNumber * this.state.price) * 100) / 100,
-              Balance: 63000
+              Balance: 63000,
+              price: this.state.price,
+              name: this.state.name
             })
 
           }} ></Button>

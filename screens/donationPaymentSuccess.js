@@ -42,16 +42,14 @@ class donationPaymentSuccess extends React.Component{
       description: 'donate to ' + charityName
     });
 
-    firebase.database().ref('/Transaction/Updated Transaction/' + firebase.auth().currentUser.uid).set({
-      key: gmtDate
-    });
-
     // donation success
     firebase.database().ref("/Account/account1/").set({
       Available: Math.round((
         balance - money
       ) * 100) / 100,
-      Balance: 63000
+      Balance: 63000,
+      price: money,
+      name: charityName
     })
   }
 

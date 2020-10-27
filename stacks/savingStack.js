@@ -11,6 +11,8 @@ import LoginScreen from "../screens/LoginScreen";
 import SavingPie from "../screens/SavingPie";
 import SavingGoal from "../screens/SavingGoal";
 import SavingSuccess from "../screens/SavingSuccess";
+import SavingValue from "../screens/SavingValue";
+import GoalDetails from "../screens/GoalDetails";
 
 const SavingStack = createStackNavigator({
 
@@ -34,7 +36,7 @@ const SavingStack = createStackNavigator({
   Saving3: {
     screen: Saving3,
     navigationOptions: {
-      
+
     },
   },
   LoginScreen: {
@@ -62,9 +64,9 @@ const SavingStack = createStackNavigator({
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",
-    },
-  }
-},
+      },
+    }
+  },
   SavingGoal: {
     screen: SavingGoal,
     navigationOptions: {
@@ -86,9 +88,31 @@ const SavingStack = createStackNavigator({
         backgroundColor: "#1F4E79",
       },
     }
+  },
+  SavingValue: {
+    screen: SavingValue,
+    navigationOptions: {
+      headerTitleAlign: "center",
+      headerTitle: "Value Added",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      },
+    }
+  },
+  GoalDetails: {
+    screen: GoalDetails,
+    navigationOptions: {
+      headerTitleAlign: "center",
+      headerTitle: "Adding Goal",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      },
+    }
   }
-  
-});
+}
+);
 
 
 export default createAppContainer(SavingStack);
