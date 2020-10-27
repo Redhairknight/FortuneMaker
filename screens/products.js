@@ -35,8 +35,6 @@ export default class SearchBarExample extends Component {
       number: 0,
       totalInvestment: 0,
       type: null
-
-
     }
     this.testFunction = this.testFunction.bind(this)
 
@@ -121,8 +119,14 @@ export default class SearchBarExample extends Component {
                 description: 'financial product'
               });
 
+            // pass updated key to the latest transaction
+            firebase.database().ref('/Transaction/Updated Transaction/' + firebase.auth().currentUser.uid).set
+              ({
+                key: this.getCurrentDates()
+              });
+
             firebase.database().ref("/Account/account1/").set({
-              Available: this.state.totalInvestment - this.state.productNumber * this.state.price,
+              Available: Math.round((this.state.totalInvestment - this.state.productNumber * this.state.price) * 100) / 100,
               Balance: 63000
             })
 

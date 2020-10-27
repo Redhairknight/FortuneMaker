@@ -25,54 +25,60 @@ import AppText from '../components/AppText/AppText';
 import colors from '../config/colors';
 
 class SavingOne extends React.Component {
-    constructor(props) {
+    constructor(props){
         super(props);
-
         this.state = {
-            listingData: [],
+            adata:'have not set up',
+            // balance: retrieveDatabse("/Account/account1/Available"),
         }
     }
 
-    // capture the data before it loads
-    componentWillMount() {
-
-        var that = this;
-        var userId = firebase.auth().currentUser.uid;
-        let q = firebase.database().ref('Transaction/' + userId);
-        var finished = [];
-
-        q.once('value', snapshot => {
-            snapshot.forEach(function (data) {
-                let result = data.val();
-                result['key'] = data.key;
-                finished.push(result);
-            })
-        }).then(function () {
-            that.setState({
-                listingData: finished
-            })
+    getData(){
+        setTimeout(() => {
+        console.log('Our data is fetched');
+        this.setState({
+            adata: "app"
         })
+        }, 2000)
     }
+    // capture the data before it loads
+    componentDidMount() {
+        this.getData();
+        //Here is the Trick
+        const { navigation } = this.props;
+        //Adding an event listner om focus
+        //So whenever the screen will have focus it will set the state to zero
+        this.focusListener = navigation.addListener('didFocus', () => {
+          this.setState({ count: 0 });
+        });
+      }
+      componentWillUnmount() {
+        // Remove the event listener before removing the screen from the stack
+        this.focusListener.remove();
+      }
 
     render() {
+        var userId = firebase.auth().currentUser.uid;
         var balance = retrieveDatabse("/Account/account1/Balance");
         var available = retrieveDatabse("/Account/account1/Available");
-        var item = retrieveDatabse("/Transaction/1/title");
-
+        var key = retrieveDatabse("/Transaction/Updated Transaction/" 
+            + userId + '/key');
+        var price = retrieveDatabse("/Transaction/" + userId  + '/' +
+            key + '/price');
+        var name = retrieveDatabse("/Transaction/" + userId  + '/' +
+            key + '/name');    
         return (
             <View style={styles.container}>
                 <ImageBackground style={styles.usage}
                     source={require('../assets/Welcome/Royal.jpg')}>
                     <Image style={styles.shopLogo} source={require('../assets/transaction.png')} />
-                    {
-                        this.state.listingData.map(function (x) {
-                            return (
-                    <View style={styles.textContainer} key={x.key}>
+            
+                    <View style={styles.textContainer}>
                         <Text style={styles.sectionText}>Your last spending is</Text>
-                        <Text style={styles.sectionText}>${x.price} On</Text>
-                        <Text style={styles.highlightText}>{x.name}</Text>
+                        <Text style={styles.sectionText}>${price} On</Text>
+                        <Text style={styles.highlightText}>{name}</Text>
                     </View>
-                            )})}
+                        
                     <View style={styles.buttonContainer}>
                         <Button title='See detail' onPress={() => this.props.navigation.navigate("SavingPie")} />
                     </View>
@@ -251,7 +257,6 @@ const styles = StyleSheet.create({
     },
     textContainer: {
         position: 'relative',
-        top: 150,
         alignItems: 'center',
         marginBottom: 100,
     },
