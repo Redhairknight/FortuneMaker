@@ -58,7 +58,7 @@ class donationCalculator extends React.Component{
                         </View>
 
                         <View style={styles.bottomCalculator}>
-                        <TextInput textAlign="center" placeholderTextColor="#1F4E79" placeholder="Input your weekly income   " maxLength={6}  keyboardType="numeric" style={styles.regularyText} onChangeText={(text)=>this.setState({money:text})} onEndEditing={()=>writeOut()}/>
+                        <TextInput textAlign="center" placeholderTextColor="grey" placeholder="Input your weekly income   " maxLength={6}  keyboardType="numeric" style={styles.regularyText} onChangeText={(text)=>this.setState({money:text})} onEndEditing={()=>writeOut()}/>
                         <Text style={styles.regularyTextOut}>We recommend you to donate</Text>
                         <Text style={styles.regularyTextOut}>{out}</Text>
                         </View>
@@ -103,9 +103,9 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
     },
-    contentContainer:{
-        height:"100%",
-    },
+    // contentContainer:{
+    //     height:"100%",
+    // },
     head:{
         flex:1,
         backgroundColor: "#1F4E79",
@@ -128,6 +128,7 @@ const styles = StyleSheet.create({
     buttomEach:{
         flex:4,
         justifyContent:"center",
+        marginTop:75
 
     },
     bottomEachTextTitle:{

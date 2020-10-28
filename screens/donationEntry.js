@@ -9,7 +9,7 @@ import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 class donationEntry extends React.Component{
     render(){
         return (
-            <SafeAreaView style={styles.container}>
+            // <SafeAreaView style={styles.container}>
                 <ScrollView contentContainerStyle={styles.contentContainer}>
                     {/* Main contents */}
                     <View style={styles.bottom}>
@@ -84,7 +84,7 @@ class donationEntry extends React.Component{
                         </View>
                     </View>
                 </ScrollView>
-            </SafeAreaView>
+            // </SafeAreaView>
         )
     }
 }
@@ -93,9 +93,9 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
     },
-    contentContainer:{
-        height:"100%",
-    },
+    // contentContainer:{
+    //     height:"100%",
+    // },
     head:{
         flex:1,
         backgroundColor: "#1F4E79",

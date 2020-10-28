@@ -66,9 +66,9 @@ const styles = StyleSheet.create({
     container:{
         flex:1,
     },
-    contentContainer:{
-        height:"100%",
-    },
+    // contentContainer:{
+    //     height:"100%",
+    // },
     head:{
         flex:1,
         backgroundColor: "#1F4E79",
