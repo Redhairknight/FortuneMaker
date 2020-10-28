@@ -7,6 +7,10 @@ import {
   StyleSheet,
   SafeAreaView,
   ScrollView,
+  Image,
+  TouchableHighlight,
+  Modal,
+  Alert,
 } from "react-native";
 
 import retrieveApi from "../components/ApiManager";
@@ -20,6 +24,7 @@ var STORAGE_KEY =
 export default App = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
+    const [modalVisible, setModalVisible] = useState(false);
 
   useEffect(() => {
     fetch(REQUEST_URL, {
@@ -51,9 +56,15 @@ export default App = () => {
               data={data}
               renderItem={({ item }) => (
                 <View style={styles.items}>
-                  <Text style={styles.itemDesc}>
-                    {item.attributes.description}
-                  </Text>
+                  <View>
+                    <Image
+                      style={styles.imageL}
+                      source={require("../assets/Welcome/upbank.png")}
+                    />
+                    <Text style={styles.itemDesc}>
+                      {item.attributes.description}
+                    </Text>
+                  </View>
 
                   <Text style={styles.itemCategory}>
                     {item.relationships.category.data.id}
@@ -118,5 +129,47 @@ const styles = StyleSheet.create({
   },
   itemTitle: {
     textAlign: "left",
+  },
+  imageL: {
+    width: 50,
+    height: 50,
+    marginLeft: 10,
+    marginTop: 10,
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 20,
+    padding: 35,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+    elevation: 5,
+  },
+  openButton: {
+    backgroundColor: "#F194FF",
+    borderRadius: 20,
+    padding: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    marginBottom: 15,
+    textAlign: "center",
   },
 });
