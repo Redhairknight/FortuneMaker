@@ -200,7 +200,7 @@ const styles = StyleSheet.create({
     separator: {
         width: "90%",
         height: 2,
-        backgroundColor: colors.black,
+        backgroundColor: colors.blue,
         alignSelf: 'center'
     },
     renderContainer: {
