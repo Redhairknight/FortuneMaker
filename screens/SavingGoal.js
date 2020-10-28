@@ -1,44 +1,35 @@
-import React, { Component, useState } from 'react';
+import React, { Component } from 'react';
 import { Modal, FlatList, SafeAreaView, StyleSheet, Platform, StatusBar, Text, View, ScrollView, ImageBackground, Image, Button, TouchableHighlight, Alert } from 'react-native';
-import { ceil } from 'react-native-reanimated';
-import retrieveDatabse from "../components/DatabaseManager";
 import { MaterialCommunityIcons, AntDesign } from "@expo/vector-icons";
-import Swipeable from 'react-native-gesture-handler/Swipeable';
+
 // import firebase
-import firebaseConfig from "../config/firebase";
 import * as firebase from 'firebase'
 // import component
 import AppTextInput from '../components/AppTextInput';
 import ListItem from '../components/ListItem';
-// import ListItem from '../components/ListItem';
-import { getTrans } from '../components/DatabaseIterate';
-// import ListItemDeleteAction from '../components/ListItemDeleteAction';
 import colors from '../config/colors';
 import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export default class SavingGoal extends Component {
-
+    // initialize state for Firebase array, input text and modal status
     constructor(props) {
         super(props);
-
         this.state = {
             listingData: [],
             modalVisible: false,
             description: "",
             price: "",
+            initial: "",
         }
     }
-    
+    // call to show the modal
     DisplayModal = () => {
         this.setModalVisible(true);
         this.state.description = ''
         this.state.price = ''
+        this.state.initial = ''
     };
-
-    // onNavigate = () => {
-    //     this.setState({isModalVisible: false}, () => formValidation())
-    // };
-
+    // set modal state
     setModalVisible = (visible) => {
         this.setState({ modalVisible: visible });
     };
@@ -47,18 +38,14 @@ export default class SavingGoal extends Component {
     componentWillMount() {
         var that = this;
         var userId = firebase.auth().currentUser.uid;
-
-        let q = firebase.database().ref('Transaction');
+        let q = firebase.database().ref('Saving/' + userId + '/Goals/');
         var finished = [];
-
-        let i = firebase.database().ref('investment')
 
         q.once('value', snapshot => {
             snapshot.forEach(function (data) {
                 let result = data.val();
                 result['key'] = data.key;
                 finished.push(result);
-                // console.log("finished:" + finished)
             })
         }).then(function () {
             that.setState({
@@ -68,101 +55,115 @@ export default class SavingGoal extends Component {
     }
 
     render() {
-
         const price = this.state.price;
         const description = this.state.description;
+        const initial = this.state.initial;
         const navi = this.props.navigation;
-
+        // valide the form, if missing input value, will pop up window to remind the user
         function formValidation() {
-            console.log(price);
-            console.log(description);
-            if (price == '' || description == '') {
-                Alert.alert("Missing something","Please fill your information",
-                [
-                    {
-                      text: "Cancel",
-                      style: "cancel"
-                    },
-                    { text: "OK" }
-                  ])
+            if (price == "" || description == "" || initial == "") {
+                Alert.alert("Missing something", "Please fill your information",
+                    [
+                        {
+                            text: "Cancel",
+                            onPress: () => console.log("Cancel Pressed"),
+                            style: "cancel"
+                        },
+                        { text: "OK", onPress: () => console.log("OK Pressed") }
+                    ])
             } else {
-                modal = true;
-                navi.navigate("SavingSuccess",
-                    {
-                        description: description,
-                        price: price,
-                    })
-            } 
-        } 
+                // if success, will redirect to SavingSuceess Page and pass three params
+                navi.navigate("SavingSuccess", {
+                    description: description,
+                    price: price,
+                    initial: initial
+                })
+            }
+        }
 
+        // initial empty array and assign data from firebase into it
         var dataList = [];
         this.state.listingData.map(function (receive) {
-            dataList.push({ x: receive.Category, y: receive.price });
-            // console.log(dataList);
+            dataList.push({
+                id: receive.date,
+                title: receive.description,
+                description: receive.price,
+                value: receive.initial,
+                date: receive.date,
+                // image source: https://www.flaticon.com/free-icon/piggy-bank_3050243?term=saving&page=1&position=32
+                image: require('../assets/Welcome/money.png')
+            });
         })
 
         var modalBackgroundStyle = {
             backgroundColor: 'rgba(0, 0, 0, 0.5)'
-          };
-        var innerStyle = {backgroundColor: '#fff', padding: 20};
-        
+        };
+        var innerStyle = { backgroundColor: '#fff', padding: 20 };
+
         return (
             <SafeAreaView style={styles.screen}>
                 <Modal
                     animationType="fade"
                     transparent={true}
                     visible={this.state.modalVisible}
-                    onRequestClose={()=> this.setModalVisible(false)}>
+                    onRequestClose={() => this.setModalVisible(false)}>
                     <View style={[styles.modalContainer, modalBackgroundStyle]}>
-                    <View style={[styles.modalView, innerStyle]}>
-                    <AntDesign name="close" size={24} color="black" style={styles.closeTag} onPress={this.setModalVisible.bind(this, false)}/>
-                    <AppTextInput onChangeText={(text)=>this.setState({description:text})}
-                        autoCorrect={false}
-                        autoCapitalize= 'none'
-                        icon = 'email'
-                        placeholder="Description"
-                        />
-                    <AppTextInput onChangeText={(text)=>this.setState({price:text})}
-                        autoCorrect={false}
-                        autoCapitalize= 'none'
-                        icon = 'lock'
-                        placeholder="Price"
-                        />
-                    {/* <Button title="Create" onPress={()=>formValidation() && this.setModalVisible.bind(this, false)} /> */}
-                    <TouchableHighlight style={styles.button} onPress={() => formValidation(this.setModalVisible(false))}>
-                        <Text style={styles.text}>Create</Text>
-                    </TouchableHighlight>
-
-                    </View>
+                        <View style={[styles.modalView, innerStyle]}>
+                            <AntDesign name="close" size={24} color="black" style={styles.closeTag} onPress={this.setModalVisible.bind(this, false)} />
+                            <Text style={styles.warning}>Add new Saving Goal</Text>
+                            <AppTextInput onChangeText={(text) => this.setState({ description: text })}
+                                autoCorrect={false}
+                                autoCapitalize='none'
+                                icon='playlist-check'
+                                placeholder="Description"
+                            />
+                            <AppTextInput onChangeText={(text) => this.setState({ price: text })}
+                                autoCorrect={false}
+                                autoCapitalize='none'
+                                icon='currency-usd'
+                                placeholder="Price"
+                            />
+                            <AppTextInput onChangeText={(text) => this.setState({ initial: text })}
+                                autoCorrect={false}
+                                autoCapitalize='none'
+                                icon='currency-usd'
+                                placeholder="Price"
+                            />
+                            <TouchableHighlight style={styles.buttonTwo} onPress={() => formValidation(this.setModalVisible(false))}>
+                                <Text style={styles.text}>Create</Text>
+                            </TouchableHighlight>
+                        </View>
                     </View>
                 </Modal>
-                <ScrollView>
-                    <Image style={styles.image} source={require('../assets/g_back.jpg')} />
-                    <View style={styles.inLine}>
-                        <TouchableHighlight style={styles.button} onPress={this.DisplayModal}>
-                            <Text style={styles.text}>Set up Goal!</Text>
-                        </TouchableHighlight>
-                    </View>
-                    {
-                        this.state.listingData.map(function (x) {
-                            return (
-                                <Swipeable key={x.key}>
-                                    <TouchableHighlight
-                                        underlayColor={colors.light}>
-                                        <View style={styles.containter}>
-                                            <Image style={styles.imageL} source={require('../assets/Welcome/commonwealth.png')} />
-                                            <View>
-                                                <Text style={styles.title}>{x.title}</Text>
-                                                <Text style={styles.subTitle}>{x.description}</Text>
-                                                <Text style={styles.price}>${x.price}</Text>
-                                            </View>
-                                        </View>
-                                    </TouchableHighlight>
-                                </Swipeable>
-                            )
-                        })
-                    }
-                </ScrollView>
+                {/* image source: https://unsplash.com/photos/ZVprbBmT8QA */}
+                <Image style={styles.image} source={require('../assets/g_back.jpg')} />
+                <FlatList
+                    // assign value to data in ListItem (customized component)
+                    data={dataList}
+                    renderItem={({ item }) => (
+                        <ListItem
+                            title={item.title}
+                            subTitle={item.description}
+                            image={item.image}
+                            value={item.value}
+                            date={item.date}
+                            onPress={() => this.setState({ date: item.date })}
+                            renderRightActions={() => (
+                                <TouchableWithoutFeedback onPress={this.DisplayModal}>
+                                    <View style={styles.renderContainer}>
+                                        <MaterialCommunityIcons
+                                            name="plus"
+                                            size={35}
+                                            color={colors.white}
+                                        />
+                                    </View>
+                                </TouchableWithoutFeedback>
+                            )}
+                        />)}
+                    // add the separator line
+                    ItemSeparatorComponent={() =>
+                        <View
+                            style={styles.separator} />} />
             </SafeAreaView>
         );
     }
@@ -170,7 +171,6 @@ export default class SavingGoal extends Component {
 
 const styles = StyleSheet.create({
     screen: {
-        // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         flex: 1,
     },
     separator: {
@@ -180,7 +180,7 @@ const styles = StyleSheet.create({
         alignSelf: 'center'
     },
     renderContainer: {
-        backgroundColor: colors.danger,
+        backgroundColor: 'rgba(41, 241, 195, 1)',
         width: 70,
         justifyContent: 'center',
         alignItems: 'center',
@@ -198,6 +198,11 @@ const styles = StyleSheet.create({
         width: 50,
         height: 50,
         marginRight: 10
+    },
+    warning: {
+        marginTop: 20,
+        fontWeight: 'bold',
+        fontSize: 25,
     },
     title: {
         fontWeight: '500',
@@ -217,6 +222,15 @@ const styles = StyleSheet.create({
         padding: 5,
         width: '100%'
     },
+    buttonTwo: {
+        backgroundColor: colors.primary,
+        borderRadius: 5,
+        justifyContent: 'center',
+        alignItems: 'center',
+        padding: 5,
+        width: '60%',
+        marginTop: 30,
+    },
     text: {
         color: colors.white,
         fontSize: 20,
@@ -224,12 +238,8 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
     },
     inLine: {
-        position: 'absolute',
-        width: 200,
-        top: 0,
-        bottom: 200,
-        left: 95,
-        right: 0,
+        position: 'relative',
+        width: '100%',
         justifyContent: 'center',
         alignItems: 'center',
     },

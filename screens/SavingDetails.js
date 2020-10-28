@@ -1,46 +1,37 @@
-import React, { Component, useState } from 'react';
-import { FlatList, SafeAreaView, StyleSheet, Platform, StatusBar,Text, View, ScrollView, ImageBackground, Image, Button, TouchableHighlight } from 'react-native';
-import { ceil } from 'react-native-reanimated';
-import retrieveDatabse from "../components/DatabaseManager";
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { ListItem, Divider } from 'react-native-elements';
+import React, { Component } from 'react';
+import { SafeAreaView, StyleSheet, Text, View, ScrollView, Image, TouchableHighlight } from 'react-native';
 import  Swipeable  from 'react-native-gesture-handler/Swipeable';
+
 // import firebase
-import firebaseConfig from "../config/firebase";
 import * as firebase from 'firebase'
 // import component
-// import ListItem from '../components/ListItem';
-import {getTrans} from '../components/DatabaseIterate';
-// import ListItemDeleteAction from '../components/ListItemDeleteAction';
 import colors from '../config/colors';
-import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 
 export default class SavingDetail extends Component {
-
+    // initialze state and construct the empty array
     constructor(props){
         super(props);
-
         this.state = {
             listingData: []
         }
     }
 
     // capture the data before it loads
+    // this method is inspired by "Beginner Programmers" on:
+    // https://www.youtube.com/watch?v=1jIKovuhtAU&t=615s&ab_channel=BeginnerProgrammers
     componentWillMount(){
-    
         var that = this;
         var userId = firebase.auth().currentUser.uid;
-        let q = firebase.database().ref('Transaction/' + userId);
+        let trans = firebase.database().ref('Transaction/' + userId);
         var finished = [];
 
-        q.once('value', snapshot => {
+        // retreive array using foreach in firebase
+        trans.once('value', snapshot => {
             snapshot.forEach(function(data) {
                 let result = data.val();
                 result['key'] = data.key;
                 finished.push(result);
-                console.log("finished:" + finished)
-            })
-        }).then(function(){
+            })}).then(function(){
             that.setState({
                 listingData: finished
             })
@@ -51,6 +42,7 @@ export default class SavingDetail extends Component {
         return (
             <SafeAreaView style={styles.screen}>
                 <ScrollView>
+                    {/* image source: https://unsplash.com/photos/6EnTPvPPL6I */}
                     <Image style={styles.image} source={require('../assets/t_back.jpg')} />
                     {
                         this.state.listingData.map(function(x){
@@ -59,6 +51,7 @@ export default class SavingDetail extends Component {
                                     <TouchableHighlight 
                                         underlayColor={colors.light}>
                                         <View style={styles.containter}>
+                                            {/* image source: https://favpng.com/png_view/commonwealth-bank-logo-logo-commonwealth-bank-brand-organization-png/3t2F5asF */}
                                             <Image style={styles.imageL}source={require('../assets/Welcome/commonwealth.png')}/>
                                             <View>
                                                 <Text style={styles.title}>{x.name}</Text>
@@ -67,12 +60,6 @@ export default class SavingDetail extends Component {
                                             </View>
                                         </View>
                                     </TouchableHighlight>
-                                
-                                {/* <View>
-                                <Text>{x.description}</Text>
-                                <Text>{x.price}</Text>
-                                <Text>{x.title}</Text>
-                                </View> */}
                                 </Swipeable>
                             )
                         })
@@ -85,7 +72,6 @@ export default class SavingDetail extends Component {
 
 const styles = StyleSheet.create({
     screen: {
-        // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
         flex: 1,
     },
     separator: {

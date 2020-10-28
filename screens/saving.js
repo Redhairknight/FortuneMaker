@@ -1,158 +1,85 @@
-/**
-author: Chang Liu 
-*/
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity, Button } from 'react-native';
-import { MaterialCommunityIcons, AntDesign, FontAwesome } from '@expo/vector-icons';
-import { Card } from 'react-native-web'
-import { StatusBar } from 'expo-status-bar';
-import Constants from 'expo-constants';
 
-// import firebase
-import firebaseConfig from "../config/firebase";
-import * as firebase from 'firebase'
-
-// import fonts
-import { useFonts, Inter_900Black } from '@expo-google-fonts/inter';
-import { Allerta_400Regular } from '@expo-google-fonts/allerta';
+import retrieveDatabse from '../components/DatabaseManager';
+import colors from '../config/colors';
 import { AppLoading } from 'expo';
 
-// import Component from '../components/AppText';
-import retrieveDatabse from '../components/DatabaseManager'
-import AppButton from '../components/AppButton';
-import ProcessBar from '../components/ProcessBar';
-import AppText from '../components/AppText/AppText';
-import colors from '../config/colors';
-// import retrieveApi from "../components/ApiManager";
-
 class SavingOne extends React.Component {
+    // initialize state
     constructor(props) {
         super(props);
-
         this.state = {
-            listingData: [],
+            adata: 'have not set up',
         }
     }
 
+    // settimer remind the data has been fetched
+    getData() {
+        setTimeout(() => {
+            console.log('Our data is fetched');
+            this.setState({
+                adata: "app"
+            })
+        }, 2000)
+    }
     // capture the data before it loads
-    componentWillMount() {
+    componentDidMount() {
+        this.getData();
+        //Here is the Trick
+        const { navigation } = this.props;
+        //Adding an event listner om focus
+        //So whenever the screen will have focus it will set the state to zero
+        this.focusListener = navigation.addListener('didFocus', () => {
+            this.setState({ count: 0 });
+        });
+    }
 
-        var that = this;
-        var userId = firebase.auth().currentUser.uid;
-        let q = firebase.database().ref('Transaction/' + userId);
-        var finished = [];
-
-        q.once('value', snapshot => {
-            snapshot.forEach(function (data) {
-                let result = data.val();
-                result['key'] = data.key;
-                finished.push(result);
-            })
-        }).then(function () {
-            that.setState({
-                listingData: finished
-            })
-        })
+    componentWillUnmount() {
+        // Remove the event listener before removing the screen from the stack
+        this.focusListener.remove();
     }
 
     render() {
+        // retrieve data from firebase by its path(link)
         var balance = retrieveDatabse("/Account/account1/Balance");
         var available = retrieveDatabse("/Account/account1/Available");
-        var item = retrieveDatabse("/Transaction/1/title");
-
+        var price = retrieveDatabse("/Account/account1/price");
+        var name = retrieveDatabse("/Account/account1/name");
         return (
-          <View style={styles.container}>
-            <ImageBackground
-              style={styles.usage}
-              source={require("../assets/Welcome/Royal.jpg")}
-            >
-              <Image
-                style={styles.shopLogo}
-                source={require("../assets/transaction.png")}
-              />
-              {this.state.listingData.map(function (x) {
-                return (
-                  <View style={styles.textContainer} key={x.key}>
-                    <Text style={styles.sectionText}>
-                      Your last spending is
-                    </Text>
-                    <Text style={styles.sectionText}>${x.price} On</Text>
-                    <Text style={styles.highlightText}>{x.name}</Text>
-                  </View>
-                );
-              })}
-              <View style={styles.buttonContainer}>
-                <Button
-                  title="See detail"
-                  onPress={() => this.props.navigation.navigate("SavingPie")}
-                />
-              </View>
-            </ImageBackground>
-            <ImageBackground
-              style={styles.savingGoal}
-              source={require("../assets/Welcome/Joomla.jpg")}
-            >
-              <Image
-                style={styles.shopLogo}
-                source={require("../assets/Welcome/money.png")}
-              />
-              <Text style={styles.goalHeader}>Saving for your future</Text>
-              <View style={styles.buttonContainer2}>
-                <TouchableOpacity
-                  style={styles.button}
-                  onPress={() => this.props.navigation.navigate("SavingGoal")}
-                >
-                  <Text style={styles.text}>Set up Goal!</Text>
-                </TouchableOpacity>
-              </View>
-            </ImageBackground>
-            <View style={styles.creditCard}>
-              <TouchableOpacity
-                style={styles.creditCardSection}
-                onPress={() => this.props.navigation.navigate("SavingDetail")}
-              >
-                <ImageBackground
-                  style={styles.imageBackground}
-                  imageStyle={{ borderRadius: 12 }}
-                  source={require("../assets/Welcome/Royal.jpg")}
-                >
-                  <View style={styles.bankLogoSection}>
-                    <Image
-                      style={styles.bankLogo}
-                      source={require("../assets/Welcome/commonwealth.png")}
-                    />
-                  </View>
-                  <View style={styles.bankDetail}>
-                    <View style={styles.bankDetailText}>
-                      <Text style={styles.creditText}>Available Funds:</Text>
-                      <Text style={styles.creditValue}>${available}</Text>
+
+            <View style={styles.container}>
+                <ImageBackground style={styles.usage}
+                    // image source: https://uigradients.com/#Royal
+                    source={require('../assets/Welcome/Royal.jpg')}>
+                    {/* image source: https://www.flaticon.com/free-icon/transaction_1041872?term=transaction&page=1&position=11 */}
+                    <Image style={styles.shopLogo} source={require('../assets/transaction.png')} />
+
+                    <View style={styles.textContainer}>
+                        <Text style={styles.sectionText}>Your last spending is</Text>
+                        <Text style={styles.sectionText}>${price} On</Text>
+                        <Text style={styles.highlightText}>{name}</Text>
                     </View>
-                    <View style={styles.bankDetailText}>
-                      <Text style={styles.creditText}>Current Balance:</Text>
-                      <Text style={styles.creditValue}>${balance}</Text>
+
+                    <View style={styles.buttonContainer}>
+                        {/* redirect to the saving pie page */}
+                        <Button title='See detail' onPress={() => this.props.navigation.navigate("SavingPie")} />
+
                     </View>
                   </View>
                 </ImageBackground>
-              </TouchableOpacity>
-              <TouchableOpacity
-                style={styles.creditCardSection}
-                onPress={() => this.props.navigation.navigate("UpBankTransaction")}
-              >
-                <ImageBackground
-                  style={styles.imageBackground}
-                  imageStyle={{ borderRadius: 12 }}
-                  source={require("../assets/Welcome/Royal.jpg")}
-                >
-                  <View style={styles.bankLogoSection}>
-                    <Image
-                      style={styles.bankLogo}
-                      source={require("../assets/Welcome/upbank.png")}
-                    />
-                  </View>
-                  <View style={styles.bankDetail}>
-                    <View style={styles.bankDetailText}>
-                      <Text style={styles.creditText}>Available Funds:</Text>
-                      <Text style={styles.creditValue}>$64,000</Text>
+
+                <ImageBackground style={styles.savingGoal}
+                    // image source: https://uigradients.com/#Joomla
+                    source={require('../assets/Welcome/Joomla.jpg')}>
+                    {/* image source: https://www.flaticon.com/free-icon/piggy-bank_3050243?term=saving&page=1&position=32 */}
+                    <Image style={styles.shopLogo} source={require('../assets/Welcome/money.png')} />
+                    <Text style={styles.goalHeader}>Saving for your future</Text>
+                    <View style={styles.buttonContainer2}>
+                        {/* redirect to the saving goal page */}
+                        <TouchableOpacity style={styles.button} onPress={() => this.props.navigation.navigate("SavingGoal")}>
+                            <Text style={styles.text}>Set up Goal!</Text>
+                        </TouchableOpacity>
                     </View>
                     <View style={styles.bankDetailText}>
                       <Text style={styles.creditText}>Current Balance:</Text>
@@ -184,12 +111,100 @@ class SavingOne extends React.Component {
                     </View>
                   </View>
                 </ImageBackground>
-              </TouchableOpacity>
+                <View style={styles.creditCard}>
+                    {/* redirect to the transaction page */}
+                    <TouchableOpacity style={styles.creditCardSection} onPress={() => this.props.navigation.navigate("SavingDetail")}>
+                        <ImageBackground style={styles.imageBackground} imageStyle={{ borderRadius: 12 }}
+                            // image source: https://uigradients.com/#Royal
+                            source={require('../assets/Welcome/Royal.jpg')}>
+                            <View style={styles.bankLogoSection}>
+                                {/* image source: https://favpng.com/png_view/commonwealth-bank-logo-logo-commonwealth-bank-brand-organization-png/3t2F5asF */}
+                                <Image style={styles.bankLogo} source={require('../assets/Welcome/commonwealth.png')} />
+                            </View>
+                            <View style={styles.bankDetail}>
+                                <View style={styles.bankDetailText}>
+                                    <Text style={styles.creditText}>
+                                        Available Funds:
+                                    </Text>
+                                    <Text style={styles.creditValue}>
+                                        ${available}
+                                    </Text>
+                                </View>
+                                <View style={styles.bankDetailText}>
+                                    <Text style={styles.creditText}>
+                                        Current Balance:
+                                    </Text>
+                                    <Text style={styles.creditValue}>
+                                        ${balance}
+                                    </Text>
+                                </View>
+                            </View>
+                        </ImageBackground>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.creditCardSection}>
+                        <ImageBackground style={styles.imageBackground}
+                            imageStyle={{ borderRadius: 12 }}
+                            // image source: https://uigradients.com/#Royal
+                            source={require('../assets/Welcome/Royal.jpg')}>
+                            <View style={styles.bankLogoSection}>
+                                {/* image source: https://favpng.com/png_view/bills-alipay-digital-wallet-payment-png/j5nxDeVh */}
+                                <Image style={styles.bankLogo} source={require('../assets/Welcome/alipay.png')} />
+                            </View>
+                            <View style={styles.bankDetail}>
+                                <View style={styles.bankDetailText}>
+                                    <Text style={styles.creditText}>
+                                        Available Funds:
+                                    </Text>
+                                    <Text style={styles.creditValue}>
+                                        $64,000
+                                    </Text>
+                                </View>
+                                <View style={styles.bankDetailText}>
+                                    <Text style={styles.creditText}>
+                                        Current Balance:
+                                    </Text>
+                                    <Text style={styles.creditValue}>
+                                        $73,653
+                                    </Text>
+                                </View>
+                            </View>
+                        </ImageBackground>
+                    </TouchableOpacity>
+                    <TouchableOpacity style={styles.creditCardSection}>
+                        <ImageBackground style={styles.imageBackground}
+                            imageStyle={{ borderRadius: 12 }}
+                            // image source: https://uigradients.com/#Royal
+                            source={require('../assets/Welcome/Royal.jpg')}>
+                            <View style={styles.bankLogoSection}>
+                                {/* image source: https://favpng.com/png_view/bank-citibank-credit-card-logo-private-banking-png/CdM5GDti */}
+                                <Image style={styles.bankLogo} source={require('../assets/Welcome/citibank.png')} />
+                            </View>
+                            <View style={styles.bankDetail}>
+                                <View style={styles.bankDetailText}>
+                                    <Text style={styles.creditText}>
+                                        Available Funds:
+                                    </Text>
+                                    <Text style={styles.creditValue}>
+                                        $64,000
+                                    </Text>
+                                </View>
+                                <View style={styles.bankDetailText}>
+                                    <Text style={styles.creditText}>
+                                        Current Balance:
+                                    </Text>
+                                    <Text style={styles.creditValue}>
+                                        $73,653
+                                    </Text>
+                                </View>
+                            </View>
+                        </ImageBackground>
+                    </TouchableOpacity>
+                </View>
+
             </View>
           </View>
         );
     }
-
 }
 
 const styles = StyleSheet.create({
@@ -267,10 +282,10 @@ const styles = StyleSheet.create({
         height: 70,
     },
     textContainer: {
-        position: 'relative',
-        top: 150,
+        position: 'absolute',
         alignItems: 'center',
         marginBottom: 100,
+        top: 100
     },
     sectionText: {
         color: colors.light,
@@ -332,9 +347,6 @@ const styles = StyleSheet.create({
         height: 90,
         width: 400,
         margin: 2,
-    },
-    icon: {
-
     },
     button: {
         backgroundColor: colors.primary,

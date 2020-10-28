@@ -1,70 +1,29 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { View, Text, ImageBackground, StyleSheet, Image, Modal, TouchableHighlight, TextInput, Button, Alert } from 'react-native';
-import {MaterialCommunityIcons, MaterialIcons, AntDesign} from '@expo/vector-icons';
 
-// Import firebase here
-import * as firebase from 'firebase'
-
-import AppText from '../components/AppText/AppText';
-import AppButton from '../components/AppButton';
-import AppTextInput from '../components/AppTextInput';
+// import local component
 import colors from '../config/colors';
 
-function HelloScreen({navigation}) {
-
-    const [modalVisible, setModalVisible] = useState(false);
-    const [email, setEmail] = useState();
-    const [password, setPassword] = useState();
+function HelloScreen({ navigation }) {
 
     return (
         <ImageBackground
             style={styles.background}
+            // image source: https://uigradients.com/#Royal
             source={require('../assets/Welcome/Royal.jpg')}
-        >   
+        >
             <View style={styles.logoContainer}>
-                <Image style={styles.logo} source={require('../assets/Welcome/logo.png')}/>
+                {/* image source: https://www.flaticon.com/free-icon/money_2933116?term=coin&page=1&position=7 */}
+                <Image style={styles.logo} source={require('../assets/Welcome/logo.png')} />
                 <Text style={styles.logoText}>Fortune Maker</Text>
             </View>
             <View style={styles.loginButton}>
-                
-        <Modal
-            animationType="slide"
-            transparent={true}
-            visible={modalVisible}>
-            <View style={styles.centeredView}>
-            <View style={styles.modalView}>
-                <AntDesign name="close" size={24} color="black" style={styles.closeTag} onPress={() => {
-                    setModalVisible(!modalVisible);}}/>
-                <AppTextInput 
-                    keyboardType="email-address"
-                    onChangeText={text => setEmail(text)}
-                    autoCorrect={false}
-                    autoCapitalize= 'none'
-                    icon = 'email'
-                    placeholder="Email"
-                    textContentType="emailAddress"
-                    />
-                <AppTextInput
-                    autoCapitalize="none"
-                    autoCorrect={false}
-                    icon='lock'
-                    onChangeText={text => setPassword(text)}
-                    placeholder="Password"
-                    secureTextEntry
-                    textContentType="password"
-                    />
-                <Button title="Login" onPress={()=>navigation.navigate("MainScreen") && setModalVisible(!modalVisible)} />
-
-            </View>
-            </View>
-        </Modal>
-            <Text onPress={() => navigation.navigate("Login")} style={styles.buttonText}>Login</Text>
-                {/* <Text onPress={() => setModalVisible(true)} style={styles.buttonText}>Login</Text> */}
+                <Text onPress={() => navigation.navigate("Login")} style={styles.buttonText}>Login</Text>
             </View>
             <View style={styles.registerButton}>
                 <Text onPress={() => navigation.navigate("Register")} style={styles.buttonText}>Register</Text>
             </View>
-        </ImageBackground>  
+        </ImageBackground>
     );
 }
 
@@ -119,27 +78,6 @@ const styles = StyleSheet.create({
         fontStyle: 'italic',
         fontWeight: '600',
         textTransform: "capitalize",
-    },
-    modalView: {
-        margin: 20,
-        backgroundColor: "white",
-        borderRadius: 20,
-        padding: 35,
-        alignItems: "center",
-        shadowColor: "#000",
-        shadowOffset: {
-          width: 0,
-          height: 2
-        },
-        shadowOpacity: 0.25,
-        shadowRadius: 3.84,
-        elevation: 5,
-        marginTop: 150,
-    },
-    closeTag: {
-        position: 'absolute',
-        top: 20,
-        right: 20,
     },
 })
 

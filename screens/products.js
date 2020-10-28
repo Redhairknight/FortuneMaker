@@ -34,10 +34,10 @@ export default class SearchBarExample extends Component {
       intitution: 0,
       number: 0,
       totalInvestment: 0,
+
       type: null,
       purchaseSuccess: false,
       addFavoriteSuccess: false
-
 
     }
     this.testFunction = this.testFunction.bind(this)
@@ -150,18 +150,23 @@ export default class SearchBarExample extends Component {
                   category: 'investment',
                   description: 'financial product'
                 });
-
+//            Changed from merge
+//               firebase.database().ref("/Account/account1/").set({
+//                 Available: this.state.totalInvestment - this.state.productNumber * this.state.price,
+//                 Balance: 63000
+//               })
               firebase.database().ref("/Account/account1/").set({
-                Available: this.state.totalInvestment - this.state.productNumber * this.state.price,
-                Balance: 63000
+                Available: Math.round((this.state.totalInvestment - this.state.productNumber * this.state.price) * 100) / 100,
+                Balance: 63000,
+                price: this.state.price,
+                name: this.state.name
               })
 
             }} ></Button>
           </View>
 
+
           <View style={styles.buttonStyle}>
-
-
             <Button title='CANCEL' onPress={() => this.setState({ pop: false })} ></Button>
           </View>
         </View>

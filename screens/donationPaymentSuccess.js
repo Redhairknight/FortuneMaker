@@ -6,6 +6,7 @@ import { StyleSheet, Text, View ,Image, ScrollView} from 'react-native';
 import { NavigationContainer} from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import * as firebase from 'firebase'
+import retrieveDatabse from "../components/DatabaseManager";
 
 // Paid succeed and show results
 // Can navigate to donation home page or donation history page
@@ -21,6 +22,10 @@ class donationPaymentSuccess extends React.Component{
     const month = new Date().getMonth() + 1;
     const date = new Date().getFullYear() +'-'+ month +'-' + new Date().getDate();
     const gmtDate = new Date().toString();
+
+    // get total money
+    var balance = retrieveDatabse("/Account/account1/Available")
+
     firebase.database().ref('Donation/History/' + userId + "/" + gmtDate).set({
       charityName:charityName,
       money:money,
@@ -36,15 +41,22 @@ class donationPaymentSuccess extends React.Component{
       category: 'donation',
       description: 'donate to ' + charityName
     });
+
+    // donation success
+    firebase.database().ref("/Account/account1/").set({
+      Available: Math.round((
+        balance - money
+      ) * 100) / 100,
+      Balance: 63000,
+      price: money,
+      name: charityName
+    })
   }
 
   render(){
-
       return (
           <SafeAreaView style={styles.container}>
               <ScrollView contentContainerStyle={styles.contentContainer}>
-
-
                   {/* Main contents */}
                   <View style={styles.bottom}>
                     <View style={styles.bottomHeader}>

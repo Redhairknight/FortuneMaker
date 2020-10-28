@@ -1,15 +1,13 @@
 import React from 'react';
 import { StyleSheet, Image, View, Button, Text, TouchableOpacity } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
 // import firebase
 import * as firebase from 'firebase'
 
 // local import
-import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 
 export default class LoginScreen extends React.Component {
-
+    // set state to initial email and password
     state = {
         email: "",
         password: "",
@@ -21,14 +19,14 @@ export default class LoginScreen extends React.Component {
         firebase.auth().onAuthStateChanged(user =>{
             if (user) {
                 this.props.navigation.navigate("Loading")
-                
             } else {
                 // No user is signed in.
                 this.props.navigation.navigate("Login")
             }
-            });
+        });
     }
 
+    // check if the user exists in the firebase database
     handleLogin = () => {
         const {email, password} = this.state
         
@@ -44,6 +42,7 @@ export default class LoginScreen extends React.Component {
             <View>
             <Image
                 style={styles.logo} 
+                // https://www.flaticon.com/free-icon/money_2933116?term=coin&page=1&position=7
                 source={require('../assets/Welcome/logo.png')} />
             {/* error message */}
             <View style={styles.errorMessage}>
@@ -74,7 +73,7 @@ export default class LoginScreen extends React.Component {
 
             <TouchableOpacity style={{alignSelf: 'center', marginTop: 32}}
                 onPress={() => this.props.navigation.navigate('Register')}>
-                <Text style={{color: '#414959', fontSize: 13}}>
+                <Text style={{color: '#414959', fontSize: 12}}>
                     New to FortuneMaker? <Text style={{fontWeight: '500', color: '#E9446A'}}>Sign in </Text>
                 </Text>
             </TouchableOpacity>
@@ -92,14 +91,14 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     errorMessage: {
-        height: 72,
+        height: 70,
         alignItems: 'center',
         justifyContent: 'center',
         marginHorizontal: 30
     },
     error: {
         color: '#E9446A',
-        fontSize: 13,
+        fontSize: 12,
         fontWeight: '600',
         textAlign: 'center'
     }
