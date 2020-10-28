@@ -1,14 +1,14 @@
 import React from 'react';
-import { StyleSheet, Image, View, Button, Text, TouchableOpacity } from 'react-native';
-import { TextInput } from 'react-native-gesture-handler';
+import { StyleSheet, Image, View, Button, Text } from 'react-native';
+
 // import firebase
 import * as firebase from 'firebase'
 
 // local import
-import AppButton from '../components/AppButton';
 import AppTextInput from '../components/AppTextInput';
 
 export default class RegisterScreen extends React.Component {
+    // set initial state of input text
     state = {
         name: "",
         email: "",
@@ -16,9 +16,9 @@ export default class RegisterScreen extends React.Component {
         errorMessage: null
     };
 
+    // register user successfully or display error message
     handleSignUp = () => {
-        firebase
-            .auth()
+        firebase.auth()
             .createUserWithEmailAndPassword(this.state.email, this.state.password)
             .then(userCredentials => {
                 return userCredentials.user.updateProfile({
@@ -31,47 +31,47 @@ export default class RegisterScreen extends React.Component {
     render() {
         return (
             <View>
-            <Image
-                style={styles.logo} 
-                source={require('../assets/splash.png')} />
-            {/* error message */}
-            <View style={styles.errorMessage}>
-                {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text> }
+                <Image
+                    style={styles.logo}
+                    // image source: https://www.flaticon.com/free-icon/money_2933116?term=coin&page=1&position=7
+                    source={require('../assets/Welcome/logo.png')} />
+                {/* error message */}
+                <View style={styles.errorMessage}>
+                    {this.state.errorMessage && <Text style={styles.error}>{this.state.errorMessage}</Text>}
+                </View>
+                {/* textinput field below */}
+                <AppTextInput
+                    onChangeText={name => this.setState({ name })}
+                    value={this.state.name}
+                    autoCorrect={false}
+                    autoCapitalize='none'
+                    icon='account-circle'
+                    placeholder="Name"
+                    textContentType="emailAddress"
+                />
+                <AppTextInput
+                    keyboardType="email-address"
+                    onChangeText={email => this.setState({ email })}
+                    value={this.state.email}
+                    autoCorrect={false}
+                    autoCapitalize='none'
+                    icon='email'
+                    placeholder="Email"
+                    textContentType="emailAddress"
+                />
+                <AppTextInput
+                    autoCapitalize="none"
+                    autoCorrect={false}
+                    icon='lock'
+                    onChangeText={password => this.setState({ password })}
+                    value={this.state.password}
+                    placeholder="Password"
+                    secureTextEntry
+                    textContentType="password"
+                />
+                {/* button to trigger "signup" */}
+                <Button title="Register" onPress={this.handleSignUp} />
             </View>
-            <AppTextInput 
-                onChangeText={name => this.setState({ name })}
-                value = {this.state.name}
-                autoCorrect={false}
-                autoCapitalize= 'none'
-                icon = 'email'
-                placeholder="Name"
-                textContentType="emailAddress"
-                />
-            <AppTextInput 
-                keyboardType="email-address"
-                onChangeText={email => this.setState({ email })}
-                value = {this.state.email}
-                autoCorrect={false}
-                autoCapitalize= 'none'
-                icon = 'email'
-                placeholder="Email"
-                textContentType="emailAddress"
-                />
-            <AppTextInput
-                autoCapitalize="none"
-                autoCorrect={false}
-                icon='lock'
-                onChangeText={password => this.setState({ password })}
-                value = {this.state.password}
-                placeholder="Password"
-                secureTextEntry
-                textContentType="password"
-                />
-            {/* <Button title="Register" onPress={()=>console.log(email, password) && navigation.navigate("Welcome")} /> */}
-            <Button title="Register" onPress={this.handleSignUp} />
-
-          
-        </View>
 
         );
     }
@@ -86,14 +86,14 @@ const styles = StyleSheet.create({
         marginBottom: 20,
     },
     errorMessage: {
-        height: 72,
+        height: 70,
         alignItems: 'center',
         justifyContent: 'center',
         marginHorizontal: 30
     },
     error: {
         color: '#E9446A',
-        fontSize: 13,
+        fontSize: 12,
         fontWeight: '600',
         textAlign: 'center'
     }

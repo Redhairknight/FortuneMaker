@@ -1,3 +1,6 @@
+// inspired by Mosh Tutorial
+// https://www.youtube.com/watch?v=0-S5a0eXPoc&ab_channel=ProgrammingwithMo
+
 import React from 'react';
 import { View, StyleSheet, Image, Text } from 'react-native';
 import { TouchableHighlight, TouchableOpacity } from 'react-native-gesture-handler';
@@ -16,7 +19,7 @@ function ListItem({title, subTitle, image, onPress, renderRightActions, value, d
                     <View>
                         <Text style={styles.title}>{title}</Text>
                         <Text style={styles.price}>${value}/${subTitle}</Text>
-                        <Text style={styles.subTitle}>{Math.round((value/subTitle) * 100)}% achieved. Click "+" to add more value</Text>
+                        <Text style={styles.subTitle}>{Math.round((value/subTitle) * 100)}% achieved. Click "+" to add more goals</Text>
                     </View>
                 </View>
             </TouchableHighlight>

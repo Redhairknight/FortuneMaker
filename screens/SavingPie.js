@@ -10,7 +10,6 @@ import {
     VictoryLegend, VictoryBar
 } from 'victory-native'
 //import firebase
-import firebaseConfig from "../config/firebase";
 import * as firebase from 'firebase'
 
 
@@ -25,6 +24,8 @@ export default class SavingPie extends Component {
     }
 
     // capture the data before it loads
+    // this method is inspired by "Beginner Programmers" on:
+    // https://www.youtube.com/watch?v=1jIKovuhtAU&t=615s&ab_channel=BeginnerProgrammers
     componentWillMount() {
 
         var that = this;
@@ -55,9 +56,10 @@ export default class SavingPie extends Component {
         })
     }
 
-
-
     render() {
+        // 1. initialize variable
+        // 2. Assign the value retrieved from firebase into the empty array
+        // 3. push the new array into the data
         var dataList = [];
         var investment = 0;
         var donation = 0;
@@ -78,18 +80,16 @@ export default class SavingPie extends Component {
             }
             // dataList.push({ x: receive.category, y: receive.price });
         })
-        dataList.push({x: 'donation', y: donation})
-        dataList.push({x: 'investment', y: investment})
-        dataList.push({x: 'entertainment', y: entertainment})
-        dataList.push({x: 'shopping', y: shopping})
-        dataList.push({x: 'transportation', y: transportation})
+        dataList.push({ x: 'donation', y: donation })
+        dataList.push({ x: 'investment', y: investment })
+        dataList.push({ x: 'entertainment', y: entertainment })
+        dataList.push({ x: 'shopping', y: shopping })
+        dataList.push({ x: 'transportation', y: transportation })
         console.log(dataList);
 
         return (
             <View style={styles.container}>
                 <VictoryPie
-
-
                     colorScale={colorScale}
                     data={dataList}
 

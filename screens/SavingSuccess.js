@@ -1,23 +1,22 @@
-import { StatusBar } from 'expo-status-bar';
-import React, { Component } from 'react';
+import React from 'react';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { FlatList, TextInput, TouchableOpacity, TouchableWithoutFeedback } from 'react-native-gesture-handler';
+import { TouchableWithoutFeedback } from 'react-native-gesture-handler';
 import { StyleSheet, Text, View, Image, ScrollView } from 'react-native';
-import { CommonActions, NavigationContainer, StackActions } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
+import { CommonActions } from '@react-navigation/native';
 import * as firebase from 'firebase'
+
 // import component
 import retrieveDatabse from "../components/DatabaseManager"
 import { NavigationActions } from 'react-navigation';
 
-// Change StackActions to NavigationActions if using v1
+// Change StackActions to NavigationActions if using
 const resetAction = CommonActions.reset({
     index: 0,
     actions: [NavigationActions.navigate({ routeName: 'Investment' })],
 });
 
 export default class SavingSuccess extends React.Component {
-
+    // initialize state
     constructor(props) {
         super(props);
         this.state = {
@@ -72,31 +71,16 @@ export default class SavingSuccess extends React.Component {
                             <Text style={styles.bottomEachTextTitle}>
                                 You currently has ${balance} balance and ${available} in your Account.
                       </Text><Text style={styles.bottomEachTextTitle}>
-                                For better ultilize your money, we do encourage you:
+                                For better ultilize your money, we do encourage you to try the investment and donation as well
                       </Text>
                         </View>
                         <View style={styles.bottomMiddle}>
                             <TouchableWithoutFeedback onPress={()=> this.props.navigation.navigate("SavingGoal")} 
-                            // {
-                            //     this.props.navigation.navigate(
-                            //         'InvestmentHome',
-                            //         {},
-                            //         NavigationActions.navigate({
-                            //             routeName: 'ProductsDetail'
-                            //         })
-                            //     )
-                            //     console.log('it is clicked')
-                            // }
                             style={styles.payBtn}>
+                                {/* image source: https://www.flaticon.com/free-icon/profit_3442141?term=investment&page=1&position=47 */}
                                 <Image style={styles.payImg} source={require("../assets/investment.png")} />
                                 <Text style={styles.payText}> Saving Page</Text>
                             </TouchableWithoutFeedback>
-                            {/* <View style={styles.lineBreak}></View> */}
-
-                            {/* <TouchableWithoutFeedback onPress={() => checkNameAndEmail()} style={styles.payBtn}>
-                                <Image style={styles.payImg} source={require("../assets/heart.png")} />
-                                <Text style={styles.payText}> Donation</Text>
-                            </TouchableWithoutFeedback> */}
                         </View>
                     </View>
                 </ScrollView>
