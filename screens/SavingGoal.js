@@ -101,70 +101,94 @@ export default class SavingGoal extends Component {
         var innerStyle = { backgroundColor: '#fff', padding: 20 };
 
         return (
-            <SafeAreaView style={styles.screen}>
-                <Modal
-                    animationType="fade"
-                    transparent={true}
-                    visible={this.state.modalVisible}
-                    onRequestClose={() => this.setModalVisible(false)}>
-                    <View style={[styles.modalContainer, modalBackgroundStyle]}>
-                        <View style={[styles.modalView, innerStyle]}>
-                            <AntDesign name="close" size={24} color="black" style={styles.closeTag} onPress={this.setModalVisible.bind(this, false)} />
-                            <Text style={styles.warning}>Add new Saving Goal</Text>
-                            <AppTextInput onChangeText={(text) => this.setState({ description: text })}
-                                autoCorrect={false}
-                                autoCapitalize='none'
-                                icon='playlist-check'
-                                placeholder="Description"
-                            />
-                            <AppTextInput onChangeText={(text) => this.setState({ price: text })}
-                                autoCorrect={false}
-                                autoCapitalize='none'
-                                icon='currency-usd'
-                                placeholder="Price"
-                            />
-                            <AppTextInput onChangeText={(text) => this.setState({ initial: text })}
-                                autoCorrect={false}
-                                autoCapitalize='none'
-                                icon='currency-usd'
-                                placeholder="Price"
-                            />
-                            <TouchableHighlight style={styles.buttonTwo} onPress={() => formValidation(this.setModalVisible(false))}>
-                                <Text style={styles.text}>Create</Text>
-                            </TouchableHighlight>
-                        </View>
-                    </View>
-                </Modal>
-                {/* image source: https://unsplash.com/photos/ZVprbBmT8QA */}
-                <Image style={styles.image} source={require('../assets/g_back.jpg')} />
-                <FlatList
-                    // assign value to data in ListItem (customized component)
-                    data={dataList}
-                    renderItem={({ item }) => (
-                        <ListItem
-                            title={item.title}
-                            subTitle={item.description}
-                            image={item.image}
-                            value={item.value}
-                            date={item.date}
-                            onPress={() => this.setState({ date: item.date })}
-                            renderRightActions={() => (
-                                <TouchableWithoutFeedback onPress={this.DisplayModal}>
-                                    <View style={styles.renderContainer}>
-                                        <MaterialCommunityIcons
-                                            name="plus"
-                                            size={35}
-                                            color={colors.white}
-                                        />
-                                    </View>
-                                </TouchableWithoutFeedback>
-                            )}
-                        />)}
-                    // add the separator line
-                    ItemSeparatorComponent={() =>
-                        <View
-                            style={styles.separator} />} />
-            </SafeAreaView>
+          <SafeAreaView style={styles.screen}>
+            <Modal
+              animationType="fade"
+              transparent={true}
+              visible={this.state.modalVisible}
+              onRequestClose={() => this.setModalVisible(false)}
+            >
+              <View style={[styles.modalContainer, modalBackgroundStyle]}>
+                <View style={[styles.modalView, innerStyle]}>
+                  <AntDesign
+                    name="close"
+                    size={24}
+                    color="black"
+                    style={styles.closeTag}
+                    onPress={this.setModalVisible.bind(this, false)}
+                  />
+                  <Text style={styles.warning}>Add new Saving Goal</Text>
+                  <AppTextInput
+                    onChangeText={(text) =>
+                      this.setState({ description: text })
+                    }
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                    icon="playlist-check"
+                    placeholder="Description"
+                  />
+                  <AppTextInput
+                    onChangeText={(text) => this.setState({ price: text })}
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                    icon="currency-usd"
+                    placeholder="Your Saving Goal"
+                  />
+                  <AppTextInput
+                    onChangeText={(text) => this.setState({ initial: text })}
+                    autoCorrect={false}
+                    autoCapitalize="none"
+                    icon="currency-usd"
+                    placeholder="Your Initial Input"
+                  />
+                  <TouchableHighlight
+                    style={styles.buttonTwo}
+                    onPress={() => formValidation(this.setModalVisible(false))}
+                  >
+                    <Text style={styles.text}>Create</Text>
+                  </TouchableHighlight>
+                </View>
+              </View>
+            </Modal>
+            {/* image source: https://unsplash.com/photos/ZVprbBmT8QA */}
+            <Image
+              style={styles.image}
+              source={require("../assets/g_back.jpg")}
+            />
+            <TouchableHighlight
+              style={styles.button}
+              onPress={this.DisplayModal}
+            >
+              <Text style={styles.text}>Set up goal</Text>
+            </TouchableHighlight>
+            <FlatList
+              // assign value to data in ListItem (customized component)
+              data={dataList}
+              renderItem={({ item }) => (
+                <ListItem
+                  title={item.title}
+                  subTitle={item.description}
+                  image={item.image}
+                  value={item.value}
+                  date={item.date}
+                  onPress={() => this.setState({ date: item.date })}
+                  renderRightActions={() => (
+                    <TouchableWithoutFeedback onPress={this.DisplayModal}>
+                      <View style={styles.renderContainer}>
+                        <MaterialCommunityIcons
+                          name="plus"
+                          size={35}
+                          color={colors.white}
+                        />
+                      </View>
+                    </TouchableWithoutFeedback>
+                  )}
+                />
+              )}
+              // add the separator line
+              ItemSeparatorComponent={() => <View style={styles.separator} />}
+            />
+          </SafeAreaView>
         );
     }
 }
@@ -215,8 +239,7 @@ const styles = StyleSheet.create({
         color: 'blue',
     },
     button: {
-        backgroundColor: colors.primary,
-        borderRadius: 5,
+        backgroundColor: colors.blue,
         justifyContent: 'center',
         alignItems: 'center',
         padding: 5,

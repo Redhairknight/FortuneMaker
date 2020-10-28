@@ -19,7 +19,7 @@ function ListItem({title, subTitle, image, onPress, renderRightActions, value, d
                     <View>
                         <Text style={styles.title}>{title}</Text>
                         <Text style={styles.price}>${value}/${subTitle}</Text>
-                        <Text style={styles.subTitle}>{Math.round((value/subTitle) * 100)}% achieved. Click "+" to add more goals</Text>
+                        <Text style={styles.subTitle}>{Math.round((value/subTitle) * 100)}% achieved. Swipe, use '+' to add more goals</Text>
                     </View>
                 </View>
             </TouchableHighlight>

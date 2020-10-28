@@ -18,7 +18,7 @@ import {
   VictoryScatter,
 } from "victory-native";
 //import firebase
-// <<<<<<< week10-Saving
+
 import * as firebase from "firebase";
 
 import colors from "../config/colors";
