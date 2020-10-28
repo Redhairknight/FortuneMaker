@@ -7,9 +7,13 @@ import {
   ScrollView,
 } from "react-native";
 import { VictoryPie, VictoryLegend, VictoryBar } from "victory-native";
+import colors from "../config/colors";
+
 //import firebase
 // <<<<<<< week10-Saving
-import * as firebase from 'firebase'
+import * as firebase from "firebase";
+import colors from "../config/colors";
+import { NavigationActions } from "react-navigation";
 
 
 export default class SavingPie extends Component {
@@ -89,10 +93,14 @@ export default class SavingPie extends Component {
         return (
             <View style={styles.container}>
                 <VictoryPie
+                    style={styles.container}
                     colorScale={colorScale}
                     data={dataList}
-
-                    innerRadius={(75)}
+                    //set the labels
+                    innerRadius={45}
+                    labelRadius={({ innerRadius }) => innerRadius + 65}
+                    cornerRadius={5}
+                    padAngle={2}
                     height={400}
                     width={400}
                     animate={{ duration: 2000 }}
