@@ -153,11 +153,11 @@ class SavingOne extends React.Component {
               <View style={styles.bankDetail}>
                 <View style={styles.bankDetailText}>
                   <Text style={styles.creditText}>Available Funds:</Text>
-                  <Text style={styles.creditValue}>$64,000</Text>
+                  <Text style={styles.creditValue}>$14.93</Text>
                 </View>
                 <View style={styles.bankDetailText}>
                   <Text style={styles.creditText}>Current Balance:</Text>
-                  <Text style={styles.creditValue}>$73,653</Text>
+                  <Text style={styles.creditValue}>$14.93</Text>
                 </View>
               </View>
             </ImageBackground>
