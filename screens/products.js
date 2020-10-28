@@ -34,7 +34,11 @@ export default class SearchBarExample extends Component {
       intitution: 0,
       number: 0,
       totalInvestment: 0,
-      type: null
+
+      type: null,
+      purchaseSuccess: false,
+      addFavoriteSuccess: false
+
     }
     this.testFunction = this.testFunction.bind(this)
 
@@ -78,6 +82,30 @@ export default class SearchBarExample extends Component {
 
     return (<TouchableOpacity onPress={() => this.setState({ price: price1, pop: true, name: name1, institution: institution1, rateofreturn: rateofreturn1, number: number1, totalInvestment: totalInvestment1, type: type1 })}>
       <Modal
+        transparent={this.state.purchaseSuccess}
+        visible={this.state.purchaseSuccess}>
+        <View style={styles.purchaseSuccess}>
+          <Text>Congratulations, you have successfully purchased this financial product</Text>
+          <Button title='OK' onPress={() => this.setState({ purchaseSuccess: false })} ></Button>
+
+
+        </View>
+
+      </Modal>
+      <Modal
+        transparent={this.state.addFavoriteSuccess}
+        visible={this.state.addFavoriteSuccess}>
+        <View style={styles.purchaseSuccess}>
+          <Text>Congratulations, you have successfully added this product to the favorite </Text>
+          <Button title='OK' onPress={() => this.setState({ addFavoriteSuccess: false })} ></Button>
+
+
+        </View>
+
+      </Modal>
+
+
+      <Modal
         transparent={this.state.pop}
         visible={this.state.pop}>
         <View style={styles.popWindow}>
@@ -92,45 +120,58 @@ export default class SearchBarExample extends Component {
           ></TextInput>
           <Text>You need to pay ${this.state.productNumber * this.state.price} </Text>
           <TouchableOpacity onPress={() => {
-            this.setState({ pop: false }); firebase.database().ref(`investment/Favorite/` + firebase.auth().currentUser.uid + `/` + this.state.name).set
+            this.setState({
+              pop: false, addFavoriteSuccess: true
+            }); firebase.database().ref(`investment/Favorite/` + firebase.auth().currentUser.uid + `/` + this.state.name).set
               ({
                 name: this.state.name,
                 price: this.state.price,
-                date: this.getCurrentDates()
+                date: this.getCurrentDates(),
 
               })
           }}><Text>Add to favorite</Text></TouchableOpacity>
-          <Button title='CONFIRM' onPress={() => {
-            this.setState({ pop: false });
-            firebase.database().ref('investment/newTransHistory/' + firebase.auth().currentUser.uid + '/' + this.getCurrentDates()).set
-              ({
-                name: this.state.name,
-                price: this.state.productNumber * this.state.price,
-                date: this.getCurrentDates()
 
-              });
-            // insert to Total transaction - Chang Liu
-            firebase.database().ref('Transaction/' + firebase.auth().currentUser.uid + '/' + this.getCurrentDates()).set
-              ({
-                name: this.state.name,
-                price: this.state.productNumber * this.state.price,
-                date: this.getCurrentDates(),
-                category: 'investment',
-                description: 'financial product'
-              });
+          <View style={styles.buttonStyle}>
+            <Button title='CONFIRM' onPress={() => {
+              this.setState({ pop: false, purchaseSuccess: true });
+              firebase.database().ref('investment/newTransHistory/' + firebase.auth().currentUser.uid + '/' + this.getCurrentDates()).set
+                ({
+                  name: this.state.name,
+                  price: this.state.productNumber * this.state.price,
+                  date: this.getCurrentDates()
 
-            firebase.database().ref("/Account/account1/").set({
-              Available: Math.round((this.state.totalInvestment - this.state.productNumber * this.state.price) * 100) / 100,
-              Balance: 63000,
-              price: this.state.price,
-              name: this.state.name
-            })
+                });
+              // insert to Total transaction - Chang Liu
+              firebase.database().ref('Transaction/' + firebase.auth().currentUser.uid + '/' + this.getCurrentDates()).set
+                ({
+                  name: this.state.name,
+                  price: this.state.productNumber * this.state.price,
+                  date: this.getCurrentDates(),
+                  category: 'investment',
+                  description: 'financial product'
+                });
+//            Changed from merge
+//               firebase.database().ref("/Account/account1/").set({
+//                 Available: this.state.totalInvestment - this.state.productNumber * this.state.price,
+//                 Balance: 63000
+//               })
+              firebase.database().ref("/Account/account1/").set({
+                Available: Math.round((this.state.totalInvestment - this.state.productNumber * this.state.price) * 100) / 100,
+                Balance: 63000,
+                price: this.state.price,
+                name: this.state.name
+              })
 
-          }} ></Button>
+            }} ></Button>
+          </View>
 
-          <Button title='CANCEL' onPress={() => this.setState({ pop: false })} ></Button>
+
+          <View style={styles.buttonStyle}>
+            <Button title='CANCEL' onPress={() => this.setState({ pop: false })} ></Button>
+          </View>
         </View>
       </Modal>
+
       <View style={styles.financialProductContainer}>
         <View style={styles.productProp}>
           <Text style={styles.productName}>{name1}</Text>
@@ -240,9 +281,11 @@ const styles = {
   productUnit: { fontWeight: "bold", width: "24%" },
   productType: { width: "20%" },
   unitProp: { fontWeight: "bold", fontSize: 18 },
-  popWindow: { backgroundColor: "white", flex: 1, margin: 60, padding: 40, borderRadius: 10 },
+  popWindow: { backgroundColor: "white", margin: 60, padding: 40, borderRadius: 10, height: 400 },
   numberInput: {
     borderWidth: 1,
     borderColor: '#777'
-  }
+  },
+  purchaseSuccess: { backgroundColor: "white", margin: 60, padding: 40, borderRadius: 10, height: 200 },
+  buttonStyle: { padding: 5 }
 };

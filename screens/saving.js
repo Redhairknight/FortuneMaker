@@ -1,10 +1,10 @@
 import React from 'react';
 import { View, Text, ImageBackground, StyleSheet, Image, TouchableOpacity, Button } from 'react-native';
 
-// import Component from '../components/AppText';
 import retrieveDatabse from '../components/DatabaseManager';
 import colors from '../config/colors';
 import { AppLoading } from 'expo';
+
 class SavingOne extends React.Component {
     // initialize state
     constructor(props) {
@@ -47,6 +47,7 @@ class SavingOne extends React.Component {
         var price = retrieveDatabse("/Account/account1/price");
         var name = retrieveDatabse("/Account/account1/name");
         return (
+
             <View style={styles.container}>
                 <ImageBackground style={styles.usage}
                     // image source: https://uigradients.com/#Royal
@@ -63,8 +64,11 @@ class SavingOne extends React.Component {
                     <View style={styles.buttonContainer}>
                         {/* redirect to the saving pie page */}
                         <Button title='See detail' onPress={() => this.props.navigation.navigate("SavingPie")} />
+
                     </View>
+                  </View>
                 </ImageBackground>
+
                 <ImageBackground style={styles.savingGoal}
                     // image source: https://uigradients.com/#Joomla
                     source={require('../assets/Welcome/Joomla.jpg')}>
@@ -77,6 +81,35 @@ class SavingOne extends React.Component {
                             <Text style={styles.text}>Set up Goal!</Text>
                         </TouchableOpacity>
                     </View>
+                    <View style={styles.bankDetailText}>
+                      <Text style={styles.creditText}>Current Balance:</Text>
+                      <Text style={styles.creditValue}>$73,653</Text>
+                    </View>
+                  </View>
+                </ImageBackground>
+              </TouchableOpacity>
+              <TouchableOpacity style={styles.creditCardSection}>
+                <ImageBackground
+                  style={styles.imageBackground}
+                  imageStyle={{ borderRadius: 12 }}
+                  source={require("../assets/Welcome/Royal.jpg")}
+                >
+                  <View style={styles.bankLogoSection}>
+                    <Image
+                      style={styles.bankLogo}
+                      source={require("../assets/Welcome/citibank.png")}
+                    />
+                  </View>
+                  <View style={styles.bankDetail}>
+                    <View style={styles.bankDetailText}>
+                      <Text style={styles.creditText}>Available Funds:</Text>
+                      <Text style={styles.creditValue}>$64,000</Text>
+                    </View>
+                    <View style={styles.bankDetailText}>
+                      <Text style={styles.creditText}>Current Balance:</Text>
+                      <Text style={styles.creditValue}>$73,653</Text>
+                    </View>
+                  </View>
                 </ImageBackground>
                 <View style={styles.creditCard}>
                     {/* redirect to the transaction page */}
@@ -167,7 +200,9 @@ class SavingOne extends React.Component {
                         </ImageBackground>
                     </TouchableOpacity>
                 </View>
+
             </View>
+          </View>
         );
     }
 }

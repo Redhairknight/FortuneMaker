@@ -1,6 +1,7 @@
 // Import detailed saving screens here
 import Saving from "../screens/saving";
 import SavingDetail from "../screens/SavingDetails";
+
 import LoginScreen from "../screens/LoginScreen";
 import SavingPie from "../screens/SavingPie";
 import SavingGoal from "../screens/SavingGoal";
@@ -8,12 +9,27 @@ import SavingSuccess from "../screens/SavingSuccess";
 import { createStackNavigator } from "react-navigation-stack";
 import { createAppContainer } from "react-navigation";
 
+
 const SavingStack = createStackNavigator({
   // the starter page of the stack
   SavingHome: {
     screen: Saving,
     navigationOptions: {
       headerShown: false,
+    },
+  },
+  Investment: {
+    screen: Investment,
+  },
+  Donation: {
+    screen: Donation,
+    navigationOptions: {
+      headerTitleAlign: "center",
+      headerTitle: "Welcome to Donation",
+      headerTintColor: "white",
+      headerStyle: {
+        backgroundColor: "#1F4E79",
+      },
     },
   },
   LoginScreen: {
@@ -30,7 +46,7 @@ const SavingStack = createStackNavigator({
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",
-      }
+      },
     },
   },
   SavingPie: {
@@ -52,8 +68,8 @@ const SavingStack = createStackNavigator({
       headerTintColor: "white",
       headerStyle: {
         backgroundColor: "#1F4E79",
-      }
-    }
+      },
+    },
   },
   SavingSuccess: {
     screen: SavingSuccess,
@@ -68,6 +84,10 @@ const SavingStack = createStackNavigator({
   },
 }
 );
-
+  UpBankTransaction: {
+    screen: upBankTransaction,
+    navigationOptions: {},
+  },
+});
 
 export default createAppContainer(SavingStack);
