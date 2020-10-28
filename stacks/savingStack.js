@@ -82,12 +82,11 @@ const SavingStack = createStackNavigator({
       },
     }
   },
-}
-);
   UpBankTransaction: {
     screen: upBankTransaction,
     navigationOptions: {},
   },
-});
+})
+
 
 export default createAppContainer(SavingStack);
