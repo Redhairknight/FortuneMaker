@@ -17,6 +17,8 @@ import * as firebase from 'firebase'
 class Investment extends React.Component {
 
   constructor(props) {
+    /** connect and retrive data before the render */
+
     super(props);
     this.state = {
       totalInvestment: retrieveDatabse("/Account/account1/Available"),
@@ -26,6 +28,8 @@ class Investment extends React.Component {
   }
 
   checkInvestorType = (score) => {
+    /** return the risk type of investor based the risk survey score */
+
     console.log(score)
     var type = ''
     if (score <= 30) {
@@ -45,7 +49,6 @@ class Investment extends React.Component {
 
   getData() {
     setTimeout(() => {
-      console.log('Our data is fetched');
       this.setState({
         adata: "app",
       })
@@ -79,7 +82,7 @@ class Investment extends React.Component {
 
     var riskType = this.checkInvestorType(this.state.score)
     return (
-      
+
       <SafeAreaView style={styles.container}>
         <ScrollView contentContainerStyle={styles.contentContainer}>
           <View style={styles.head}>
@@ -114,19 +117,7 @@ class Investment extends React.Component {
                 </View>
               </View>
             </TouchableWithoutFeedback>
-            {/* <View style={styles.head_bottom}>
-              <View style={styles.head_bottom_up}>
-                <View style={styles.head_bottom_up_left}>
-                  <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800" }}>Goal</Text>
-                  <Text style={{ alignSelf: "center", fontSize: 18, color: "#1F4E79", fontWeight: "bold"}}>$ {format(3000)}</Text>
-                </View>
-                <View style={styles.head_bottom_up_right}>
-                  <Text style={{ alignSelf: "center", paddingTop: 40, fontSize: 20, fontWeight: "800" }}>Description</Text>
-                  <Text style={{ alignSelf: "center", fontSize: 18, color: "#1F4E79", fontWeight: "bold"}}>$ {format(3000)}</Text>
-                </View>
-              </View>
-              <View style={styles.head_bottom_down}></View>
-            </View> */}
+
           </View>
           <View style={styles.middle}>
             <View style={styles.middle_three_button}>
@@ -251,7 +242,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     alignSelf: "center",
     width: '50%',
-    
+
   },
   tinyLogo: {
     width: 20,

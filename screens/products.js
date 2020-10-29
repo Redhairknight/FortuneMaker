@@ -20,6 +20,8 @@ import { Button } from 'react-native-elements';
 
 
 export default class SearchBarExample extends Component {
+  /** store the information that will used in render function */
+
   constructor(props) {
     super(props);
     this.state = {
@@ -82,6 +84,8 @@ export default class SearchBarExample extends Component {
 
     return (<TouchableOpacity onPress={() => this.setState({ price: price1, pop: true, name: name1, institution: institution1, rateofreturn: rateofreturn1, number: number1, totalInvestment: totalInvestment1, type: type1 })}>
       <Modal
+        // the pop window after buying a financial product
+
         transparent={this.state.purchaseSuccess}
         visible={this.state.purchaseSuccess}>
         <View style={styles.purchaseSuccess}>
@@ -93,6 +97,8 @@ export default class SearchBarExample extends Component {
 
       </Modal>
       <Modal
+        // the pop window after add financial product to favorite
+
         transparent={this.state.addFavoriteSuccess}
         visible={this.state.addFavoriteSuccess}>
         <View style={styles.purchaseSuccess}>
@@ -106,6 +112,7 @@ export default class SearchBarExample extends Component {
 
 
       <Modal
+        // input the number of product
         transparent={this.state.pop}
         visible={this.state.pop}>
         <View style={styles.popWindow}>
@@ -150,11 +157,7 @@ export default class SearchBarExample extends Component {
                   category: 'investment',
                   description: 'financial product'
                 });
-//            Changed from merge
-//               firebase.database().ref("/Account/account1/").set({
-//                 Available: this.state.totalInvestment - this.state.productNumber * this.state.price,
-//                 Balance: 63000
-//               })
+
               firebase.database().ref("/Account/account1/").set({
                 Available: Math.round((this.state.totalInvestment - this.state.productNumber * this.state.price) * 100) / 100,
                 Balance: 63000,

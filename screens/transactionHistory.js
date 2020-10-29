@@ -52,10 +52,7 @@ export default class SearchBarExample extends Component {
   }
 
   render() {
-    var test = retrieveDatabse("/investment/financialproduct/name/price");
-    var date = retrieveDatabse("/investment/transactionHistory/date")
-    var productName = retrieveDatabse("/investment/transactionHistory/financialProduct")
-    var price = retrieveDatabse("/investment/transactionHistory/price")
+
     return (
       <ScrollView>
         <View style={styles.container}>

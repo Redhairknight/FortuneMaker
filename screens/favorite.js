@@ -17,6 +17,8 @@ import {
 import { Container, Header, Item, Input, Icon, Button } from "native-base";
 export default class SearchBarExample extends Component {
     constructor(props) {
+        /** store the product information in the state */
+
         super(props);
 
         this.state = {
