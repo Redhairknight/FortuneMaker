@@ -19,22 +19,16 @@ class donationCalculator extends React.Component{
     
 
     render()
-    
-    
     {
-
-
-        
         var money = this.state.money;
         var out = this.state.output;
         var that = this;
 
+        // Display output on the screen
         function writeOut(){
             var deduction = Math.ceil(money*0.0267937891);
             out = "$ " + deduction + " per week"
             that.setState({output:out})
-            console.log(deduction)
-            console.log(out)
         }
 
         return (
@@ -58,12 +52,15 @@ class donationCalculator extends React.Component{
                         </View>
 
                         <View style={styles.bottomCalculator}>
+
+                        {/* After completing the input, call the function to get results */}
                         <TextInput textAlign="center" placeholderTextColor="grey" placeholder="Input your weekly income   " maxLength={6}  keyboardType="numeric" style={styles.regularyText} onChangeText={(text)=>this.setState({money:text})} onEndEditing={()=>writeOut()}/>
+                        {/* Output display */}
                         <Text style={styles.regularyTextOut}>We recommend you to donate</Text>
                         <Text style={styles.regularyTextOut}>{out}</Text>
                         </View>
 
-                        {/* Navigate to Charity Choose Step */}
+                        {/* Navigate to Charity Choose */}
                         <View style={styles.buttomEach}>
                             <TouchableWithoutFeedback
                                 onPress ={()=> this.props.navigation.navigate("DonationCharityChoose")}
@@ -79,6 +76,7 @@ class donationCalculator extends React.Component{
 
                             <View style={styles.lineBreak}></View>
 
+                            {/* Navigate to donation home page */}
                             <TouchableWithoutFeedback
                                 onPress ={()=> this.props.navigation.navigate("DonationEntry")}
                             >

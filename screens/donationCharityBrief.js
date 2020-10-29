@@ -92,9 +92,6 @@ const styles = StyleSheet.create({
   container:{
       flex:1,
   },
-  // contentContainer:{
-  //     height:"100%",
-  // },
   head:{
       flex:1,
       backgroundColor: "#1F4E79",
@@ -108,11 +105,8 @@ const styles = StyleSheet.create({
   },
   bottom:{
       flex:5,
-      // flexDirection:"column"
-      // backgroundColor: "pink",
   },
   bottomEach:{
-      // justifyContent:"center",
       flex:1,
       flexDirection:'row',
       padding:5
