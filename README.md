@@ -13,9 +13,9 @@ DECO 7381 Group Project last modified on 2020 - Oct - 29
 
 > Make sure you have installed node.js so as to use npm commands
 
-* Clone the whole repository to your computers
+* Clone the whole repository to your computer
 * Step into the repository folder
-* Open command and input
+* Open command line tool and input
 
 ```
 npm install --global expo-cli
@@ -26,7 +26,7 @@ expo install
 
 2. Run the application
 
-> You can use Android stimulator on the laptop, or use real Android phone to operate.
+> You can use Android stimulator on the laptop, or use physical Android device to operate it.
 >
 > If you try to use Android phone, please install expo application in advance from Android Market
 
