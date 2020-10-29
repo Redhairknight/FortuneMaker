@@ -21,7 +21,9 @@ import colors from "../config/colors";
 // icon source:
 // [Guzman y Gomez.png] [icon] https://www.guzmanygomez.com/
 // [Domino's.png] [icon] https://iconscout.com/icon/dominos-pizza-1863639
-// [upbank.png] [icon] https://www.facebook.com/upbanking/
+// [vending.png] [icon] https://699pic.com/tupian-400284479.html
+// [cafe.png] [icon] https://toppng.com/ranos-de-caf%c3%a9-icono-de-taza-de-cafe-PNG-free-PNG-Images_171716?search-result=taza
+// [EASI.png] [icon] https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Feasiaustralia&psig=AOvVaw3yJQhZixuDPxxaQ66V1u2g&ust=1604069663368000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIDcraaH2uwCFQAAAAAdAAAAABAN
 
 var REQUEST_URL = "https://api.up.com.au/api/v1/transactions";
 var STORAGE_KEY =
@@ -50,6 +52,59 @@ export default App = () => {
       .finally(() => setLoading(false));
   }, []);
 
+  function GetImg(props) {
+    console.log(props);
+    // const imgName = props.imgName;
+
+    switch (props) {
+      case "Domino's":
+        return (
+          <Image
+            style={styles.imageL}
+            source={require("../assets/Welcome/Domino's.png")}
+          />
+        );
+      case "Guzman y Gomez":
+        return (
+          <Image
+            style={styles.imageL}
+            source={require("../assets/Welcome/Guzman_y_Gomez.png")}
+          />
+        );
+      case "Lakeside Cafe":
+        return (
+          <Image
+            style={styles.imageL}
+            source={require("../assets/Welcome/cafe.png")}
+          />
+        );
+      case "The Trustee for GDK Fa Murarri":
+        return (
+          <Image
+            style={styles.imageL}
+            source={require("../assets/Welcome/vending.png")}
+          />
+        );
+      case "EASI":
+        return (
+          <Image
+            style={styles.imageL}
+            source={require("../assets/Welcome/EASI.png")}
+          />
+        );
+        break;
+
+      default:
+        return (
+          <Image
+            style={styles.imageL}
+            source={require("../assets/Welcome/upbank.png")}
+          />
+        );
+        break;
+    }
+  }
+
   return (
     <SafeAreaView style={styles.screen}>
       <ScrollView style={{ flex: 1, padding: 24 }}>
@@ -65,10 +120,7 @@ export default App = () => {
               renderItem={({ item }) => (
                 <View style={styles.items}>
                   <View>
-                    <Image
-                      style={styles.imageL}
-                      source={require("../assets/Welcome/upbank.png")}
-                    />
+                    {GetImg(item.attributes.description)}
                     <Text style={styles.itemDesc}>
                       {item.attributes.description}
                     </Text>
@@ -105,6 +157,7 @@ const styles = StyleSheet.create({
   items: {
     borderColor: colors.blue,
     // borderTopColor: colors.white,
+    backgroundColor: colors.white,
     borderWidth: 2,
     borderRadius: 10,
     margin: 5,
