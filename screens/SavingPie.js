@@ -56,9 +56,6 @@ export default class SavingPie extends Component {
         listingData: finished,
       });
     });
-    //   .finally (() => {
-    //       this.setState({ isLoading: false });
-    //   })
   }
 
   state = {

@@ -17,10 +17,10 @@ import retrieveApi from "../components/ApiManager";
 
 import colors from "../config/colors";
 
-  // icon source:
-  // [Guzman y Gomez.png] [icon] https://www.guzmanygomez.com/
-  // [Domino's.png] [icon] https://iconscout.com/icon/dominos-pizza-1863639
-  // [upbank.png] [icon] https://www.facebook.com/upbanking/
+// icon source:
+// [Guzman y Gomez.png] [icon] https://www.guzmanygomez.com/
+// [Domino's.png] [icon] https://iconscout.com/icon/dominos-pizza-1863639
+// [upbank.png] [icon] https://www.facebook.com/upbanking/
 
 var REQUEST_URL = "https://api.up.com.au/api/v1/transactions";
 var STORAGE_KEY =
@@ -29,8 +29,9 @@ var STORAGE_KEY =
 export default App = () => {
   const [isLoading, setLoading] = useState(true);
   const [data, setData] = useState({});
-    const [modalVisible, setModalVisible] = useState(false);
+  const [modalVisible, setModalVisible] = useState(false);
 
+  // fetch data from upBank API
   useEffect(() => {
     fetch(REQUEST_URL, {
       headers: {
@@ -56,6 +57,7 @@ export default App = () => {
         ) : (
           (data.forEach((a) => {}),
           (
+            //iterate transactions in FlatList
             <FlatList
               style={styles.list}
               data={data}
