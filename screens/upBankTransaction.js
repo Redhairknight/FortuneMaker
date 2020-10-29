@@ -17,6 +17,11 @@ import retrieveApi from "../components/ApiManager";
 
 import colors from "../config/colors";
 
+  // icon source:
+  // [Guzman y Gomez.png] [icon] https://www.guzmanygomez.com/
+  // [Domino's.png] [icon] https://iconscout.com/icon/dominos-pizza-1863639
+  // [upbank.png] [icon] https://www.facebook.com/upbanking/
+
 var REQUEST_URL = "https://api.up.com.au/api/v1/transactions";
 var STORAGE_KEY =
   "Bearer up:yeah:UwoTA9D94NS8PwnSsfYCEkqwDqEdhSOJXlRqQIMS6b9UONH0L9B6lcAqS0pFd3770hxBxkut9laaaR2llyObIU9pZLvl5lCqiIyqv3e60LLBBvyNUvcTU8gjhPVCyhbk";
