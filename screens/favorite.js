@@ -15,6 +15,8 @@ import {
     ScrollView,
 } from "react-native";
 import { Container, Header, Item, Input, Icon, Button } from "native-base";
+
+// source :https://material.io/resources/icons/?style=baseline
 export default class SearchBarExample extends Component {
     constructor(props) {
         /** store the product information in the state */
@@ -95,14 +97,7 @@ export default class SearchBarExample extends Component {
                                 )
                             })
                         }
-
-
-
-
                     </View>
-
-
-
                 </View>
             </ScrollView>
         );

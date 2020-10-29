@@ -21,6 +21,7 @@ import { Button } from 'react-native-elements';
 
 export default class SearchBarExample extends Component {
   /** store the information that will used in render function */
+  // icon source: https://material.io/resources/icons/?style=baseline
 
   constructor(props) {
     super(props);

@@ -19,6 +19,7 @@ import { Container, Header, Item, Input, Icon, Button } from "native-base";
 
 
 export default class SearchBarExample extends Component {
+  // icon source:https://material.io/resources/icons/?style=baseline
 
 
   constructor(props) {

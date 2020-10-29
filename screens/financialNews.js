@@ -2,6 +2,7 @@ import React from "react";
 import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
 
 export default class App extends React.Component {
+  // news image source:https://www.news.com.au/finance
   render() {
     return (
       <ScrollView>

@@ -15,6 +15,9 @@ import retrieveDatabse from "../components/DatabaseManager"
 import * as firebase from 'firebase'
 
 class Investment extends React.Component {
+  // icon source:
+  // https://www.iconfinder.com/
+  // https://www.flaticon.com/
 
   constructor(props) {
     /** connect and retrive data before the render */

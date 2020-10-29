@@ -5,6 +5,7 @@ import firebaseConfig from "../config/firebase";
 import * as firebase from 'firebase'
 
 export default class App extends React.Component {
+    // image source:https://www.pexels.com/
     render() {
         console.log(firebase.auth().currentUser.uid)
         return (
