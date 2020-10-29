@@ -30,7 +30,7 @@ expo install
 expo start
 ```
 
-* If the command line says there are some missed package, you can obey the instructions to install then.
+* If the command line says there are some missed packages, you can obey the instructions to install them.
 * Then you can see a QR code on the command line which can be scanned by your phone camera.
 * Or you can run the application on stimulator. Make sure you have already opened the stimulator 
 
