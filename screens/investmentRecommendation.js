@@ -19,6 +19,7 @@ import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { VictoryPie, VictoryLegend, } from 'victory-native'
 
 class Recommendation extends React.Component {
+    // image source: https://newnetservices.net
     constructor(props) {
         /** connect to firebase and retrive data first */
 
