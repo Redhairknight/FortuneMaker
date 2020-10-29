@@ -130,6 +130,7 @@ export default class SearchBarExample extends Component {
 
               })
           }}><Text>Add to favorite</Text></TouchableOpacity>
+<<<<<<< HEAD
 
           <View style={styles.buttonStyle}>
             <Button title='CONFIRM' onPress={() => {
@@ -168,6 +169,28 @@ export default class SearchBarExample extends Component {
 
           <View style={styles.buttonStyle}>
             <Button title='CANCEL' onPress={() => this.setState({ pop: false })} ></Button>
+=======
+          <View style={{ padding: 5 }}>
+            <Button title='CONFIRM' onPress={() => {
+              this.setState({ pop: false });
+              firebase.database().ref('investment/newTransHistory/' + firebase.auth().currentUser.uid + '/' + this.getCurrentDates()).set
+                ({
+                  name: this.state.name,
+                  price: this.state.productNumber * this.state.price,
+                  date: this.getCurrentDates()
+
+                });
+              firebase.database().ref("/Account/account1/").set({
+                Available: this.state.totalInvestment - this.state.productNumber * this.state.price
+              })
+
+            }} ></Button>
+          </View>
+
+          <View style={{ padding: 5 }}>
+            <Button title='CANCEL' onPress={() => this.setState({ pop: false })} ></Button>
+
+>>>>>>> 0d92fca032f38ee55e14859eccd97f28f505ddc1
           </View>
         </View>
       </Modal>
