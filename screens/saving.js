@@ -147,6 +147,7 @@ class SavingOne extends React.Component {
                 {/* image source: https://favpng.com/png_view/bills-alipay-digital-wallet-payment-png/j5nxDeVh */}
                 <Image
                   style={styles.bankLogo}
+                  // image source: [upbank.png] [icon] https://www.facebook.com/upbanking/
                   source={require("../assets/Welcome/upbank.png")}
                 />
               </View>

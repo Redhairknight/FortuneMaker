@@ -1,3 +1,4 @@
+import { getAppLoadingLifecycleEmitter } from "expo/build/launch/AppLoading";
 import React, { useEffect, useState } from "react";
 import {
   ActivityIndicator,
@@ -80,6 +81,10 @@ export default App = () => {
                   <Text style={styles.itemCurrency}>
                     {item.attributes.amount.value}{" "}
                     {item.attributes.amount.currencyCode}
+                  </Text>
+
+                  <Text style={styles.itemCurrency}>
+                    {item.attributes.createdAt.substring(0, 16)}
                   </Text>
                 </View>
               )}
