@@ -22,6 +22,7 @@ export default class SurveyCompletedScreen extends Component {
     }
 
     writeUserData = (score) => {
+        /** write the survey to firebase */
         var userId = firebase.auth().currentUser.uid
         firebase.database().ref('investment/riskSurvey/' + userId).set({
           score: score
@@ -29,11 +30,13 @@ export default class SurveyCompletedScreen extends Component {
       }
     
     switchScreen = () => {
+        /** switch the screen to investment recommendation */
         this.props.navigation.pop(2)
         this.props.navigation.navigate("InvestmentRecommendation")
     }
 
     checkInvestorType = (score) => {
+        /** return investor type based on the survey score */
         var type = ''
         if (score <= 30) {
             type = 'Conservative'

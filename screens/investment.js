@@ -17,6 +17,7 @@ import * as firebase from 'firebase'
 class Investment extends React.Component {
 
   constructor(props) {
+    /** connect and retrive data before the render */
     super(props);
     this.state = {
       totalInvestment: retrieveDatabse("/Account/account1/Available"),
@@ -26,7 +27,7 @@ class Investment extends React.Component {
   }
 
   checkInvestorType = (score) => {
-    console.log(score)
+    /** return the risk type of investor based the risk survey score */
     var type = ''
     if (score <= 30) {
       type = 'Conservative'
@@ -45,7 +46,6 @@ class Investment extends React.Component {
 
   getData() {
     setTimeout(() => {
-      console.log('Our data is fetched');
       this.setState({
         adata: "app",
       })

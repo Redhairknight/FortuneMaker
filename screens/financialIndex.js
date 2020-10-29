@@ -9,6 +9,7 @@ import AppTextInput from '../components/indexInput';
 class FinancialIndex extends React.Component {
 
     constructor(props) {
+      /** state to store the stock value and stock symbol used to retrive data */
         super(props);
         this.state = {
           stockChartYValues: [],
@@ -25,6 +26,7 @@ class FinancialIndex extends React.Component {
       }
       
       fetchData() {
+        /** fetch data from alpha vantage api */
         this.setState({stockChartYValues: []})
         this.state.stockSymbol.forEach(symbol => {
           this.fetchStock(symbol);
@@ -32,6 +34,7 @@ class FinancialIndex extends React.Component {
       }
 
       fetchStock(symbol) {
+        /** set stock ticker and fetch */
         const pointerToThis = this;
         const API_KEY = '33USA38GJYOUEIHD';
         let stockSymbol = symbol;
@@ -59,12 +62,14 @@ class FinancialIndex extends React.Component {
       }
 
       processData(price) {
+        /** filter out null value  */
         if (price != null && price != "") {
             return price
         }
       }
 
       tickerInput() {
+        /** chage the state to the latest data */
         const ticker = this.state.tickerInput
         const symbol = this.state.stockSymbol
         symbol.push(ticker)
@@ -73,7 +78,7 @@ class FinancialIndex extends React.Component {
       }
 
     render() {
-
+        // variables used in text
         var price = this.state.stockChartYValues
         var data = this.processData(price)
 

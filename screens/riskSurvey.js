@@ -6,6 +6,7 @@ import { COLORS } from '../config/validColors';
 const BLUE = '#1F4E79';
 const GRAY = '#BEBEBE';
 
+// set up the survey questionnaires
 const survey = [
     {
         questionType: 'Info',

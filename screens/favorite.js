@@ -17,6 +17,7 @@ import {
 import { Container, Header, Item, Input, Icon, Button } from "native-base";
 export default class SearchBarExample extends Component {
     constructor(props) {
+        /** store the product information in the state */
         super(props);
 
         this.state = {
@@ -75,7 +76,6 @@ export default class SearchBarExample extends Component {
                         {
                             this.state.listingData.map(function (x) {
 
-
                                 return (
                                     <Swipeable key={x.key}>
                                         <View style={styles.financialProductContainer}>
@@ -93,14 +93,7 @@ export default class SearchBarExample extends Component {
                                 )
                             })
                         }
-
-
-
-
                     </View>
-
-
-
                 </View>
             </ScrollView>
         );

@@ -20,6 +20,7 @@ import { VictoryPie, VictoryLegend, } from 'victory-native'
 
 class Recommendation extends React.Component {
     constructor(props){
+        /** connect to firebase and retrive data first */
         super(props);
         this.state = {
           score: retrieveDatabse("/investment/riskSurvey/" + (firebase.auth().currentUser.uid) + "/score"),
@@ -31,6 +32,7 @@ class Recommendation extends React.Component {
     
       
     checkInvestorType = (score) => {
+        /** return risk type of investor based on risk survey score */
         var type = ''
         if (score <= 30) {
             type = 'Conservative'
@@ -47,11 +49,13 @@ class Recommendation extends React.Component {
     };
 
     takeRiskSurvy = () => {
+        /** switch the screen to retake the risk survey */
         this.props.navigation.pop()
         this.props.navigation.navigate('RiskSurvyDetail')
     }
 
     setModalText = (riskType) => {
+        /** the modals that will display based on users' risk type */
         if (riskType == 'Conservative') {
             this.setState({description: "For investors who seek current income and stability and are less concerned about growth"})
             this.setState({assetAllocation: [

@@ -20,6 +20,7 @@ import { Button } from 'react-native-elements';
 
 
 export default class SearchBarExample extends Component {
+  /** store the information that will used in render function */
   constructor(props) {
     super(props);
     this.state = {
@@ -46,7 +47,6 @@ export default class SearchBarExample extends Component {
 
   getData() {
     setTimeout(() => {
-      console.log('Our data is fetched');
       this.setState({
         adata: "app",
       })

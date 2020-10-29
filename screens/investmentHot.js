@@ -6,13 +6,11 @@ import * as firebase from 'firebase'
 
 export default class App extends React.Component {
     render() {
-        console.log(firebase.auth().currentUser.uid)
         return (
             <ScrollView>
                 <View style={styles.container}>
                     <View >
                         <View>
-
 
                         </View>
                         <ImageBackground style={styles.imgBackground} source={require("../assets/no1.jpg")} imageStyle={styles.imageStyle}

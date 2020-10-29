@@ -15,13 +15,14 @@ import transactionHistory from '../screens/transactionHistory'
 import { createStackNavigator } from "react-navigation-stack";
 
 const InvestmentStack = createStackNavigator({
-
+  // investment home page
   InvestmentHome: {
     screen: Investment,
     navigationOptions: {
       headerShown: false,
     },
   },
+  // investment education screen
   InvestmentEducationDetail: {
     screen: InvestmentEducation,
     navigationOptions: {
@@ -33,6 +34,7 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
+  // new screen
   FinancialNewsDetail: {
     screen: FinancialNews,
     navigationOptions: {
@@ -44,7 +46,7 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
-
+  // product screen
   ProductsDetail: {
     screen: Products,
     navigationOptions: {
@@ -56,6 +58,7 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
+  // risk survey screen
   RiskSurvyDetail: {
     screen: RiskSurvey,
     navigationOptions: {
@@ -67,7 +70,7 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
-
+  // survey complete screen
   SurveyCompleted: {
     screen: SurveyCompleted,
     navigationOptions: {
@@ -79,7 +82,7 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
-
+  // favorite product screen
   FavoriteDetail: {
     screen: Favorite,
     navigationOptions: {
@@ -91,6 +94,7 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
+  // stock index screen
   FinancialIndexDetail: {
     screen: FinancialIndex,
     navigationOptions: {
@@ -102,6 +106,7 @@ const InvestmentStack = createStackNavigator({
       }
     },
   },
+  // transication history screen
   TransactionHistory: {
     screen: transactionHistory,
     navigationOptions: {
@@ -113,6 +118,7 @@ const InvestmentStack = createStackNavigator({
       }
     }
   },
+  // recommendation screen
   InvestmentRecommendation: {
     screen: Recommendation,
     navigationOptions: {
@@ -124,6 +130,7 @@ const InvestmentStack = createStackNavigator({
       }
     }
   },
+  // hot products screen
   InvestmentHot: {
     screen: investmentHot,
     navigationOptions: {
