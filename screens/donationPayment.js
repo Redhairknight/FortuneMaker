@@ -88,17 +88,20 @@ class donationPayment extends React.Component{
 
                     {/* Provide pay link */}
                     <View style={styles.bottomPayLink}>
-                      <TouchableWithoutFeedback onPress={()=>checkNameAndEmail()} style={styles.payBtn}>
+                      <TouchableWithoutFeedback onPress={()=>checkNameAndEmail()} style={styles.payBtn}>、
+                      {/* https://www.flaticon.com/free-icon/paypal_888871?term=paypal&page=1&position=4 */}
                         <Image style={styles.payImg} source={require("../assets/paypal.png")}/>
                         <Text style={styles.payText}> Pay by PayPal</Text>
                       </TouchableWithoutFeedback>
                       <View style={styles.lineBreak}></View>
                       <TouchableWithoutFeedback onPress={()=>checkNameAndEmail()} style={styles.payBtn}>
+                      {/* https://www.flaticon.com/free-icon/credit-card_633611?term=card&page=1&position=1 */}
                         <Image style={styles.payImg} source={require("../assets/credit-card.png")}/>
                         <Text style={styles.payText}> Pay by Card</Text>
                       </TouchableWithoutFeedback>
                       <View style={styles.lineBreak}></View>
                       <TouchableWithoutFeedback onPress={()=>checkNameAndEmail()} style={styles.payBtn}>
+                      {/* https://www.flaticon.com/free-icon/apple-pay_825455?term=apple%20pay&page=1&position=2 */}
                         <Image style={styles.payImg} source={require("../assets/apple-pay.png")}/>
                         <Text style={styles.payText}> Pay by Apple</Text>
                       </TouchableWithoutFeedback>

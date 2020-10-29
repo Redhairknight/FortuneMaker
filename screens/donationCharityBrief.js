@@ -22,6 +22,7 @@ class donationCharityBrief extends React.Component{
                       <View style={styles.bottomEach}>
                       <TouchableOpacity style={styles.bottomEach} onPress={()=>this.props.navigation.navigate("AKF")}>
                         <View style={styles.eachImageView}>
+                        {/* https://www.savethekoala.com/ */}
                           <Image style={{height:150,width:150}} source={require("../assets/check1.png")}/>
                           <Text>
                             Australian Koala Foundation
@@ -30,6 +31,7 @@ class donationCharityBrief extends React.Component{
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.bottomEach} onPress={()=>this.props.navigation.navigate("GuideDogs")}>
                         <View style={styles.eachImageView}>
+                        {/* https://www.guidedogsqld.com.au/be-involved/guide-dogs-lottery/?gclid=CjwKCAjw0On8BRAgEiwAincsHE03ZIs-1RGMIVyJiKvcYQtf8jl9P1lW015zOKu6vbxzbj_6LSNAOhoCekMQAvD_BwE */}
                           <Image style={{height:150,width:150}} source={require("../assets/check2.png")}/>
                           <Text>
                           Guide Dogs
@@ -43,6 +45,7 @@ class donationCharityBrief extends React.Component{
                       <View style={styles.bottomEach}>
                       <TouchableOpacity onPress={()=>this.props.navigation.navigate("CanTeen")}>
                         <View style={styles.eachImageView}>
+                        {/* https://www.canteen.org.au/ */}
                           <Image style={{height:150,width:150}} source={require("../assets/check3.png")}/>
                           <Text>
                             CanTeen
@@ -51,6 +54,7 @@ class donationCharityBrief extends React.Component{
                         </TouchableOpacity>
                         <TouchableOpacity onPress={()=>this.props.navigation.navigate("FlyingDoctor")}>
                         <View style={styles.eachImageView}>
+                        {/* https://www.flyingdoctor.org.au/ */}
                           <Image style={{height:150,width:150}} source={require("../assets/check4.png")}/>
                           <Text>
                             Royal Flying Doctor
@@ -64,6 +68,7 @@ class donationCharityBrief extends React.Component{
                       <View style={styles.bottomEach}>
                       <TouchableOpacity style={styles.bottomEach} onPress={()=>this.props.navigation.navigate("CareFlight")}>
                         <View style={styles.eachImageView}>
+                        {/* https://careflight.org/ */}
                           <Image style={{height:150,width:150}} source={require("../assets/check5.png")}/>
                           <Text>
                             CareFlight
@@ -72,6 +77,7 @@ class donationCharityBrief extends React.Component{
                         </TouchableOpacity>
                         <TouchableOpacity style={styles.bottomEach} onPress={()=>this.props.navigation.navigate("Fred")}>
                         <View style={styles.eachImageView}>
+                        {/* https://www.hollows.org/au/home */}
                           <Image style={{height:150,width:150}} source={require("../assets/check6.png")}/>
                           <Text>
                             The Fred

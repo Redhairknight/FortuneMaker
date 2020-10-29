@@ -28,6 +28,7 @@ class profile1 extends React.Component{
 
         const uname = this.state.uname;
         return (
+            // https://www.pexels.com/zh-cn/photo/2253275/
             <ImageBackground style={styles.usage}
                 source={require('../assets/profile1.png')}>                  
 
@@ -49,6 +50,7 @@ class profile1 extends React.Component{
                                 )
                             }} style={styles.flex_Four_Each_Saving}>
                     <View style={styles.nav_btn}>
+                    {/* https://www.flaticon.com/free-icon/piggy-bank_880321?term=piggy%20bank&page=1&position=83 */}
                     <Image style={styles.btn_img} source={require("../assets/piggy-bank.png")}/>
                     <Text style={styles.btn_text}>
                         Saving
@@ -66,6 +68,7 @@ class profile1 extends React.Component{
                                 )
                             }} style={styles.flex_Four_Each_Investment}>
                     <View style={styles.nav_btn}>
+                    {/* https://www.flaticon.com/free-icon/profits_843734?term=profits&page=1&position=4 */}
                         <Image style={styles.btn_img} source={require("../assets/profits.png")}/>
                         <Text style={styles.btn_text}>
                             Investment
@@ -76,12 +79,10 @@ class profile1 extends React.Component{
                                 this.props.navigation.navigate(
                                     'Donation',
                                     {},
-                                    // NavigationActions.navigate({
-                                    //     routeName: 'DonationHistory'
-                                    // })
                                 )
                             }} style={styles.flex_Four_Each_Donation}>
                     <View style={styles.nav_btn}>
+                    {/* https://www.flaticon.com/free-icon/solidarity_940922?term=solidarity&page=1&position=10 */}
                     <Image style={styles.btn_img} source={require("../assets/solidarity.png")}/>
                     <Text style={styles.btn_text}>
                         Donation

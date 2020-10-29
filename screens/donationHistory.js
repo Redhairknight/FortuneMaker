@@ -51,6 +51,7 @@ render() {
   return (
       <SafeAreaView style={styles.screen}>
           <ScrollView>
+          {/* https://www.pexels.com/zh-cn/photo/2072165/ */}
               <Image style={styles.image} source={require('../assets/thankyou.jpg')} />
               {
                   this.state.listingData.map(function(x){
@@ -106,7 +107,6 @@ render() {
 
 const styles = StyleSheet.create({
 screen: {
-  // paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0,
   flex: 1,
 },
 separator: {
