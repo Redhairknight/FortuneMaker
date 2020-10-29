@@ -1,5 +1,11 @@
-# FortuneMaker
-DECO 7381 Group Project
+# FortuneMaker by Newbie
+DECO 7381 Group Project last modified on 2020 - Oct - 29
+### Team Member
+* Chang Liu
+* Xudong Pu
+* Xin Zheng
+* Huiyu Jia
+* Jingkang Zeng
 
 ## Setup instruction -> If you want to run it on local PC.
 
