@@ -29,8 +29,7 @@ class profile1 extends React.Component{
         const uname = this.state.uname;
         return (
 
-
-            // https://www.pexels.com/zh-cn/photo/3772783/
+// https://www.pexels.com/zh-cn/photo/2397361/
             <ImageBackground style={styles.usage}
                 source={require('../assets/profile1.jpg')}>                  
 
@@ -163,14 +162,14 @@ class profile1 extends React.Component{
             marginLeft:"25%",
             borderRadius:0,
             borderWidth:2,
-            borderColor:"#1F4E79",
+            borderColor:"white",
             flexDirection:"column",
             justifyContent:"center",
             // backgroundColor:"white"
             // alignSelf:"center",
         },
         logOutText:{
-            color:"#1F4E79",
+            color:"white",
             fontWeight:"bold",
             fontSize:30,
             textAlignVertical:"center",
