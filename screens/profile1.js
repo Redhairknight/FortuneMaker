@@ -28,11 +28,14 @@ class profile1 extends React.Component{
 
         const uname = this.state.uname;
         return (
-            // https://www.pexels.com/zh-cn/photo/2253275/
+
+
+            // https://www.pexels.com/zh-cn/photo/3772783/
             <ImageBackground style={styles.usage}
-                source={require('../assets/profile1.png')}>                  
+                source={require('../assets/profile1.jpg')}>                  
 
             <View style={styles.headContainer}>
+            {/* https://www.pexels.com/zh-cn/photo/2253275/ */}
                 <Image style={styles.headImg} source={require('../assets/profile2.png')}/>
                 <Text style={styles.headText}>Hi, {uname}</Text>
             </View>
