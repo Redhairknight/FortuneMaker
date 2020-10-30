@@ -88,7 +88,7 @@ class donationPayment extends React.Component{
 
                     {/* Provide pay link */}
                     <View style={styles.bottomPayLink}>
-                      <TouchableWithoutFeedback onPress={()=>checkNameAndEmail()} style={styles.payBtn}>、
+                      <TouchableWithoutFeedback onPress={()=>checkNameAndEmail()} style={styles.payBtn}>
                       {/* https://www.flaticon.com/free-icon/paypal_888871?term=paypal&page=1&position=4 */}
                         <Image style={styles.payImg} source={require("../assets/paypal.png")}/>
                         <Text style={styles.payText}> Pay by PayPal</Text>
