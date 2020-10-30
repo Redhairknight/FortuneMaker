@@ -15,9 +15,6 @@ import retrieveDatabse from "../components/DatabaseManager"
 import * as firebase from 'firebase'
 
 class Investment extends React.Component {
-  // icon source:
-  // https://www.iconfinder.com/
-  // https://www.flaticon.com/
 
   constructor(props) {
     /** connect and retrive data before the render */
@@ -99,6 +96,7 @@ class Investment extends React.Component {
                     $ {format(totalInvestment)}
                     <Image
                       style={styles.tinyLogo}
+                      // icon source: https://www.flaticon.com/
                       source={require("../assets/tiny_arrow.png")}
                     />
                   </Text>
@@ -128,6 +126,8 @@ class Investment extends React.Component {
                 onPress={() => this.props.navigation.navigate("ProductsDetail")}
               >
                 <View style={styles.buttons}>
+
+                  {/* icon source: https://www.flaticon.com/ */}
                   <Image
                     style={styles.buttonLogo}
                     source={require("../assets/button1.png")}
@@ -142,6 +142,7 @@ class Investment extends React.Component {
                 }
               >
                 <View style={styles.buttons}>
+                  {/* icon source: https://www.flaticon.com/ */}
                   <Image
                     style={styles.buttonLogo}
                     source={require("../assets/button2.png")}
@@ -155,6 +156,7 @@ class Investment extends React.Component {
                 <View style={styles.buttons}>
                   <Image
                     style={styles.buttonLogo}
+                    // icon source: https://www.flaticon.com/
                     source={require("../assets/button3.png")}
                   />
                   <Text style={styles.buttons_text}>Transation History</Text>
@@ -164,6 +166,7 @@ class Investment extends React.Component {
             <View style={styles.middle_three_button}>
               <TouchableOpacity onPress={() => this.props.navigation.navigate("RiskSurvyDetail")}>
                 <View style={styles.buttons}>
+                  {/* icon source: https://www.flaticon.com/ */}
                   <Image
                     style={styles.buttonLogo}
                     source={require("../assets/button4.png")}
@@ -175,6 +178,7 @@ class Investment extends React.Component {
                 onPress={() => this.props.navigation.navigate("FavoriteDetail")}
               >
                 <View style={styles.buttons}>
+                  {/* icon source: https://www.flaticon.com/ */}
                   <Image
                     style={styles.buttonLogo}
                     source={require("../assets/button5.png")}
@@ -186,6 +190,7 @@ class Investment extends React.Component {
                 onPress={() => this.props.navigation.navigate("InvestmentHot")}
               >
                 <View style={styles.buttons}>
+                  {/* icon source: https://www.flaticon.com/ */}
                   <Image
                     style={styles.buttonLogo}
                     source={require("../assets/button6.png")}
@@ -198,6 +203,7 @@ class Investment extends React.Component {
           <View style={styles.bottom}>
             <TouchableOpacity onPress={() => this.props.navigation.navigate("InvestmentRecommendation")} >
               <View style={styles.bottom_content}>
+                {/* icon source: https://www.flaticon.com/ */}
                 <Image
                   style={styles.bottom_Logos}
                   source={require("../assets/button6.png")}
@@ -213,6 +219,7 @@ class Investment extends React.Component {
               }
             >
               <View style={styles.bottom_content}>
+                {/* icon source: https://www.flaticon.com/ */}
                 <Image
                   style={styles.bottom_Logos}
                   source={require("../assets/button7.png")}
@@ -222,6 +229,7 @@ class Investment extends React.Component {
             </TouchableOpacity>
             <TouchableOpacity onPress={() => this.props.navigation.navigate("FinancialIndexDetail")}>
               <View style={styles.bottom_content}>
+                {/* icon source: https://www.flaticon.com/ */}
                 <Image
                   style={styles.bottom_Logos}
                   source={require("../assets/button8.png")}

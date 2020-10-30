@@ -8,7 +8,6 @@ import { WebView } from 'react-native-webview';
 import YoutubePlayer from "react-native-youtube-iframe";
 
 class InvestmentEducation extends React.Component {
-    // video source: www.youtube.com
     render() {
         return (
             <SafeAreaView style={{ flex: 1, backgroundColor: "white", }}>

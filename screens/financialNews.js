@@ -2,7 +2,15 @@ import React from "react";
 import { StyleSheet, Text, View, ScrollView, Image } from "react-native";
 
 export default class App extends React.Component {
-  // news image source:https://www.news.com.au/finance
+  // news image1 source:https://www.news.com.au/finance
+  // news image2 source:https://www.news.com.au/finance
+  // news image3 source:https://www.news.com.au/finance
+  // news image4 source:https://www.news.com.au/finance
+  // news image5 source:https://www.news.com.au/finance
+  // news image6 source:https://www.news.com.au/finance
+
+
+
   render() {
     return (
       <ScrollView>
@@ -22,6 +30,7 @@ export default class App extends React.Component {
               </Text>
             </View>
             <View style={styles.news_rightside}>
+              {/* news image1 source:https://www.news.com.au/finance */}
               <Image
                 style={styles.news_image}
                 source={require("../assets/news_button1.png")}
@@ -44,6 +53,7 @@ export default class App extends React.Component {
             <View style={styles.news_rightside}>
               <Image
                 style={styles.news_image}
+                // news image6 source:https://www.news.com.au/finance
                 source={require("../assets/news_button4.png")}
               />
             </View>
@@ -62,6 +72,7 @@ export default class App extends React.Component {
               </Text>
             </View>
             <View style={styles.news_rightside}>
+              {/* news image6 source:https://www.news.com.au/finance */}
               <Image
                 style={styles.news_image}
                 source={require("../assets/news_button5.png")}
@@ -82,6 +93,7 @@ export default class App extends React.Component {
               </Text>
             </View>
             <View style={styles.news_rightside}>
+              {/* news image6 source:https://www.news.com.au/finance */}
               <Image
                 style={styles.news_image}
                 source={require("../assets/news_button2.png")}
@@ -102,6 +114,7 @@ export default class App extends React.Component {
               </Text>
             </View>
             <View style={styles.news_rightside}>
+              {/* news image6 source:https://www.news.com.au/finance */}
               <Image
                 style={styles.news_image}
                 source={require("../assets/news_button6.png")}
@@ -121,6 +134,7 @@ export default class App extends React.Component {
               </Text>
             </View>
             <View style={styles.news_rightside}>
+              {/* news image6 source:https://www.news.com.au/finance */}
               <Image
                 style={styles.news_image}
                 source={require("../assets/news_button3.png")}

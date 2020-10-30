@@ -16,7 +16,6 @@ import {
 } from "react-native";
 import { Container, Header, Item, Input, Icon, Button } from "native-base";
 
-// source :https://material.io/resources/icons/?style=baseline
 export default class SearchBarExample extends Component {
     constructor(props) {
         /** store the product information in the state */
@@ -63,6 +62,7 @@ export default class SearchBarExample extends Component {
                             <Text> product name</Text>
                             <Image
                                 style={styles.labelLogo}
+                                // ranking icon1 source :https://material.io/resources/icons/?style=baseline
                                 source={require("../assets/product_button1.png")}
                             />
                         </TouchableOpacity>
@@ -70,6 +70,7 @@ export default class SearchBarExample extends Component {
                             <Text>                       price</Text>
                             <Image
                                 style={styles.labelLogo}
+                                // ranking icon2 source :https://material.io/resources/icons/?style=baseline
                                 source={require("../assets/product_button1.png")}
                             />
                         </TouchableOpacity>
