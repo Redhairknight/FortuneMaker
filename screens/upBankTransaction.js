@@ -61,6 +61,7 @@ export default App = () => {
         return (
           <Image
             style={styles.imageL}
+            // [Domino's.png] [icon] https://iconscout.com/icon/dominos-pizza-1863639
             source={require("../assets/Welcome/Domino's.png")}
           />
         );
@@ -68,6 +69,7 @@ export default App = () => {
         return (
           <Image
             style={styles.imageL}
+            // image source: [Guzman y Gomez.png] [icon] https://www.guzmanygomez.com/
             source={require("../assets/Welcome/Guzman_y_Gomez.png")}
           />
         );
@@ -75,6 +77,7 @@ export default App = () => {
         return (
           <Image
             style={styles.imageL}
+            // image source: [cafe.png] [icon] https://toppng.com/ranos-de-caf%c3%a9-icono-de-taza-de-cafe-PNG-free-PNG-Images_171716?search-result=taza
             source={require("../assets/Welcome/cafe.png")}
           />
         );
@@ -82,6 +85,7 @@ export default App = () => {
         return (
           <Image
             style={styles.imageL}
+            // image source: [vending.png] [icon] https://699pic.com/tupian-400284479.html
             source={require("../assets/Welcome/vending.png")}
           />
         );
@@ -89,6 +93,7 @@ export default App = () => {
         return (
           <Image
             style={styles.imageL}
+            // image source: [EASI.png] [icon] https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.linkedin.com%2Fcompany%2Feasiaustralia&psig=AOvVaw3yJQhZixuDPxxaQ66V1u2g&ust=1604069663368000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCIDcraaH2uwCFQAAAAAdAAAAABAN
             source={require("../assets/Welcome/EASI.png")}
           />
         );
@@ -98,6 +103,7 @@ export default App = () => {
         return (
           <Image
             style={styles.imageL}
+            // image source: [upbank.png] [icon] https://www.facebook.com/upbanking/
             source={require("../assets/Welcome/upbank.png")}
           />
         );
